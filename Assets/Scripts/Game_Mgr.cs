@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -15,6 +16,7 @@ public enum GameRound
 public class Game_Mgr : MonoBehaviour
 {
     [HideInInspector] public GameRound m_GameRound = GameRound.ReadyRound;
+    [HideInInspector] public bool isClick = false;
 
     //--- 숫자 소환 변수
     [Header("------ Number Spawn ------")]
@@ -128,7 +130,7 @@ public class Game_Mgr : MonoBehaviour
 
         //--- BackPanel
         if (m_BackBtn != null)
-            m_BackBtn.onClick.AddListener(()=>
+            m_BackBtn.onClick.AddListener(() =>
             {
                 m_BackPanel.SetActive(true);
                 Time.timeScale = 0.0f;
@@ -152,13 +154,16 @@ public class Game_Mgr : MonoBehaviour
         if (m_ConfigBtn != null)
             m_ConfigBtn.onClick.AddListener(ConfigBtnClick);
         //--- BackPanel
+
+        if (GoldText != null)
+            GoldText.text = m_Gold.ToString();
     }
 
     // Update is called once per frame
     void Update()
     {
         m_RoundTime -= Time.deltaTime;
-        if(m_RoundTime <= 0.0f)
+        if (m_RoundTime <= 0.0f)
         {
             m_Round++;
             RoundUpdate();
@@ -173,7 +178,7 @@ public class Game_Mgr : MonoBehaviour
             GameDie();
 
         //PanelTimer 작동
-        if(PanelTimer > 0.0f)
+        if (PanelTimer > 0.0f)
         {
             PanelTimer -= Time.deltaTime;
             if (PanelTimer <= 0.0f)
@@ -183,6 +188,13 @@ public class Game_Mgr : MonoBehaviour
             }
         }
         //PanelTimer 작동
+
+        //sprite 클릭시 캐릭터 정보 사라지게 만듬
+        if (Input.GetMouseButtonDown(0) && IsPointerOverUIObject() == false &&
+            isClick == false) //<-- 캐릭터 클릭이 아닐때
+        {
+            NumInfoText.text = "";
+        }
 
     }//void Update()
 
@@ -204,13 +216,13 @@ public class Game_Mgr : MonoBehaviour
     {
         if (m_Gold < m_SpawnGold)   //보유금액이 부족한 경우
         {
-            HelpPanelSpawn(1);
+            HelpPanelSpawn("보유골드가 부족합니다.");
             return;
         }
 
-        if (m_NumPosList.Count >= 25)
+        if (m_NumPosList.Count >= 25)   //칸수가 꽉찼을 때
         {
-            HelpPanelSpawn(2);
+            HelpPanelSpawn("모든 칸이 꽉 차 소환할 수 없습니다.");
             return;
         }
 
@@ -276,13 +288,14 @@ public class Game_Mgr : MonoBehaviour
             TimeText.text = m_RoundTime.ToString("F2");
         if (MonCountText != null)
             MonCountText.text = m_MonCount.ToString();
-        if (GoldText != null)
-            GoldText.text = m_Gold.ToString();
     }//void RefreshUIUpdate()
 
     public void AddGold(int a_Value)
     {
         m_Gold += a_Value;
+
+        if (GoldText != null)
+            GoldText.text = m_Gold.ToString();
     }//public void AddGold(int a_Value)
 
     public void GameDie()
@@ -319,7 +332,7 @@ public class Game_Mgr : MonoBehaviour
             m_GameRound = GameRound.MonsterRound;
     }//void RoundUpdate()
 
-    IEnumerator MonsterSpawn()
+    IEnumerator MonsterSpawn()  //몬스터 소환 코루틴
     {
         if (m_GameRound == GameRound.MonsterRound)
         {
@@ -330,13 +343,13 @@ public class Game_Mgr : MonoBehaviour
                 Monster_Ctrl MonCtrl = Go.GetComponent<Monster_Ctrl>();
                 MonCtrl.InitState(m_Round);
                 Go.transform.position = a_Pos;
-                
+
                 m_MonCount++;
                 yield return new WaitForSeconds(Dur);
             }
         }
 
-        else if(m_GameRound == GameRound.BossRound)
+        else if (m_GameRound == GameRound.BossRound)
         {
             Vector3 a_Pos = new Vector3(1.75f, 4.0f, 0.0f);
             GameObject Go = Instantiate(MonsterPrefab) as GameObject;
@@ -346,7 +359,7 @@ public class Game_Mgr : MonoBehaviour
         }
     }//IEnumerator MonsterSpawn()
 
-    public void HelpPanelSpawn(int Erroridx)
+    public void HelpPanelSpawn(string errorstr) //안내 판넬 소환
     {
         if (IsPanel == true)
             return;
@@ -354,10 +367,9 @@ public class Game_Mgr : MonoBehaviour
         IsPanel = true;
         PanelTimer = 3.0f;
 
-        //Erroridx = 1:골드 부족  2:칸수 꽉참 
         GameObject HelpPanel = Instantiate(HelpPanelPrefab) as GameObject;
         HelpPanel_Ctrl HelpPanel_Ctrl = HelpPanel.GetComponent<HelpPanel_Ctrl>();
-        HelpPanel_Ctrl.InitHelpText(Erroridx);
+        HelpPanel_Ctrl.InitHelpText(errorstr);
         HelpPanel.transform.SetParent(m_Canvas.transform, false);
     }//public void HelpPanelSpawn(int Erroridx)
 
@@ -370,6 +382,7 @@ public class Game_Mgr : MonoBehaviour
 
     void ExitBtnClick()
     {
+        //환경설정프리팹이 있으면 리턴
         Config_Ctrl ConObj = GameObject.FindObjectOfType<Config_Ctrl>();
         if (ConObj != null)
             return;
@@ -377,5 +390,30 @@ public class Game_Mgr : MonoBehaviour
         m_BackPanel.SetActive(false);
         Time.timeScale = 1.0f;
     }
+
+    public static bool IsPointerOverUIObject() //UGUI의 UI들이 먼저 피킹되는지 확인하는 함수
+    {
+        PointerEventData a_EDCurPos = new PointerEventData(EventSystem.current);
+
+#if !UNITY_EDITOR && (UNITY_IPHONE || UNITY_ANDROID)
+
+			List<RaycastResult> results = new List<RaycastResult>();
+			for (int i = 0; i < Input.touchCount; ++i)
+			{
+				a_EDCurPos.position = Input.GetTouch(i).position;  
+				results.Clear();
+				EventSystem.current.RaycastAll(a_EDCurPos, results);
+                if (0 < results.Count)
+                    return true;
+			}
+
+			return false;
+#else
+        a_EDCurPos.position = Input.mousePosition;
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(a_EDCurPos, results);
+        return (0 < results.Count);
+#endif
+    }//public bool IsPointerOverUIObject() 
 
 }//public class Game_Mgr : MonoBehaviour

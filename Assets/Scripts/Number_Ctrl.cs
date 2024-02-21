@@ -41,6 +41,7 @@ public class Number_Ctrl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //--- 소환했을때 업그레이드 양만큼 공격력 증가
         if (m_NumType == NumType.Beginner)
             m_CurAttack = m_StAttack;
 
@@ -144,13 +145,13 @@ public class Number_Ctrl : MonoBehaviour
 
     public void InitState(NumType a_NumType, int a_Level, int a_NumPos)
     {
-        m_NumPos = a_NumPos;
-        m_NumType = a_NumType;
+        m_NumPos = a_NumPos;    //PosIndex
+        m_NumType = a_NumType;  //숫자Type
         m_Level = a_Level;
         NumberClass a_Num = new NumberClass();
         a_Num.SetType(m_NumType, m_Level);
-        m_StAttack = a_Num.m_Attack;
-        m_AttackSpeed = a_Num.m_AttackSpeed;
+        m_StAttack = a_Num.m_Attack;    //초기 공격력 값
+        m_AttackSpeed = a_Num.m_AttackSpeed;    //업글정렬후 공격력값
         //m_SpriteIcon = m_IconImg.GetComponent<SpriteRenderer>();
         //m_SpriteIcon.sprite = a_Num.m_IconImg;
     }
@@ -185,16 +186,17 @@ public class Number_Ctrl : MonoBehaviour
             else if (a_NumType == NumType.Binary_System)
                 m_CurAttack = m_StAttack * (1.0f + 0.1f * UpgradeRoot_Ctrl.B_S_Lv);
         }
-
-        if (Game_Mgr.Inst.NumInfoText != null)
-            Game_Mgr.Inst.NumInfoText.text = "";
-
     }//public void UpgradeRefresh(NumType a_NumType) //업그레이드 버튼을 눌렀을 때 공격력 업글
+
+    //------------------------------------------------------------------------------------------------------------
 
     //마우스 드래그 및 포인트
     void OnMouseDown()  //마우스누를때
     {
         m_StartPos = transform.position;
+
+        Game_Mgr.Inst.isClick = true;
+
         if (Game_Mgr.Inst.NumInfoText != null)
             Game_Mgr.Inst.NumInfoText.text = NumberInfo(m_NumType);
     }
@@ -211,6 +213,8 @@ public class Number_Ctrl : MonoBehaviour
 
     void OnMouseUp()    //마우스 뗄때
     {
+        Game_Mgr.Inst.isClick = false;
+
         Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, distance);
         Vector3 objPos = Camera.main.ScreenToWorldPoint(mousePos);
 

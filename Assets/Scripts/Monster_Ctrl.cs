@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public enum MonsterType
-{ 
+{
     Round1,
     Round2,
     Round3,
@@ -25,7 +25,7 @@ public class Monster_Ctrl : MonoBehaviour
     float m_CurHp = 0.0f;
     float m_MaxHp = 0.0f;
 
-    float m_MoveSpeed = 2.0f;
+    float m_MoveSpeed = 2.2f;
     Vector3 m_Pos;
     Vector3 m_Dir = Vector3.down;
 
@@ -71,47 +71,47 @@ public class Monster_Ctrl : MonoBehaviour
 
     void MonsterState()
     {
-        if(m_MonType == MonsterType.Round1)
+        if (m_MonType == MonsterType.Round1)
         {
-            m_MaxHp = 100.0f + 10.0f * (m_Round-1);
+            m_MaxHp = 100.0f + 10.0f * (m_Round - 1);
             m_CurHp = m_MaxHp;
             m_Gold = 10;
         }
-        else if(m_MonType == MonsterType.Round2)
+        else if (m_MonType == MonsterType.Round2)
         {
             m_MaxHp = 200.0f + 10.0f * (m_Round - 11);
             m_CurHp = m_MaxHp;
             m_Gold = 15;
         }
-        else if(m_MonType == MonsterType.Round3)
+        else if (m_MonType == MonsterType.Round3)
         {
             m_MaxHp = 300.0f + 10.0f * (m_Round - 21);
             m_CurHp = m_MaxHp;
             m_Gold = 20;
         }
-        else if(m_MonType == MonsterType.Boss1)
+        else if (m_MonType == MonsterType.Boss1)
         {
             m_MaxHp = 1000.0f;
             m_CurHp = m_MaxHp;
             m_Gold = 300;
         }
-        else if(m_MonType == MonsterType.Boss2)
+        else if (m_MonType == MonsterType.Boss2)
         {
             m_MaxHp = 2000.0f;
             m_CurHp = m_MaxHp;
             m_Gold = 500;
         }
-        else if(m_MonType == MonsterType.Boss3)
+        else if (m_MonType == MonsterType.Boss3)
         {
             m_MaxHp = 3000.0f;
             m_CurHp = m_MaxHp;
             m_Gold = 700;
-        }    
+        }
     }//void MonsterState()
 
     void OnTriggerEnter2D(Collider2D coll)
     {
-        if(coll.gameObject.tag == "Bullet")
+        if (coll.gameObject.tag == "Bullet")
         {
             Bullet_Ctrl a_BCtrl = coll.GetComponent<Bullet_Ctrl>();
             float a_Attack = a_BCtrl.m_Attack;
@@ -123,7 +123,7 @@ public class Monster_Ctrl : MonoBehaviour
     void TakeDamage(float a_Value)
     {
         if (m_CurHp <= 0.0f)    //이 몬스터가 이미 죽어 있으면
-            return;             
+            return;
 
         float a_CacDmg = a_Value;
         if (m_CurHp < a_Value)  //남은 체력보다 데미지가 더 높으면
@@ -133,16 +133,14 @@ public class Monster_Ctrl : MonoBehaviour
         Game_Mgr.Inst.DamageText(-a_CacDmg, transform.position, Color.red);
 
         m_CurHp -= a_Value;
-        if (m_CurHp < 0.0f)
+        if (m_CurHp <= 0.0f)
+        {
             m_CurHp = 0.0f;
+            Die();
+        }
 
         if (m_HpBar != null)
             m_HpBar.fillAmount = m_CurHp / m_MaxHp;
-
-        if (m_CurHp <= 0.0f)
-        {
-            Die();
-        }
     }
 
     void Die()

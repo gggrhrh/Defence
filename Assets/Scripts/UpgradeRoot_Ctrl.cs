@@ -60,7 +60,7 @@ public class UpgradeRoot_Ctrl : MonoBehaviour
     {
         if (Game_Mgr.Inst.m_Gold < Gold)
         {
-            Game_Mgr.Inst.HelpPanelSpawn(1);    //골드부족 판넬
+            Game_Mgr.Inst.HelpPanelSpawn("업그레이드에 필요한 골드가 부족합니다.");    //골드부족 판넬
             return;
         }
 
