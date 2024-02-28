@@ -522,7 +522,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 1, g: 1, b: 1, a: 0}
+  m_BackGroundColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -718,7 +718,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "SBS\uC544\uCE74\uB370\uBBF8"
+  m_Text: Park Ji
 --- !u!222 &482387871
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1258,9 +1258,9 @@ MonoBehaviour:
   MessageText: {fileID: 1120225718}
   m_NickNameText: {fileID: 482387870}
   m_GoldText: {fileID: 858705062}
-  m_StoreBtn: {fileID: 0}
-  m_InvenBtn: {fileID: 0}
-  m_CollectionBtn: {fileID: 0}
+  m_StoreBtn: {fileID: 707135461}
+  m_InvenBtn: {fileID: 1528682148}
+  m_CollectionBtn: {fileID: 246614704}
 --- !u!1 &1060715242
 GameObject:
   m_ObjectHideFlags: 0
@@ -1311,14 +1311,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.9607843}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: fd555b487c4ceb341a56f1f3a62a6752, type: 3}
+  m_Texture: {fileID: 2800000, guid: 29fd4c227866b574a822899b74feb396, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
