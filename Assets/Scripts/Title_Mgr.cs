@@ -14,7 +14,7 @@ public class Title_Mgr : MonoBehaviour
         if(m_StartBtn != null)    
             m_StartBtn.onClick.AddListener(() =>   
             {     
-                SceneManager.LoadScene("GameScene");
+                SceneManager.LoadScene("LobbyScene");
             });
     }
 

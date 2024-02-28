@@ -124,7 +124,7 @@ public class Game_Mgr : MonoBehaviour
         if (Lobby_Btn != null)
             Lobby_Btn.onClick.AddListener(() =>
             {
-                SceneManager.LoadScene("TitleScene");
+                SceneManager.LoadScene("LobbyScene");
             });
         //--- GameOverPanel
 
@@ -148,7 +148,7 @@ public class Game_Mgr : MonoBehaviour
         if (m_GoLobbyBtn != null)
             m_GoLobbyBtn.onClick.AddListener(() =>
             {
-                SceneManager.LoadScene("TitleScene");
+                SceneManager.LoadScene("LobbyScene");
             });
 
         if (m_ConfigBtn != null)

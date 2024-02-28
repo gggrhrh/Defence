@@ -25,7 +25,7 @@ public class Monster_Ctrl : MonoBehaviour
     float m_CurHp = 0.0f;
     float m_MaxHp = 0.0f;
 
-    float m_MoveSpeed = 2.2f;
+    [HideInInspector]public float m_MoveSpeed = 2.2f;
     Vector3 m_Pos;
     Vector3 m_Dir = Vector3.down;
 
@@ -120,7 +120,7 @@ public class Monster_Ctrl : MonoBehaviour
         }
     }
 
-    void TakeDamage(float a_Value)
+    public void TakeDamage(float a_Value)
     {
         if (m_CurHp <= 0.0f)    //이 몬스터가 이미 죽어 있으면
             return;

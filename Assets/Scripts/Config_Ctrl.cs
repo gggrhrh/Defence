@@ -15,6 +15,7 @@ public class Config_Ctrl : MonoBehaviour
         if (m_Exit_Btn != null)
             m_Exit_Btn.onClick.AddListener(() =>
             {
+                Time.timeScale = 1.0f;
                 Destroy(gameObject);
             });
     }
