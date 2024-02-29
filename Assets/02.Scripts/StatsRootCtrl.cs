@@ -231,7 +231,6 @@ public class StatsRootCtrl : MonoBehaviour
 
     void TryBuyItem()
     {
-        Debug.Log("aaa");
         m_BuyGold = 0;
 
         //서버에 저장
@@ -241,6 +240,8 @@ public class StatsRootCtrl : MonoBehaviour
         PlayerPrefs.SetInt("CriDmgLv", CriDmgLevel);
         PlayerPrefs.SetInt("UserGold", m_UserGold);
         //서버에 저장
+
+        Debug.Log("aaa");
 
         //저장 데이터 불러오기
         GlobalValue.LoadGameData();
