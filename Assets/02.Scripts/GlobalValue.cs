@@ -16,7 +16,7 @@ public class GlobalValue
 
     public static void LoadGameData()
     {
-        PlayerPrefs.DeleteAll();
+        //PlayerPrefs.DeleteAll();
         g_NickName = PlayerPrefs.GetString("NickName", "SBSÀü»ç");
         g_UserLevel = PlayerPrefs.GetInt("UserLevel", 0);
         g_UserGold = PlayerPrefs.GetInt("UserGold", 0);
