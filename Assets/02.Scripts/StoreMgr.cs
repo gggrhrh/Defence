@@ -16,9 +16,41 @@ public class StoreMgr : MonoBehaviour
     bool isSkill = false;
     bool isChar = false;
 
+    [Header("------ GameObject ------")]
+    public GameObject m_StatsRoot = null;
+    public GameObject m_SkillRoot = null;
+    public GameObject m_CharRoot = null;
+
+    [Header("------ GoldText ------")]
+    public Text m_GoldText = null;
+    [HideInInspector] public int m_UserGold = 0;
+
+    public static StoreMgr Inst;
+
+    void Awake()
+    {
+        Inst = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
+        GlobalValue.LoadGameData();
+        m_UserGold = GlobalValue.g_UserGold;
+
+        if(m_GoldText !=null)
+            m_GoldText.text = m_UserGold.ToString();
+
+        //--- 초기 설정
+        m_StatsBtn.GetComponent<Image>().color = new Color32(140, 140, 140, 255);
+        m_SkillBtn.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+        m_CharBtn.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+
+        m_StatsRoot.SetActive(isStats);
+        m_SkillRoot.SetActive(isSkill);
+        m_CharRoot.SetActive(isChar);
+        //--- 초기 설정
+
         if (m_ExitBtn != null)
             m_ExitBtn.onClick.AddListener(() =>
             {
@@ -56,6 +88,12 @@ public class StoreMgr : MonoBehaviour
         m_SkillBtn.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
         m_CharBtn.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
         //--- 색깔 설정
+
+        //--- 오브젝트 설정
+        m_StatsRoot.SetActive(isStats);
+        m_SkillRoot.SetActive(isSkill);
+        m_CharRoot.SetActive(isChar);
+        //--- 오브젝트 설정
     }
 
     void SkillBtnClick()
@@ -72,6 +110,12 @@ public class StoreMgr : MonoBehaviour
         m_SkillBtn.GetComponent<Image>().color = new Color32(140, 140, 140, 255);
         m_CharBtn.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
         //--- 색깔 설정
+
+        //--- 오브젝트 설정
+        m_StatsRoot.SetActive(isStats);
+        m_SkillRoot.SetActive(isSkill);
+        m_CharRoot.SetActive(isChar);
+        //--- 오브젝트 설정
     }
 
     void CharBtnClick()
@@ -88,5 +132,16 @@ public class StoreMgr : MonoBehaviour
         m_SkillBtn.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
         m_CharBtn.GetComponent<Image>().color = new Color32(140, 140, 140, 255);
         //--- 색깔 설정
+
+        //--- 오브젝트 설정
+        m_StatsRoot.SetActive(isStats);
+        m_SkillRoot.SetActive(isSkill);
+        m_CharRoot.SetActive(isChar);
+        //--- 오브젝트 설정
+    }
+
+    public void MessageOnOff(string a_Mess, bool isOn = true, float a_Time = 3.0f)
+    {
+
     }
 }
