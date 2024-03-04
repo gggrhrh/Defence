@@ -30,6 +30,9 @@ public class LobbyMgr : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GlobalValue.LoadGameData();
+        RefreshText();
+
         if (m_PlayBtn != null)
             m_PlayBtn.onClick.AddListener(PlayBtnClick);
 
@@ -143,11 +146,11 @@ public class LobbyMgr : MonoBehaviour
     {
         if(m_NickNameText != null)
         {
-            m_NickNameText.text = "";
+            m_NickNameText.text = GlobalValue.g_NickName;
         }
         if(m_GoldText != null)
         {
-            m_GoldText.text = "0";
+            m_GoldText.text = GlobalValue.g_UserGold.ToString();
         }
     }
 

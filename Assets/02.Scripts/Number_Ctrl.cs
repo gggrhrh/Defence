@@ -12,6 +12,7 @@ public class Number_Ctrl : MonoBehaviour
     float m_CurAttack = 0.0f;   //업글 적용 공격력
     float m_AttackSpeed = 0.0f; //공격 속도
     float m_CriRate = 0.0f;     //크리티컬확률
+    float m_CriDmg = 0.0f;      //크리티컬데미지
     public GameObject m_IconImg = null;
     SpriteRenderer m_SpriteIcon = null;
     string NumInfo = "";    //숫자 캐릭터의 정보
@@ -79,13 +80,24 @@ public class Number_Ctrl : MonoBehaviour
         if(m_AttackSpeed <= m_ShootCool)
         {
             m_ShootCool = 0.0f;
-            //GameObject a_BulletObj = Instantiate(m_BulletPrefab) as GameObject;
-            Bullet_Ctrl a_BulletObj = BulletPool_Mgr.Inst.GetBulletPool();
-            a_BulletObj.gameObject.SetActive(true);
-            a_BulletObj.transform.position = m_ShootPos.transform.position;
-            a_BulletObj.InitBullet(m_CurAttack);
+            float a_Cri = Random.Range(0.0f, 1.0f);
+
+            if (a_Cri < m_CriRate)
+            {
+                Bullet_Ctrl a_BulletObj = BulletPool_Mgr.Inst.GetBulletPool();
+                a_BulletObj.gameObject.SetActive(true);
+                a_BulletObj.transform.position = m_ShootPos.transform.position;
+                a_BulletObj.InitBullet(m_CurAttack * m_CriDmg);
+            }
+            else
+            {
+                Bullet_Ctrl a_BulletObj = BulletPool_Mgr.Inst.GetBulletPool();
+                a_BulletObj.gameObject.SetActive(true);
+                a_BulletObj.transform.position = m_ShootPos.transform.position;
+                a_BulletObj.InitBullet(m_CurAttack);
+            }
         }
-    }
+    }//void FireUpdate()
 
     void BinarySystem_AI()  //이진법 공격
     {
@@ -107,16 +119,31 @@ public class Number_Ctrl : MonoBehaviour
 
     IEnumerator BinarySystemFireCorutine() //이진법 코루틴
     {
-        for (int ii = 0; ii < m_Level + 1; ii++)
-        {
-            //GameObject a_BulletObj = Instantiate(m_BulletPrefab) as GameObject;
-            //a_BulletObj.transform.position = m_ShootPos.transform.position;
-            Bullet_Ctrl a_BulletObj = BulletPool_Mgr.Inst.GetBulletPool();
-            a_BulletObj.gameObject.SetActive(true);
-            a_BulletObj.transform.position = m_ShootPos.transform.position;
-            a_BulletObj.InitBullet(m_CurAttack);
+        float a_Cri = Random.Range(0.0f, 1.0f);
 
-            yield return new WaitForSeconds(0.05f);
+        if (a_Cri < m_CriRate)
+        {
+            for (int ii = 0; ii < m_Level + 1; ii++)
+            {
+                Bullet_Ctrl a_BulletObj = BulletPool_Mgr.Inst.GetBulletPool();
+                a_BulletObj.gameObject.SetActive(true);
+                a_BulletObj.transform.position = m_ShootPos.transform.position;
+                a_BulletObj.InitBullet(m_CurAttack * m_CriDmg);
+
+                yield return new WaitForSeconds(0.05f);
+            }
+        }
+        else
+        {
+            for (int ii = 0; ii < m_Level + 1; ii++)
+            {
+                Bullet_Ctrl a_BulletObj = BulletPool_Mgr.Inst.GetBulletPool();
+                a_BulletObj.gameObject.SetActive(true);
+                a_BulletObj.transform.position = m_ShootPos.transform.position;
+                a_BulletObj.InitBullet(m_CurAttack);
+
+                yield return new WaitForSeconds(0.05f);
+            }
         }
     }
 
@@ -142,12 +169,21 @@ public class Number_Ctrl : MonoBehaviour
         if(m_AttackSpeed <= m_ShootCool)
         {
             m_ShootCool = 0.0f;
-            //GameObject a_BulletObj = Instantiate(m_BulletPrefab) as GameObject;
-            //a_BulletObj.transform.position = m_ShootPos.transform.position;
-            Bullet_Ctrl a_BulletObj = BulletPool_Mgr.Inst.GetBulletPool();
-            a_BulletObj.gameObject.SetActive(true);
-            a_BulletObj.transform.position = m_ShootPos.transform.position;
-            a_BulletObj.InitBullet(m_CurAttack);
+            float a_Cri = Random.Range(0.0f, 1.0f);
+            if (a_Cri < m_CriRate)  //크리티컬 발동
+            {
+                Bullet_Ctrl a_BulletObj = BulletPool_Mgr.Inst.GetBulletPool();
+                a_BulletObj.gameObject.SetActive(true);
+                a_BulletObj.transform.position = m_ShootPos.transform.position;
+                a_BulletObj.InitBullet(m_CurAttack * m_CriDmg);
+            }
+            else
+            {
+                Bullet_Ctrl a_BulletObj = BulletPool_Mgr.Inst.GetBulletPool();
+                a_BulletObj.gameObject.SetActive(true);
+                a_BulletObj.transform.position = m_ShootPos.transform.position;
+                a_BulletObj.InitBullet(m_CurAttack);
+            }
         }
         
     }
@@ -175,8 +211,9 @@ public class Number_Ctrl : MonoBehaviour
             NumTypestr = "이진수";
         else if (a_NumType == NumType.Binary_System)
             NumTypestr = "이진법";
-        NumInfo = string.Format("숫자 타입 : {0}\n레벨 : {1}\n공격력 : {2}\n공격속도 : {3:0.00}\n치명타 확률 : {4:0.00}"
-            , NumTypestr, m_Level, m_CurAttack, m_AttackSpeed, m_CriRate);
+        NumInfo = string.Format("숫자 타입 : {0}\n레벨 : {1}\n공격력 : {2}\n공격속도 : {3:0.00}" +
+            "\n치명타 확률 : {4:0.00}\n치명타 데미지 : {5:0.00}"
+            , NumTypestr, m_Level, m_CurAttack, m_AttackSpeed, m_CriRate, m_CriDmg);
         
         return NumInfo;
     }
@@ -203,6 +240,11 @@ public class Number_Ctrl : MonoBehaviour
         m_AttSpeedUp = GlobalValue.g_AttSpeed;
         m_CriRateUp = GlobalValue.g_CriRate;
         m_CriDmgUp =GlobalValue.g_CriDmg;
+
+        m_StAttack = m_StAttack * (1 + 0.01f * m_AttUp);
+        m_AttackSpeed = m_AttackSpeed - (0.01f * m_AttSpeedUp);
+        m_CriRate = 0.01f * m_CriRateUp;
+        m_CriDmg = 2 + (0.01f * m_CriDmgUp);
     }
 
     //------------------------------------------------------------------------------------------------------------
