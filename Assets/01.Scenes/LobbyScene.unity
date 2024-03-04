@@ -1259,7 +1259,7 @@ MonoBehaviour:
   m_NickNameText: {fileID: 482387870}
   m_GoldText: {fileID: 858705062}
   m_StoreBtn: {fileID: 707135461}
-  m_InvenBtn: {fileID: 1528682148}
+  m_MyInfoBtn: {fileID: 1528682148}
   m_CollectionBtn: {fileID: 246614704}
 --- !u!1 &1060715242
 GameObject:
@@ -1939,7 +1939,7 @@ GameObject:
   - component: {fileID: 1528682149}
   - component: {fileID: 1528682148}
   m_Layer: 5
-  m_Name: InventoryBtn
+  m_Name: MyInfoBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2117,7 +2117,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uC778\uBCA4\uD1A0\uB9AC"
+  m_Text: "\uB0B4 \uC815\uBCF4"
 --- !u!222 &1674296937
 CanvasRenderer:
   m_ObjectHideFlags: 0

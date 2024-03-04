@@ -24,7 +24,7 @@ public class LobbyMgr : MonoBehaviour
 
     [Header("------ UGUI ------")]
     public Button m_StoreBtn = null;
-    public Button m_InvenBtn = null;
+    public Button m_MyInfoBtn = null;
     public Button m_CollectionBtn = null;
 
     // Start is called before the first frame update
@@ -43,8 +43,8 @@ public class LobbyMgr : MonoBehaviour
         if (m_StoreBtn != null)
             m_StoreBtn.onClick.AddListener(StoreBtnClick);
 
-        if (m_InvenBtn != null)
-            m_InvenBtn.onClick.AddListener(InvenBtnClick);
+        if (m_MyInfoBtn != null)
+            m_MyInfoBtn.onClick.AddListener(MyInfoBtnClick);
 
         if (m_CollectionBtn != null)
             m_CollectionBtn.onClick.AddListener(CollectBtnClick);
@@ -104,7 +104,7 @@ public class LobbyMgr : MonoBehaviour
         SceneManager.LoadScene("StoreScene");
     }
 
-    void InvenBtnClick()
+    void MyInfoBtnClick()
     {
         if (CfgBoxCheck() == true)
         {
@@ -112,7 +112,7 @@ public class LobbyMgr : MonoBehaviour
             return;
         }
 
-        SceneManager.LoadScene("InvenScene");
+        SceneManager.LoadScene("MyInfoScene");
     }
 
     void CollectBtnClick()
