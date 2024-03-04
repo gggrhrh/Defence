@@ -104,6 +104,8 @@ public class Game_Mgr : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GlobalValue.LoadGameData();
+
         //게임 초기화
         Time.timeScale = 1.0f;
         m_GameRound = GameRound.ReadyRound;
@@ -304,8 +306,12 @@ public class Game_Mgr : MonoBehaviour
         GameOverPanel.SetActive(true);
         if (CurGoldText != null)
             CurGoldText.text = "남은 골드 : " + m_Gold;
+
+        int a_Coin = m_Gold / 100;
         if (CoinText != null)
-            CoinText.text = "얻은 코인 : " + ((int)m_Gold / 100).ToString();
+            CoinText.text = "얻은 코인 : " + a_Coin.ToString();
+
+        PlayerPrefs.SetInt("UserGold", GlobalValue.g_UserGold + a_Coin);
     }//public void GameDie()
 
     void TimerUpdate() //라운드별 시간 체크 및 업데이트

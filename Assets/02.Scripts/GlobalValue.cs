@@ -19,7 +19,7 @@ public class GlobalValue
         //PlayerPrefs.DeleteAll();
         g_NickName = PlayerPrefs.GetString("NickName", "SBSÀü»ç");
         g_UserLevel = PlayerPrefs.GetInt("UserLevel", 0);
-        g_UserGold = PlayerPrefs.GetInt("UserGold", 0);
+        g_UserGold = PlayerPrefs.GetInt("UserGold", 100);
         g_Attack = PlayerPrefs.GetInt("AttackLv", 0);
         g_AttSpeed = PlayerPrefs.GetInt("AttSpeedLv", 0);
         g_CriRate = PlayerPrefs.GetInt("CriRateLv", 0);
