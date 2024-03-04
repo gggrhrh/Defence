@@ -111,6 +111,8 @@ public class LobbyMgr : MonoBehaviour
             MessageOnOff("환경설정 박스를 닫고 다시 눌러주세요.");
             return;
         }
+
+        SceneManager.LoadScene("InvenScene");
     }
 
     void CollectBtnClick()
