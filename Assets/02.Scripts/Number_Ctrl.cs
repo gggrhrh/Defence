@@ -30,6 +30,12 @@ public class Number_Ctrl : MonoBehaviour
     float radius = 0.5f;    //회전 반경
     float speed = 0.0f;  //회전 속도
 
+    //--- Global Upgrade
+    int m_AttUp = 0;
+    int m_AttSpeedUp = 0;
+    int m_CriRateUp = 0;
+    int m_CriDmgUp = 0;
+
     //드래그 관련 변수
     Vector3 m_StartPos;
     Vector3 m_Pos;
@@ -41,6 +47,9 @@ public class Number_Ctrl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GlobalValue.LoadGameData();
+        GlobalUp();
+
         //--- 소환했을때 업그레이드 양만큼 공격력 증가
         if (m_NumType == NumType.Beginner)
             m_CurAttack = m_StAttack;
@@ -187,6 +196,14 @@ public class Number_Ctrl : MonoBehaviour
                 m_CurAttack = m_StAttack * (1.0f + 0.1f * UpgradeRoot_Ctrl.B_S_Lv);
         }
     }//public void UpgradeRefresh(NumType a_NumType) //업그레이드 버튼을 눌렀을 때 공격력 업글
+
+    void GlobalUp()
+    {
+        m_AttUp = GlobalValue.g_Attack;
+        m_AttSpeedUp = GlobalValue.g_AttSpeed;
+        m_CriRateUp = GlobalValue.g_CriRate;
+        m_CriDmgUp =GlobalValue.g_CriDmg;
+    }
 
     //------------------------------------------------------------------------------------------------------------
 
