@@ -9,7 +9,7 @@ public class Number_Ctrl : MonoBehaviour
     [HideInInspector] public int m_Level = 0;
     [HideInInspector] public int m_NumPos = 0;
     float m_StAttack = 0.0f;    //처음공격력
-    float m_CurAttack = 0.0f;   //현재공격력
+    float m_CurAttack = 0.0f;   //업글 적용 공격력
     float m_AttackSpeed = 0.0f; //공격 속도
     float m_CriRate = 0.0f;     //크리티컬확률
     public GameObject m_IconImg = null;

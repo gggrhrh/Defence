@@ -3131,7 +3131,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1628332735
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4456,6 +4456,7 @@ MonoBehaviour:
   m_CharRoot: {fileID: 2101342264}
   m_GoldText: {fileID: 89665190}
   m_UserGold: 0
+  MessageText: {fileID: 1628332736}
 --- !u!1 &1901868305
 GameObject:
   m_ObjectHideFlags: 0

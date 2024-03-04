@@ -106,32 +106,51 @@ public class StatsRootCtrl : MonoBehaviour
 
     void UpBtnClickMethod(int a_Value, int a_Gold)
     {
-        m_BuyGold += a_Gold;
-        if (GlobalValue.g_UserGold < m_BuyGold)
+        int a_BuyGold = m_BuyGold + a_Gold;
+        if (GlobalValue.g_UserGold < a_BuyGold)
         {
+            StoreMgr.Inst.MessageOnOff("보유한 골드가 부족합니다.");
             return;
         }
 
         if (a_Value == 0)
         {
-            if (AttackLevel >= 100) return;
+            if (AttackLevel >= 100)
+            {
+                StoreMgr.Inst.MessageOnOff("최대 레벨입니다.");
+                return;
+            } //만렙 100
             AttackLevel++;
         }
         else if (a_Value == 1)
         {
-            if (AttSpeedLevel >= 20) return;
+            if (AttSpeedLevel >= 20)
+            {
+                StoreMgr.Inst.MessageOnOff("최대 레벨입니다.");
+                return;
+            }   //만렙 20
             AttSpeedLevel++;
         }
         else if (a_Value == 2)
         {
-            if (CriRateLevel >= 20) return;
+            if (CriRateLevel >= 20)
+            {
+                StoreMgr.Inst.MessageOnOff("최대 레벨입니다.");
+                return;
+            }
             CriRateLevel++;
         }
         else if (a_Value == 3)
         {
-            if (CriDmgLevel >= 100) return;
+            if (CriDmgLevel >= 100)
+            {
+                StoreMgr.Inst.MessageOnOff("최대 레벨입니다.");
+                return;
+            }
             CriDmgLevel++;
         }
+
+        m_BuyGold = a_BuyGold;
 
         m_UserGold = GlobalValue.g_UserGold - m_BuyGold;
 
@@ -145,25 +164,42 @@ public class StatsRootCtrl : MonoBehaviour
 
         if (a_Value == 0)
         {
-            if (AttackLevel <= 0) return;
-            if (GlobalValue.g_Attack < AttackLevel) m_BuyGold -= a_Gold;
+            if (AttackLevel <= 0)
+            {
+                StoreMgr.Inst.MessageOnOff("최소 레벨입니다.");
+                return;
+            }
+            if (GlobalValue.g_Attack < AttackLevel) m_BuyGold -= a_Gold; 
+            //기본레벨에서 올렸다 내리면 골드를 다시 돌려줌
             AttackLevel--;
         }
         else if (a_Value == 1)
         {
-            if (AttSpeedLevel <= 0) return;
+            if (AttSpeedLevel <= 0)
+            {
+                StoreMgr.Inst.MessageOnOff("최소 레벨입니다.");
+                return;
+            }
             if (GlobalValue.g_AttSpeed < AttSpeedLevel) m_BuyGold -= a_Gold;
             AttSpeedLevel--;
         }
         else if (a_Value == 2)
         {
-            if (CriRateLevel <= 0) return;
+            if (CriRateLevel <= 0)
+            {
+                StoreMgr.Inst.MessageOnOff("최소 레벨입니다.");
+                return;
+            }
             if (GlobalValue.g_CriRate < CriRateLevel) m_BuyGold -= a_Gold;
             CriRateLevel--;
         }
         else if (a_Value == 3)
         {
-            if (CriDmgLevel <= 0) return;
+            if (CriDmgLevel <= 0)
+            {
+                StoreMgr.Inst.MessageOnOff("최소 레벨입니다.");
+                return;
+            }
             if (GlobalValue.g_CriDmg < CriDmgLevel) m_BuyGold -= a_Gold;
             CriDmgLevel--;
         }

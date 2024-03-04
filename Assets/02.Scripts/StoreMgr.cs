@@ -25,6 +25,10 @@ public class StoreMgr : MonoBehaviour
     public Text m_GoldText = null;
     [HideInInspector] public int m_UserGold = 0;
 
+    [Header("------ Message ------")]
+    public Text MessageText;
+    float ShowMsTimer = 0.0f;
+
     public static StoreMgr Inst;
 
     void Awake()
@@ -71,7 +75,14 @@ public class StoreMgr : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (0.0f < ShowMsTimer)
+        {
+            ShowMsTimer -= Time.deltaTime;
+            if (ShowMsTimer <= 0.0f)
+            {
+                MessageOnOff("", false);    //메시지 끄기
+            }
+        }//if(0.0f < ShowMsTimer)
     }
 
     void StatsBtnClick()
@@ -140,8 +151,19 @@ public class StoreMgr : MonoBehaviour
         //--- 오브젝트 설정
     }
 
-    public void MessageOnOff(string a_Mess, bool isOn = true, float a_Time = 3.0f)
+    public void MessageOnOff(string Mess = "", bool isOn = true)
     {
+        if (isOn == true)
+        {
+            MessageText.text = Mess;
+            MessageText.gameObject.SetActive(true);
+            ShowMsTimer = 7.0f;
+        }
+        else
+        {
+            MessageText.text = "";
+            MessageText.gameObject.SetActive(false);
+        }
+    }//void MessageOnOff(string Mess = "", bool isOn = true)
 
-    }
 }
