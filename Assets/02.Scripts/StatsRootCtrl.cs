@@ -134,7 +134,6 @@ public class StatsRootCtrl : MonoBehaviour
         }
 
         m_UserGold = GlobalValue.g_UserGold - m_BuyGold;
-        StoreMgr.Inst.m_GoldText.text = m_UserGold.ToString();
 
         RefreshText();
     }
@@ -170,7 +169,6 @@ public class StatsRootCtrl : MonoBehaviour
         }
 
         m_UserGold = GlobalValue.g_UserGold - m_BuyGold;
-        StoreMgr.Inst.m_GoldText.text = m_UserGold.ToString();
 
         RefreshText();
     }
@@ -188,6 +186,8 @@ public class StatsRootCtrl : MonoBehaviour
 
         if (CriDmgText != null)
             CriDmgText.text = CriDmgLevel.ToString();
+
+        StoreMgr.Inst.m_GoldText.text = m_UserGold.ToString();
     }
 
     void ResetBtnClick()
@@ -196,6 +196,8 @@ public class StatsRootCtrl : MonoBehaviour
         AttSpeedLevel = GlobalValue.g_AttSpeed;
         CriRateLevel = GlobalValue.g_CriRate;
         CriDmgLevel = GlobalValue.g_CriDmg;
+        m_UserGold = GlobalValue.g_UserGold;
+        m_BuyGold = 0;
 
         RefreshText();
     }
@@ -241,14 +243,11 @@ public class StatsRootCtrl : MonoBehaviour
         PlayerPrefs.SetInt("UserGold", m_UserGold);
         //서버에 저장
 
-        Debug.Log("aaa");
-
         //저장 데이터 불러오기
         GlobalValue.LoadGameData();
 
         //변수 저장및 텍스트 초기화
         ResetBtnClick();
-        StoreMgr.Inst.m_GoldText.text = m_UserGold.ToString();
     }
 
 }
