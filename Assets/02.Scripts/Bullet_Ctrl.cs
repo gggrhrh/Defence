@@ -6,15 +6,17 @@ public class Bullet_Ctrl : MonoBehaviour
 {
     float m_MoveSpeed = 10.0f;  //이동속도
     float m_LifeTime = 1.0f;
-    
+
     //--- 적을 찾는 변수
     GameObject Target_Obj = null;   //타겟 참조 변수
     Vector3 m_DesiredDir;           //타겟을 향하는 방향 변수
     bool m_FindEnemy = false;       //타겟이 죽었는지 확인하는 함수
+    [HideInInspector] public bool m_isColl = false;          //타겟에 처음 부딪히면
     //--- 적을 찾는 변수
 
     //--- 총알의 공격력
     [HideInInspector] public float m_Attack = 0.0f;
+    [HideInInspector] public bool m_isCri = false;
 
     void OnEnable() //Active가 활성화 될 때마다 호출되는 함수
     {
@@ -32,13 +34,14 @@ public class Bullet_Ctrl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(0.0f < m_LifeTime)
+        if (0.0f < m_LifeTime)
         {
             m_LifeTime -= Time.deltaTime;
             if (m_LifeTime <= 0.0f)
             {
                 gameObject.SetActive(false);
                 m_FindEnemy = false;
+                m_isColl = false;
             }
         }
 
@@ -49,6 +52,7 @@ public class Bullet_Ctrl : MonoBehaviour
         {
             transform.Translate(m_DesiredDir * m_MoveSpeed * Time.deltaTime, Space.World);
             gameObject.SetActive(false);
+            m_isColl = false;
         }
     }
 
@@ -75,8 +79,16 @@ public class Bullet_Ctrl : MonoBehaviour
         transform.Translate(m_DesiredDir * m_MoveSpeed * Time.deltaTime, Space.World);
     }
 
-    public void InitBullet(float a_Attack)
+    public void InitBullet(float a_Attack, bool isCri = false)
     {
         m_Attack = a_Attack;
+        m_isCri = isCri;
+        m_isColl = false;
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        //몬스터와 충돌하면 다른 몬스터와 겹쳐서 충돌하지 않게 함
+        m_isColl = true;
     }
 }

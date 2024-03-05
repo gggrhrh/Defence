@@ -50,6 +50,7 @@ public class Number_Ctrl : MonoBehaviour
     {
         GlobalValue.LoadGameData();
         GlobalUp();
+        m_CriRate = 0.5f;
 
         //--- 소환했을때 업그레이드 양만큼 공격력 증가
         if (m_NumType == NumType.Beginner)
@@ -82,12 +83,12 @@ public class Number_Ctrl : MonoBehaviour
             m_ShootCool = 0.0f;
             float a_Cri = Random.Range(0.0f, 1.0f);
 
-            if (a_Cri < m_CriRate)
+            if (a_Cri < m_CriRate)  //치명타 ON
             {
                 Bullet_Ctrl a_BulletObj = BulletPool_Mgr.Inst.GetBulletPool();
                 a_BulletObj.gameObject.SetActive(true);
                 a_BulletObj.transform.position = m_ShootPos.transform.position;
-                a_BulletObj.InitBullet(m_CurAttack * m_CriDmg);
+                a_BulletObj.InitBullet(m_CurAttack * m_CriDmg, true);
             }
             else
             {
@@ -128,7 +129,7 @@ public class Number_Ctrl : MonoBehaviour
                 Bullet_Ctrl a_BulletObj = BulletPool_Mgr.Inst.GetBulletPool();
                 a_BulletObj.gameObject.SetActive(true);
                 a_BulletObj.transform.position = m_ShootPos.transform.position;
-                a_BulletObj.InitBullet(m_CurAttack * m_CriDmg);
+                a_BulletObj.InitBullet(m_CurAttack * m_CriDmg, true);
 
                 yield return new WaitForSeconds(0.05f);
             }
@@ -175,7 +176,7 @@ public class Number_Ctrl : MonoBehaviour
                 Bullet_Ctrl a_BulletObj = BulletPool_Mgr.Inst.GetBulletPool();
                 a_BulletObj.gameObject.SetActive(true);
                 a_BulletObj.transform.position = m_ShootPos.transform.position;
-                a_BulletObj.InitBullet(m_CurAttack * m_CriDmg);
+                a_BulletObj.InitBullet(m_CurAttack * m_CriDmg, true);
             }
             else
             {

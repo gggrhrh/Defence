@@ -200,7 +200,7 @@ public class Game_Mgr : MonoBehaviour
 
     }//void Update()
 
-    public void DamageText(float a_Value, Vector3 a_Pos, Color a_Color)
+    public void DamageText(float a_Value, Vector3 a_Pos, Color a_Color, bool isCri = false)
     {
         if (Damage_Canvas == null || DmgTxtRoot == null)
             return;
@@ -209,7 +209,7 @@ public class Game_Mgr : MonoBehaviour
         m_DmgClone.transform.SetParent(Damage_Canvas);
         m_DmgTxt = m_DmgClone.GetComponent<DmgTxt_Ctrl>();
         if (m_DmgTxt != null)
-            m_DmgTxt.InitDamage(a_Value, a_Color);
+            m_DmgTxt.InitDamage(a_Value, a_Color, isCri);
         m_StCacPos = new Vector3(a_Pos.x, a_Pos.y + 0.5f, 0.0f);
         m_DmgClone.transform.position = m_StCacPos;
     }//public void DamageText(float a_Value, Vector3 a_Pos, Color a_Color)

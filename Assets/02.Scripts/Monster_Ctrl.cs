@@ -114,13 +114,17 @@ public class Monster_Ctrl : MonoBehaviour
         if (coll.gameObject.tag == "Bullet")
         {
             Bullet_Ctrl a_BCtrl = coll.GetComponent<Bullet_Ctrl>();
+            if (a_BCtrl.m_isColl == true)
+                return;
             float a_Attack = a_BCtrl.m_Attack;
-            TakeDamage(a_Attack);
+            bool a_isCri = a_BCtrl.m_isCri;
+            
+            TakeDamage(a_Attack, a_isCri);
             coll.gameObject.SetActive(false);
         }
     }
 
-    public void TakeDamage(float a_Value)
+    public void TakeDamage(float a_Value, bool isCri = false)
     {
         if (m_CurHp <= 0.0f)    //이 몬스터가 이미 죽어 있으면
             return;
@@ -130,7 +134,7 @@ public class Monster_Ctrl : MonoBehaviour
             a_CacDmg = m_CurHp; // 남은 체력만큼 데미지를 줌
 
         //피격데미지
-        Game_Mgr.Inst.DamageText(-a_CacDmg, transform.position, Color.red);
+        Game_Mgr.Inst.DamageText(-a_CacDmg, transform.position, Color.red, isCri);
 
         m_CurHp -= a_Value;
         if (m_CurHp <= 0.0f)
