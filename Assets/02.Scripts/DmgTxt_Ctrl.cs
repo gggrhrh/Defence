@@ -27,19 +27,19 @@ public class DmgTxt_Ctrl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        m_EffTime += Time.deltaTime;
+        m_EffTime += Time.deltaTime * Game_Mgr.Inst.m_GameSpeed;
 
         if (m_EffTime < m_EffDur)
         {
             m_CurPos = DamageText.transform.position;
-            m_CurPos.y += Time.deltaTime * MvVelocity;
+            m_CurPos.y += Time.deltaTime * Game_Mgr.Inst.m_GameSpeed * MvVelocity;
             DamageText.transform.position = m_CurPos;
         }
 
         if (0.4f < m_EffTime)
         {
             m_Color = DamageText.color;
-            m_Color.a -= (Time.deltaTime * ApVelocity);
+            m_Color.a -= (Time.deltaTime * Game_Mgr.Inst.m_GameSpeed * ApVelocity);
             if (m_Color.a < 0.0f)
                 m_Color.a = 0.0f;
             DamageText.color = m_Color;

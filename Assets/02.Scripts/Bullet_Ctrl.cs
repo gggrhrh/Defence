@@ -36,7 +36,7 @@ public class Bullet_Ctrl : MonoBehaviour
     {
         if (0.0f < m_LifeTime)
         {
-            m_LifeTime -= Time.deltaTime;
+            m_LifeTime -= Time.deltaTime * Game_Mgr.Inst.m_GameSpeed;
             if (m_LifeTime <= 0.0f)
             {
                 gameObject.SetActive(false);
@@ -50,7 +50,7 @@ public class Bullet_Ctrl : MonoBehaviour
 
         else
         {
-            transform.Translate(m_DesiredDir * m_MoveSpeed * Time.deltaTime, Space.World);
+            transform.Translate(m_DesiredDir * m_MoveSpeed * Time.deltaTime * Game_Mgr.Inst.m_GameSpeed, Space.World);
             gameObject.SetActive(false);
             m_isColl = false;
         }
@@ -76,7 +76,7 @@ public class Bullet_Ctrl : MonoBehaviour
         m_DesiredDir.Normalize();
 
         //유도탄이 바라보는 방향쪽으로 움직이게 하기...
-        transform.Translate(m_DesiredDir * m_MoveSpeed * Time.deltaTime, Space.World);
+        transform.Translate(m_DesiredDir * m_MoveSpeed * Time.deltaTime * Game_Mgr.Inst.m_GameSpeed, Space.World);
     }
 
     public void InitBullet(float a_Attack, bool isCri = false)

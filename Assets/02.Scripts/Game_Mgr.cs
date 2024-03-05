@@ -93,6 +93,23 @@ public class Game_Mgr : MonoBehaviour
     public Button m_ExitBtn = null;
     //--- Back Panel
 
+    //--- 인벤토리 관련 변수
+    [Header("--- Inventory Show OnOff ---")]
+    public Button m_Inven_Btn = null;
+    public Transform m_InvenScrollView = null;
+    bool m_Inven_ScOnOff = false;
+    float m_ScSpeed = 9000.0f;
+    Vector3 m_ScOnPos = new Vector3(-420.0f, -300.0f, 0.0f);
+    Vector3 m_ScOffPos = new Vector3(-1000.0f, -300.0f, 0.0f);
+    Vector3 m_BtnOnPos = new Vector3(-170.0f, -300.0f, 0.0f);
+    Vector3 m_BtnOffPos = new Vector3(-600.0f, -300.0f, 0.0f);
+    public Transform m_IvnContent;
+    public GameObject m_SkInvenNode;
+    //--- 인벤토리 관련 변수
+
+    //--- 게임 배속
+    [HideInInspector] public float m_GameSpeed = 1.0f;
+
     public static Game_Mgr Inst = null;
 
     private void Awake()
@@ -115,6 +132,12 @@ public class Game_Mgr : MonoBehaviour
 
         if (m_SpawnBtn != null)
             m_SpawnBtn.onClick.AddListener(SpawnBtnClick);
+
+        if (m_Inven_Btn != null)
+            m_Inven_Btn.onClick.AddListener(() =>
+            {
+                m_Inven_ScOnOff = !m_Inven_ScOnOff;
+            });
 
         //--- GameOverPanel
         if (Replay_Btn != null)
@@ -164,7 +187,14 @@ public class Game_Mgr : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        m_RoundTime -= Time.deltaTime;
+        //if(Input.GetKey(KeyCode.R) == true)
+        //{
+        //    m_GameSpeed = 0.5f;
+        //}
+        //else
+        //    m_GameSpeed = 1.0f;
+
+        m_RoundTime -= Time.deltaTime * m_GameSpeed;
         if (m_RoundTime <= 0.0f)
         {
             m_Round++;
@@ -197,6 +227,8 @@ public class Game_Mgr : MonoBehaviour
         {
             NumInfoText.text = "";
         }
+
+        ScrollViewOnOff_Update();
 
     }//void Update()
 
@@ -396,6 +428,51 @@ public class Game_Mgr : MonoBehaviour
         m_BackPanel.SetActive(false);
         Time.timeScale = 1.0f;
     }
+
+    void ScrollViewOnOff_Update()
+    {
+        if (m_InvenScrollView == null)
+            return;
+
+        if (Input.GetKeyDown(KeyCode.R) == true)
+        {
+            m_Inven_ScOnOff = !m_Inven_ScOnOff;
+        }
+
+        if (m_Inven_ScOnOff == false)
+        {
+            if (m_InvenScrollView.localPosition.x > m_ScOffPos.x)
+            {
+                m_InvenScrollView.localPosition =
+                    Vector3.MoveTowards(m_InvenScrollView.localPosition,
+                                        m_ScOffPos, m_ScSpeed * Time.deltaTime);
+            }
+
+            if (m_Inven_Btn.transform.localPosition.x > m_BtnOffPos.x)
+            {
+                m_Inven_Btn.transform.localPosition =
+                    Vector3.MoveTowards(m_Inven_Btn.transform.localPosition,
+                                        m_BtnOffPos, m_ScSpeed * Time.deltaTime);
+            }
+        }//if(m_Inven_ScOnOff == false)
+        else //if(m_Inven_ScOnOff == true)
+        {
+            if (m_ScOnPos.x > m_InvenScrollView.localPosition.x)
+            {
+                m_InvenScrollView.localPosition =
+                    Vector3.MoveTowards(m_InvenScrollView.localPosition,
+                                        m_ScOnPos, m_ScSpeed * Time.deltaTime);
+            }
+
+            if (m_BtnOnPos.x > m_Inven_Btn.transform.localPosition.x)
+            {
+                m_Inven_Btn.transform.localPosition =
+                    Vector3.MoveTowards(m_Inven_Btn.transform.localPosition,
+                                        m_BtnOnPos, m_ScSpeed * Time.deltaTime);
+            }
+        }//else //if(m_Inven_ScOnOff == true)
+
+    }//void ScrollViewOnOff_Update()
 
     public static bool IsPointerOverUIObject() //UGUI의 UI들이 먼저 피킹되는지 확인하는 함수
     {

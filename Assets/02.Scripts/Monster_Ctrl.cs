@@ -65,7 +65,7 @@ public class Monster_Ctrl : MonoBehaviour
             m_Dir = Vector3.right;
         }
 
-        transform.position += m_Dir * m_MoveSpeed * Time.deltaTime;
+        transform.position += m_Dir * m_MoveSpeed * Time.deltaTime * Game_Mgr.Inst.m_GameSpeed;
 
     }//void Update()
 
