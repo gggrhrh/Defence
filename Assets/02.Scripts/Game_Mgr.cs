@@ -99,8 +99,8 @@ public class Game_Mgr : MonoBehaviour
     public Transform m_InvenScrollView = null;
     bool m_Inven_ScOnOff = false;
     float m_ScSpeed = 9000.0f;
-    Vector3 m_ScOnPos = new Vector3(-420.0f, -300.0f, 0.0f);
-    Vector3 m_ScOffPos = new Vector3(-1000.0f, -300.0f, 0.0f);
+    Vector3 m_ScOnPos = new Vector3(-420.0f, 0.0f, 0.0f);
+    Vector3 m_ScOffPos = new Vector3(-1000.0f, 0.0f, 0.0f);
     Vector3 m_BtnOnPos = new Vector3(-170.0f, -300.0f, 0.0f);
     Vector3 m_BtnOffPos = new Vector3(-600.0f, -300.0f, 0.0f);
     public Transform m_IvnContent;
