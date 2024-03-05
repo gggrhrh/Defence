@@ -30,7 +30,7 @@ public class MonsterGenerator : MonoBehaviour
             Game_Mgr.Inst.m_GameRound == GameRound.BossRound)
             return;
 
-        delta -= Time.deltaTime * Game_Mgr.Inst.m_GameSpeed;
+        delta -= Time.deltaTime;
         if (delta <= 0.0f)
         {
             Vector3 a_Pos = new Vector3(1.75f, 4.0f, 0.0f);

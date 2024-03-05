@@ -76,7 +76,7 @@ public class Number_Ctrl : MonoBehaviour
         if (a_Enenmy.Length <= 0)   //몬스터가 존재하지 않으면 총알 발사안함
             return;
 
-        m_ShootCool += Time.deltaTime * Game_Mgr.Inst.m_GameSpeed;
+        m_ShootCool += Time.deltaTime;
 
         if(m_AttackSpeed <= m_ShootCool)
         {
@@ -109,7 +109,7 @@ public class Number_Ctrl : MonoBehaviour
         if (a_Enenmy.Length <= 0)//몬스터가 존재하지 않으면 총알 발사안함
             return;
 
-        m_ShootCool += Time.deltaTime * Game_Mgr.Inst.m_GameSpeed;
+        m_ShootCool += Time.deltaTime;
         if(m_AttackSpeed <= m_ShootCool)
         {
             StartCoroutine(BinarySystemFireCorutine());         
@@ -151,7 +151,7 @@ public class Number_Ctrl : MonoBehaviour
     void BinaryNumber_AI()  //이진수 공격
     {
         speed = 360 / m_AttackSpeed;  //공격속도에 맞춰 한바퀴 돌고 총알발사
-        angle += Time.deltaTime * Game_Mgr.Inst.m_GameSpeed * speed;
+        angle += Time.deltaTime * speed;
         m_BinaryNum.transform.position = this.transform.position + new Vector3(Mathf.Sin(angle * Mathf.Deg2Rad) * radius,
                                         Mathf.Cos(angle * Mathf.Deg2Rad) * radius, 0.0f);
 
@@ -165,7 +165,7 @@ public class Number_Ctrl : MonoBehaviour
         if (m_Level == 0)
             return;
 
-        m_ShootCool += Time.deltaTime * Game_Mgr.Inst.m_GameSpeed;
+        m_ShootCool += Time.deltaTime;
 
         if(m_AttackSpeed <= m_ShootCool)
         {

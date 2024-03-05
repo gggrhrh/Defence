@@ -107,9 +107,6 @@ public class Game_Mgr : MonoBehaviour
     public GameObject m_SkInvenNode;
     //--- 인벤토리 관련 변수
 
-    //--- 게임 배속
-    [HideInInspector] public float m_GameSpeed = 1.0f;
-
     public static Game_Mgr Inst = null;
 
     private void Awake()
@@ -187,14 +184,14 @@ public class Game_Mgr : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if(Input.GetKey(KeyCode.R) == true)
-        //{
-        //    m_GameSpeed = 0.5f;
-        //}
-        //else
-        //    m_GameSpeed = 1.0f;
+        if (Input.GetKey(KeyCode.R) == true)
+        {
+            Time.timeScale = 0.5f;
+        }
+        else
+            Time.timeScale = 1.0f;
 
-        m_RoundTime -= Time.deltaTime * m_GameSpeed;
+        m_RoundTime -= Time.deltaTime;
         if (m_RoundTime <= 0.0f)
         {
             m_Round++;
