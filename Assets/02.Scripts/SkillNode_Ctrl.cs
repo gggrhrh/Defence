@@ -7,7 +7,7 @@ public class SkillNode_Ctrl : MonoBehaviour
 {
     //--- 스킬 이미지
     [HideInInspector] public SkillType m_SkType;
-    //public Sprite[] m_IconImg = null;
+    public Sprite[] m_IconImg = null;
     float Skill_Time = 5.0f;
     float Skill_Duration = 5.0f;
     public Image Time_Img = null;
@@ -50,12 +50,25 @@ public class SkillNode_Ctrl : MonoBehaviour
         Skill_Time = 0.0f;
     }
 
-    //public void InitState(SkillType a_SkType, float a_Time, float a_During)
-    //{
-    //    m_SkType = a_SkType;
-    //    Icon_Img.sprite = m_IconImg[(int)m_SkType];
+    public void UseSkill(SkillType a_SkType)
+    {
+        if (Skill_Time < Skill_Duration)
+            return;
 
-    //    Skill_Time = 12.0f;
-    //    Skill_Duration = 12.0f;
-    //}
+        //Skill_On = true;
+        UseSkill_Prefab = Instantiate(m_SkillPrefab[(int)a_SkType]) as GameObject;
+        Vector3 a_Pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        a_Pos.z = 0.0f;
+        UseSkill_Prefab.transform.position = a_Pos;
+
+    }
+
+    public void InitState(SkillType a_SkType)
+    {
+        m_SkType = a_SkType;
+        Icon_Img.sprite = m_IconImg[(int)m_SkType];
+
+        Skill_Time = 12.0f;
+        Skill_Duration = 12.0f;
+    }
 }
