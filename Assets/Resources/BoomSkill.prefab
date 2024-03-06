@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1883030383166048663}
   - component: {fileID: 4686658388856366618}
-  - component: {fileID: 6280024218635691586}
+  - component: {fileID: 307603195047294393}
   m_Layer: 0
   m_Name: BoomSkill
   m_TagString: Untagged
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a995f59543ed7584d940b005472336f3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5a8a0c82978f4ba46a82edf662ab0ba3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &6280024218635691586
+--- !u!95 &307603195047294393
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
