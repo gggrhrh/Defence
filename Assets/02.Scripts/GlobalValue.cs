@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum SkillType
+{
+    Boom,
+    Iceage
+}
 public class GlobalValue
 {
     public static string g_UniqID = "";     //유저 아이디
