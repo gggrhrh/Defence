@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class SkillNode_Ctrl : MonoBehaviour
 {
     //--- 스킬 이미지
-    [HideInInspector] public SkillType m_SkType = SkillType.Boom;
+    [HideInInspector] public SkillType m_SkType;
     //public Sprite[] m_IconImg = null;
     float Skill_Time = 5.0f;
     float Skill_Duration = 5.0f;
