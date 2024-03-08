@@ -118,7 +118,9 @@ public class Game_Mgr : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1.0f;
         GlobalValue.LoadGameData();
+        RefreshSkillList();
 
         //게임 초기화
         Time.timeScale = 1.0f;
@@ -184,6 +186,18 @@ public class Game_Mgr : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //--- 단축키 이용으로 스킬 사용하기
+        if (Input.GetKeyDown(KeyCode.Alpha1) ||
+            Input.GetKeyDown(KeyCode.Keypad1))
+        {
+            UseSkill_Key(SkillType.Skill_0);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2) ||
+            Input.GetKeyDown(KeyCode.Keypad2))
+        {
+            UseSkill_Key(SkillType.Skill_1);
+        }
+
         m_RoundTime -= Time.deltaTime;
         if (m_RoundTime <= 0.0f)
         {
@@ -313,6 +327,41 @@ public class Game_Mgr : MonoBehaviour
         if (MonCountText != null)
             MonCountText.text = m_MonCount.ToString();
     }//void RefreshUIUpdate()
+
+    void RefreshSkillList() //보유 Skill Item 목록을 UI에 복원하는 함수
+    {
+        for (int ii = 0; ii < GlobalValue.g_SkLevelList.Count; ii++)
+        {
+            if (GlobalValue.g_SkLevelList[ii] <= 0)
+                continue;
+
+            GameObject a_SkillClone = Instantiate(m_SkInvenNode);
+            a_SkillClone.GetComponent<SkillNode_Ctrl>().InitState((SkillType)ii);
+            a_SkillClone.transform.SetParent(m_IvnContent, false);
+        }
+    }// void RefreshSkillList()
+
+    void UseSkill_Key(SkillType a_SkType)
+    {
+        if (GlobalValue.g_SkLevelList[(int)a_SkType] <= 0)
+            return;     //레벨이 0이면 사용할수 없음
+
+        //--- 스킬 아이템 사용시
+        if (m_IvnContent == null)
+            return;
+
+        SkillNode_Ctrl[] a_SkIvnList =
+                    m_IvnContent.GetComponentsInChildren<SkillNode_Ctrl>();
+        for (int ii = 0; ii < a_SkIvnList.Length; ii++)
+        {
+            if (a_SkIvnList[ii].m_SkType == a_SkType)
+            {
+                a_SkIvnList[ii].UseSkill(a_SkType);
+                break;
+            }
+        }
+        //--- 스킬 아이템 사용시
+    }
 
     public void AddGold(int a_Value)
     {
