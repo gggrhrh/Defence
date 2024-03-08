@@ -19,7 +19,6 @@ public class Skill_Info  //각 Item 정보
     public SkillType m_SkType = SkillType.Skill_0; //캐릭터 타입
     public int m_Price = 100;   //아이템 기본 가격 
     public int m_UpPrice = 50; //업그레이드 가격, 타입에 따라서
-    public int m_Level = 0;     //스킬의 레벨
     public int m_UserLv = 0;    //스킬을 얻는데 필요한 유저의 레벨
     public float m_Damage = 0.0f;
     //public string m_SkillExp = "";    //스킬 효과 설명
