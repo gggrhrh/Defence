@@ -1,16 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class MousePanelCtrl : MonoBehaviour
+public class SkillPointer_Ctrl : MonoBehaviour
 {
-    Vector3 MousePos = Vector3.zero;
+    public Image m_SkPointer = null;
+    [HideInInspector] public SkillType m_SkType;
 
     // Start is called before the first frame update
     void Start()
     {
-        Time.timeScale = 0.3f;
+        
     }
 
     // Update is called once per frame
@@ -27,7 +28,6 @@ public class MousePanelCtrl : MonoBehaviour
         if (MousePos.y > Screen.height)
             MousePos.y = Screen.height;
 
-        transform.position = MousePos;
+        m_SkPointer.transform.position = MousePos;
     }
-
 }

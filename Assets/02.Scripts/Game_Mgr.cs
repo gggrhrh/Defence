@@ -54,7 +54,6 @@ public class Game_Mgr : MonoBehaviour
     [HideInInspector] public int m_Round = 0;
     int m_MaxRound = 30;
     float m_RoundTime = 30.0f;
-    float m_Time = 0;
     //--- Round & Time 변수
 
     //--- Game Over Panel
@@ -197,6 +196,7 @@ public class Game_Mgr : MonoBehaviour
         {
             UseSkill_Key(SkillType.Skill_1);
         }
+        //--- 단축키 이용으로 스킬 사용하기
 
         m_RoundTime -= Time.deltaTime;
         if (m_RoundTime <= 0.0f)
@@ -335,14 +335,15 @@ public class Game_Mgr : MonoBehaviour
             if (GlobalValue.g_SkLevelList[ii] <= 0)
                 continue;
 
+            float a_CoolTime = GlobalValue.g_SkDataList[ii].m_CoolTime;
             GameObject a_SkillClone = Instantiate(m_SkInvenNode);
-            a_SkillClone.GetComponent<SkillNode_Ctrl>().InitState((SkillType)ii);
+            a_SkillClone.GetComponent<SkillNode_Ctrl>().InitState((SkillType)ii, a_CoolTime, a_CoolTime);
             a_SkillClone.transform.SetParent(m_IvnContent, false);
         }
     }// void RefreshSkillList()
 
     void UseSkill_Key(SkillType a_SkType)
-    {
+    {  
         if (GlobalValue.g_SkLevelList[(int)a_SkType] <= 0)
             return;     //레벨이 0이면 사용할수 없음
 
@@ -356,7 +357,8 @@ public class Game_Mgr : MonoBehaviour
         {
             if (a_SkIvnList[ii].m_SkType == a_SkType)
             {
-                a_SkIvnList[ii].UseSkill(a_SkType);
+                a_SkIvnList[ii].SkillPanel(a_SkType);
+
                 break;
             }
         }

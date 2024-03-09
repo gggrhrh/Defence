@@ -21,6 +21,7 @@ public class Skill_Info  //각 Item 정보
     public int m_UpPrice = 50; //업그레이드 가격, 타입에 따라서
     public int m_UserLv = 0;    //스킬을 얻는데 필요한 유저의 레벨
     public float m_Damage = 0.0f;
+    public float m_CoolTime = 0.0f;
     //public string m_SkillExp = "";    //스킬 효과 설명
     //public Sprite m_IconImg = null;   //캐릭터 아이템에 사용될 이미지
 
@@ -34,6 +35,7 @@ public class Skill_Info  //각 Item 정보
             m_Price = 10; //기본가격
             m_UpPrice = 5; //Lv1->Lv2  (m_UpPrice + (m_UpPrice * (m_Level - 1)) 가격 필요
             m_UserLv = 0;
+            m_CoolTime = 15.0f;
 
         }
         else if (a_SkType == SkillType.Skill_1)
@@ -44,6 +46,7 @@ public class Skill_Info  //각 Item 정보
             m_UpPrice = 10; //Lv1->Lv2  (m_UpPrice + (m_UpPrice * (m_Level - 1)) 가격 필요
 
             m_UserLv = 3;
+            m_CoolTime = 20.0f;
         }
         //else if (a_SkType == SkillType.Skill_2)
         //{
@@ -141,7 +144,7 @@ public class GlobalValue
             for (int ii = 0; ii < (int)SkillType.SkCount; ii++)
             {
                 a_KeyBuff = string.Format("Skill_Item_{0}", ii); //"Skill_Item_0", "Skill_Item_1"
-                a_SkLevel = PlayerPrefs.GetInt(a_KeyBuff, 0);
+                a_SkLevel = PlayerPrefs.GetInt(a_KeyBuff, 2);
                 // 1이면 보유 0이면 미보유
 
                 g_SkLevelList.Add(a_SkLevel);

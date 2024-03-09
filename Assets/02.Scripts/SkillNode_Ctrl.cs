@@ -8,21 +8,27 @@ public class SkillNode_Ctrl : MonoBehaviour
     //--- 스킬 이미지
     [HideInInspector] public SkillType m_SkType;
     public Sprite[] m_IconImg = null;
-    float Skill_Time = 5.0f;
-    float Skill_Duration = 5.0f;
+    float Skill_Time = 0.0f;
+    float Skill_Duration = 0.0f;
     public Image Time_Img = null;
     public Image Icon_Img = null;
     public Button Skill_Btn = null;
 
-    //--- 스킬 사용
-    GameObject UseSkill_Prefab = null;
-    public GameObject[] m_SkillPrefab = null;
+    //--- 스킬 판넬
+    GameObject m_SkillPanel = null;
+    GameObject m_Canvas = null;
 
     // Start is called before the first frame update
     void Start()
     {
+        m_SkillPanel = Resources.Load("SkillPanel") as GameObject;
+        m_Canvas = GameObject.Find("Canvas");
+
         if (Skill_Btn != null)
-            Skill_Btn.onClick.AddListener(BtnClick);
+            Skill_Btn.onClick.AddListener(() =>
+            {
+                SkillPanel(m_SkType);
+            });
     }
 
     // Update is called once per frame
@@ -34,41 +40,64 @@ public class SkillNode_Ctrl : MonoBehaviour
             Skill_Time = Skill_Duration;
 
         Time_Img.fillAmount = Skill_Time / Skill_Duration;
+
+        PointerCheck();
     }
 
-    void BtnClick()
+    public void SkillPanel(SkillType a_SkType)
     {
+        SkillPointer_Ctrl SkObj = FindObjectOfType<SkillPointer_Ctrl>();
+        if (SkObj != null)
+            return;
+
         if (Skill_Time < Skill_Duration)
             return;
 
-        //Skill_On = true;
-        UseSkill_Prefab = Instantiate(m_SkillPrefab[(int)m_SkType]) as GameObject;
-        Vector3 a_Pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        a_Pos.z = 0.0f;
-        UseSkill_Prefab.transform.position = a_Pos;
+        GameObject a_SkPan = Instantiate(m_SkillPanel) as GameObject;
+        a_SkPan.transform.position = Vector3.zero;
+        a_SkPan.transform.SetParent(m_Canvas.transform, false);
+        a_SkPan.GetComponent<SkillPointer_Ctrl>().m_SkType = a_SkType;
 
-        Skill_Time = 0.0f;
+        Time.timeScale = 0.3f;
     }
 
-    public void UseSkill(SkillType a_SkType)
+    void PointerCheck()
     {
+        SkillPointer_Ctrl SkObj = FindObjectOfType<SkillPointer_Ctrl>();
+        if (SkObj == null)
+            return;
+
         if (Skill_Time < Skill_Duration)
             return;
 
-        //Skill_On = true;
-        UseSkill_Prefab = Instantiate(m_SkillPrefab[(int)a_SkType]) as GameObject;
-        Vector3 a_Pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        a_Pos.z = 0.0f;
-        UseSkill_Prefab.transform.position = a_Pos;
+        if (m_SkType != SkObj.m_SkType)
+            return;
+
+        if (Input.GetMouseButtonDown(0) == true)
+        {
+            Skill_Time = 0.0f;
+            Destroy(SkObj.gameObject);
+            UseSkill(m_SkType);
+            Time.timeScale = 1.0f;
+        }
+        else if (Input.GetMouseButtonDown(1) == true)
+        {
+            Destroy(SkObj.gameObject);
+            Time.timeScale = 1.0f;
+        }
+    }
+
+    void UseSkill(SkillType a_SkType)
+    {
 
     }
 
-    public void InitState(SkillType a_SkType)
+    public void InitState(SkillType a_SkType, float a_SkTime, float a_SkDur)
     {
         m_SkType = a_SkType;
         Icon_Img.sprite = m_IconImg[(int)m_SkType];
 
-        Skill_Time = 12.0f;
-        Skill_Duration = 12.0f;
+        Skill_Time = a_SkTime;
+        Skill_Duration = a_SkDur;
     }
 }
