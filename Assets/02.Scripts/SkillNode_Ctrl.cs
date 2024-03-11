@@ -18,6 +18,9 @@ public class SkillNode_Ctrl : MonoBehaviour
     GameObject m_SkillPanel = null;
     GameObject m_Canvas = null;
 
+    //--- 스킬 사용
+    public GameObject[] m_SkillPrefab = null;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -75,7 +78,7 @@ public class SkillNode_Ctrl : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) == true)
         {
-            Skill_Time = 0.0f;
+
             Destroy(SkObj.gameObject);
             UseSkill(m_SkType);
             Time.timeScale = 1.0f;
@@ -89,7 +92,11 @@ public class SkillNode_Ctrl : MonoBehaviour
 
     void UseSkill(SkillType a_SkType)
     {
-
+        GameObject SkObj = Instantiate(m_SkillPrefab[(int)a_SkType]) as GameObject;
+        Vector3 a_Pos = Camera.main.WorldToScreenPoint(Input.mousePosition);
+        SkObj.transform.position = a_Pos;
+        Skill_Time = 0.0f;
+        
     }
 
     public void InitState(SkillType a_SkType, float a_SkTime, float a_SkDur)

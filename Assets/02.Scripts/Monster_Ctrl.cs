@@ -29,10 +29,16 @@ public class Monster_Ctrl : MonoBehaviour
     Vector3 m_Pos;
     Vector3 m_Dir = Vector3.down;
 
+    //피격시 빨갛게 변함
+    SpriteRenderer m_MonRenderer = null;
+    Color32 Takecolor = new Color32(255, 150, 150, 255);
+
     // Start is called before the first frame update
     void Start()
     {
         MonsterState();
+        
+        m_MonRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -129,6 +135,9 @@ public class Monster_Ctrl : MonoBehaviour
         if (m_CurHp <= 0.0f)    //이 몬스터가 이미 죽어 있으면
             return;
 
+        //피격시 색변화
+        StartCoroutine(TakeAttak());
+
         float a_CacDmg = a_Value;
         if (m_CurHp < a_Value)  //남은 체력보다 데미지가 더 높으면
             a_CacDmg = m_CurHp; // 남은 체력만큼 데미지를 줌
@@ -145,6 +154,15 @@ public class Monster_Ctrl : MonoBehaviour
 
         if (m_HpBar != null)
             m_HpBar.fillAmount = m_CurHp / m_MaxHp;
+    }
+
+    IEnumerator TakeAttak()
+    {
+        m_MonRenderer.color = Takecolor;
+
+        yield return new WaitForSeconds(0.5f);
+
+        m_MonRenderer.color = new Color32(255, 255, 255, 255);
     }
 
     void Die()

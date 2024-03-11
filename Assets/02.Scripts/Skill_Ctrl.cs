@@ -4,35 +4,25 @@ using UnityEngine;
 
 public class Skill_Ctrl : MonoBehaviour
 {
-    [HideInInspector] public SkillType m_SkType;
+    public AnimationClip aniClip;
     Animation anim;
+    float delta = 0.0f;
 
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animation>();
+        anim.Play();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 a_Pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        a_Pos.z = 0.0f;
-
-        if (a_Pos.x <= -9.0f)
-            a_Pos.x = -9.0f;
-        if (a_Pos.x >= 9.0f)
-            a_Pos.x = 9.0f;
-        if (a_Pos.y <= -5.0f)
-            a_Pos.y = -5.0f;
-        if (a_Pos.y >= 5.0f)
-            a_Pos.y = 5.0f;
-
-        this.transform.position = a_Pos;
+        delta += Time.deltaTime;
+        if(delta >= aniClip.length)
+        {
+            Destroy(gameObject);
+        }
     }
 
-    public void UseSkill()
-    {
-        anim.Play();
-    }
 }

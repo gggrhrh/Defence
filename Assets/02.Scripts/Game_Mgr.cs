@@ -122,7 +122,6 @@ public class Game_Mgr : MonoBehaviour
         RefreshSkillList();
 
         //게임 초기화
-        Time.timeScale = 1.0f;
         m_GameRound = GameRound.ReadyRound;
         m_RoundTime = 10.0f;
         m_Gold = 5000;
