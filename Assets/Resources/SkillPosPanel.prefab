@@ -59,8 +59,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2acfa4b86232524faac25ac416f0384, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SkPointer: {fileID: 6298481523754889303}
   m_SkType: 0
+  m_SkPointer: {fileID: 6298481523754889303}
+  SkillPrefab:
+  - {fileID: 2894951610540354793, guid: 6ce4e87bbe6b5534faed2c37d18ab7ef, type: 3}
+  - {fileID: 8583889226443972015, guid: c018c2d9a98a7b648ac041b4f7d8dee6, type: 3}
 --- !u!114 &562880541609462072
 MonoBehaviour:
   m_ObjectHideFlags: 0

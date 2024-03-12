@@ -20,8 +20,9 @@ public class Bullet_Ctrl : MonoBehaviour
 
     void OnEnable() //Active가 활성화 될 때마다 호출되는 함수
     {
+        m_isColl = false;   
         m_LifeTime = 1.0f;
-
+        
         FindEnemy();
     }
 
@@ -83,7 +84,6 @@ public class Bullet_Ctrl : MonoBehaviour
     {
         m_Attack = a_Attack;
         m_isCri = isCri;
-        m_isColl = false;
     }
 
     void OnTriggerEnter2D(Collider2D collision)

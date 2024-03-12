@@ -20,12 +20,12 @@ public class SkillPos_Ctrl : MonoBehaviour
     {
         Time.timeScale = 0.3f;
         //범위 증가값 = 스킬레벨 * 레벨당 범위증가 
-        m_UpRange = GlobalValue.g_SkLevelList[(int)m_SkType] * 
+        m_UpRange = GlobalValue.g_SkLevelList[(int)m_SkType] *
             GlobalValue.g_SkDataList[(int)m_SkType].m_UpRange;
 
         m_SkillRange += m_UpRange;
 
-        if(m_SkPointer != null)
+        if (m_SkPointer != null)
         {
             m_SkPointer.rectTransform.localScale = new Vector3(m_SkillRange, m_SkillRange, 0.0f);
         }
@@ -52,7 +52,7 @@ public class SkillPos_Ctrl : MonoBehaviour
             skillPos = MousePos;
             UseSkill();
             Time.timeScale = 1.0f;
-            Destroy(gameObject);      
+            Destroy(gameObject);
         }
         else if (Input.GetMouseButtonDown(1) == true)
         {
@@ -65,7 +65,7 @@ public class SkillPos_Ctrl : MonoBehaviour
     {
         //---쿨타임 갱신
         SkillNode_Ctrl[] a_SkNode = FindObjectsOfType<SkillNode_Ctrl>(true);
-        for(int i = 0; i < a_SkNode.Length; i++)
+        for (int i = 0; i < a_SkNode.Length; i++)
         {
             if (a_SkNode[i].m_SkType == m_SkType)
             {
@@ -77,13 +77,16 @@ public class SkillPos_Ctrl : MonoBehaviour
 
         //--스킬 프리팹 스폰 위치 밑 범위
         Vector3 pos = Camera.main.ScreenToWorldPoint(skillPos);
+        pos.z = 0.0f;
         GameObject SkObj = Instantiate(SkillPrefab[(int)m_SkType]) as GameObject;
         SkObj.transform.position = pos;
+        Skill_Ctrl SkCtrl = SkObj.GetComponent<Skill_Ctrl>();
+        SkCtrl.InitSkState(m_SkType, m_SkillRange);
     }
 
     public void InitSkill(SkillType a_SkType, float a_Range)
     {
         m_SkType = a_SkType;
-        m_SkillRange = a_Range; 
+        m_SkillRange = a_Range;
     }
 }
