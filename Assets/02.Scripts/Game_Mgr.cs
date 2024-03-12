@@ -335,8 +335,9 @@ public class Game_Mgr : MonoBehaviour
                 continue;
 
             float a_CoolTime = GlobalValue.g_SkDataList[ii].m_CoolTime;
+            float a_Range = GlobalValue.g_SkDataList[ii].m_Range;
             GameObject a_SkillClone = Instantiate(m_SkInvenNode);
-            a_SkillClone.GetComponent<SkillNode_Ctrl>().InitState((SkillType)ii, a_CoolTime, a_CoolTime);
+            a_SkillClone.GetComponent<SkillNode_Ctrl>().InitState((SkillType)ii, a_Range, a_CoolTime, a_CoolTime);
             a_SkillClone.transform.SetParent(m_IvnContent, false);
         }
     }// void RefreshSkillList()
@@ -356,7 +357,7 @@ public class Game_Mgr : MonoBehaviour
         {
             if (a_SkIvnList[ii].m_SkType == a_SkType)
             {
-                a_SkIvnList[ii].SkillPanel(a_SkType);
+                a_SkIvnList[ii].SkillBtnClick(a_SkType);
 
                 break;
             }
@@ -437,7 +438,7 @@ public class Game_Mgr : MonoBehaviour
         }
     }//IEnumerator MonsterSpawn()
 
-    public void HelpPanelSpawn(string errorstr) //안내 판넬 소환
+    public void HelpPanelSpawn(string errorstr)
     {
         if (IsPanel == true)
             return;
@@ -445,6 +446,7 @@ public class Game_Mgr : MonoBehaviour
         IsPanel = true;
         PanelTimer = 3.0f;
 
+        //안내 판넬 소환
         GameObject HelpPanel = Instantiate(HelpPanelPrefab) as GameObject;
         HelpPanel_Ctrl HelpPanel_Ctrl = HelpPanel.GetComponent<HelpPanel_Ctrl>();
         HelpPanel_Ctrl.InitHelpText(errorstr);

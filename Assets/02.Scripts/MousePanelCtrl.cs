@@ -10,7 +10,7 @@ public class MousePanelCtrl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Time.timeScale = 0.3f;
+        
     }
 
     // Update is called once per frame

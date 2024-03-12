@@ -22,6 +22,8 @@ public class Skill_Info  //각 Item 정보
     public int m_UserLv = 0;    //스킬을 얻는데 필요한 유저의 레벨
     public float m_Damage = 0.0f;
     public float m_CoolTime = 0.0f;
+    public float m_Range = 0.0f;    //스킬의 범위
+    public float m_UpRange = 0.0f;
     //public string m_SkillExp = "";    //스킬 효과 설명
     //public Sprite m_IconImg = null;   //캐릭터 아이템에 사용될 이미지
 
@@ -35,7 +37,9 @@ public class Skill_Info  //각 Item 정보
             m_Price = 10; //기본가격
             m_UpPrice = 5; //Lv1->Lv2  (m_UpPrice + (m_UpPrice * (m_Level - 1)) 가격 필요
             m_UserLv = 0;
-            m_CoolTime = 15.0f;
+            m_CoolTime = 5.0f;
+            m_Range = 1.0f;
+            m_UpRange = 0.1f;
 
         }
         else if (a_SkType == SkillType.Skill_1)
@@ -46,55 +50,11 @@ public class Skill_Info  //각 Item 정보
             m_UpPrice = 10; //Lv1->Lv2  (m_UpPrice + (m_UpPrice * (m_Level - 1)) 가격 필요
 
             m_UserLv = 3;
-            m_CoolTime = 20.0f;
+            m_CoolTime = 5.0f;
+            m_Range = 1.2f;
+            m_UpRange = 0.15f;
         }
-        //else if (a_SkType == SkillType.Skill_2)
-        //{
-        //    m_Name = "구미호";
- 
-        //    m_Price = 400; //기본가격
-        //    m_UpPrice = 200; //Lv1->Lv2  (m_UpPrice + (m_UpPrice * (m_Level - 1)) 가격 필요
-
-        //    m_SkillExp = "보호막";
-        //    m_IconImg = Resources.Load("IconImg/m0054", typeof(Sprite)) as Sprite;
-        //}
-        //else if (a_SkType == SkillType.Skill_3)
-        //{
-        //    m_Name = "야옹이";
-        //    m_IconSize.x = 0.93f;     //세로에 대한 가로 비율
-        //    m_IconSize.y = 1.0f;     //세로를 기준으로 잡을 것이기 때문에 그냥 1.0f
-
-        //    m_Price = 800; //기본가격
-        //    m_UpPrice = 400; //Lv1->Lv2  (m_UpPrice + (m_UpPrice * (m_Level - 1)) 가격 필요
-
-        //    m_SkillExp = "유도탄";
-        //    m_IconImg = Resources.Load("IconImg/m0423", typeof(Sprite)) as Sprite;
-        //}
-        //else if (a_SkType == SkillType.Skill_4)
-        //{
-        //    m_Name = "드래곤";
-        //    m_IconSize.x = 0.93f;     //세로에 대한 가로 비율
-        //    m_IconSize.y = 1.0f;     //세로를 기준으로 잡을 것이기 때문에 그냥 1.0f
-
-        //    m_Price = 1600; //기본가격
-        //    m_UpPrice = 800; //Lv1->Lv2  (m_UpPrice + (m_UpPrice * (m_Level - 1)) 가격 필요
-
-        //    m_SkillExp = "더블샷";
-        //    m_IconImg = Resources.Load("IconImg/m0244", typeof(Sprite)) as Sprite;
-        //}
-        //else if (a_SkType == SkillType.Skill_5)
-        //{
-        //    m_Name = "팅커벨";
-        //    m_IconSize.x = 0.93f;    //세로에 대한 가로 비율
-        //    m_IconSize.y = 1.0f;     //세로를 기준으로 잡을 것이기 때문에 그냥 1.0f
-
-        //    m_Price = 3000;   //기본가격
-        //    m_UpPrice = 1600; //Lv1->Lv2  (m_UpPrice + (m_UpPrice * (m_Level - 1)) 가격 필요
-
-        //    m_SkillExp = "소환수 공격";
-        //    m_IconImg = Resources.Load("IconImg/m0172", typeof(Sprite)) as Sprite;
-        //}
-
+   
     }//public void SetType(SkillType a_SkType)
 }
 public class GlobalValue
