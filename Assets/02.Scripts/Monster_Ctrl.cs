@@ -22,7 +22,7 @@ public class Monster_Ctrl : MonoBehaviour
 
     int m_Round = 0;
     int m_Gold = 0; //몬스터 타입마다 주는 골드 바뀜
-    float m_CurHp = 0.0f;
+    [HideInInspector]public float m_CurHp = 0.0f;
     float m_MaxHp = 0.0f;
 
     [HideInInspector]public float m_MoveSpeed = 2.2f;

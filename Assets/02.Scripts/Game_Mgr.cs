@@ -335,15 +335,18 @@ public class Game_Mgr : MonoBehaviour
                 continue;
 
             float a_CoolTime = GlobalValue.g_SkDataList[ii].m_CoolTime;
-            float a_Range = GlobalValue.g_SkDataList[ii].m_Range;
+            float a_Range = GlobalValue.g_SkDataList[ii].m_Range +
+                GlobalValue.g_SkDataList[ii].m_UpRange * (GlobalValue.g_SkLevelList[ii] - 1);
+            float a_Damage = GlobalValue.g_SkDataList[ii].m_Damage +
+                GlobalValue.g_SkDataList[ii].m_UpDamage * (GlobalValue.g_SkLevelList[ii] - 1);
             GameObject a_SkillClone = Instantiate(m_SkInvenNode);
-            a_SkillClone.GetComponent<SkillNode_Ctrl>().InitState((SkillType)ii, a_Range, a_CoolTime, a_CoolTime);
+            a_SkillClone.GetComponent<SkillNode_Ctrl>().InitState((SkillType)ii, a_Range, a_Damage, a_CoolTime, a_CoolTime);
             a_SkillClone.transform.SetParent(m_IvnContent, false);
         }
     }// void RefreshSkillList()
 
-    void UseSkill_Key(SkillType a_SkType)
-    {  
+    void UseSkill_Key(SkillType a_SkType)   //키보드로 스킬 입력시
+    {
         if (GlobalValue.g_SkLevelList[(int)a_SkType] <= 0)
             return;     //레벨이 0이면 사용할수 없음
 

@@ -99,9 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SkType: 0
-  SkillClip:
-  - {fileID: 7400000, guid: 4d6986209198de74fbb26b75235c698b, type: 2}
-  - {fileID: 7400000, guid: 9021d68d55945914bb6348b1af2921f9, type: 2}
+  SkillClip: {fileID: 7400000, guid: 4d6986209198de74fbb26b75235c698b, type: 2}
 --- !u!95 &3904319516300674760
 Animator:
   serializedVersion: 5

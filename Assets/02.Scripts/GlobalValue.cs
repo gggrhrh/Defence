@@ -17,13 +17,14 @@ public class Skill_Info  //각 Item 정보
 {
     public string m_Name = "";                  //캐릭터 이름
     public SkillType m_SkType = SkillType.Skill_0; //캐릭터 타입
-    public int m_Price = 100;   //아이템 기본 가격 
+    public int m_Price = 100;   //아이템 구매 가격 
     public int m_UpPrice = 50; //업그레이드 가격, 타입에 따라서
     public int m_UserLv = 0;    //스킬을 얻는데 필요한 유저의 레벨
-    public float m_Damage = 0.0f;
+    public float m_Damage = 0.0f;   //스킬의 데미지
+    public float m_UpDamage = 0.0f; // 업그레이드 스킬 데미지
     public float m_CoolTime = 0.0f;
     public float m_Range = 0.0f;    //스킬의 범위
-    public float m_UpRange = 0.0f;
+    public float m_UpRange = 0.0f;  //업그레이드 스킬 범위
     //public string m_SkillExp = "";    //스킬 효과 설명
     //public Sprite m_IconImg = null;   //캐릭터 아이템에 사용될 이미지
 
@@ -37,6 +38,9 @@ public class Skill_Info  //각 Item 정보
             m_Price = 10; //기본가격
             m_UpPrice = 5; //Lv1->Lv2  (m_UpPrice + (m_UpPrice * (m_Level - 1)) 가격 필요
             m_UserLv = 0;
+
+            m_Damage = 100.0f;
+            m_UpDamage = 50.0f;
             m_CoolTime = 5.0f;
             m_Range = 1.0f;
             m_UpRange = 0.1f;
@@ -48,8 +52,10 @@ public class Skill_Info  //각 Item 정보
 
             m_Price = 20; //기본가격
             m_UpPrice = 10; //Lv1->Lv2  (m_UpPrice + (m_UpPrice * (m_Level - 1)) 가격 필요
-
             m_UserLv = 3;
+
+            m_Damage = 150.0f;
+            m_UpDamage = 60.0f;
             m_CoolTime = 5.0f;
             m_Range = 1.2f;
             m_UpRange = 0.15f;

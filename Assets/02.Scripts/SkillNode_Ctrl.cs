@@ -10,6 +10,7 @@ public class SkillNode_Ctrl : MonoBehaviour
     public Sprite[] m_IconImg = null;
     [HideInInspector] public float Skill_Time = 0.0f;
     float Skill_Duration = 0.0f;
+    float Skill_Damage = 0.0f;
     float Skill_Range = 0.0f;
     public Image Time_Img = null;
     public Image Icon_Img = null;
@@ -57,14 +58,15 @@ public class SkillNode_Ctrl : MonoBehaviour
         a_SkPan.transform.position = Vector3.zero;
         a_SkPan.transform.SetParent(m_Canvas.transform, false);
         SkillPos_Ctrl a_SkPos = a_SkPan.GetComponent<SkillPos_Ctrl>();
-        a_SkPos.InitSkill(m_SkType, Skill_Range);
+        a_SkPos.InitSkill(m_SkType, Skill_Range, Skill_Damage);
     }
 
-    public void InitState(SkillType a_SkType, float a_Range, float a_SkTime, float a_SkDur)
+    public void InitState(SkillType a_SkType, float a_Range, float a_Damage, float a_SkTime, float a_SkDur)
     {
         m_SkType = a_SkType;
         Icon_Img.sprite = m_IconImg[(int)m_SkType];
         Skill_Range = a_Range;
+        Skill_Damage = a_Damage;
 
         Skill_Time = a_SkTime;
         Skill_Duration = a_SkDur;

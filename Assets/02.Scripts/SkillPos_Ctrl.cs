@@ -12,7 +12,7 @@ public class SkillPos_Ctrl : MonoBehaviour
 
     //스킬의 범위및 위치설정 변수
     float m_SkillRange = 0.0f;
-    float m_UpRange = 0.0f;
+    float m_Damage = 0.0f;
     Vector3 skillPos = Vector3.zero;
 
     // Start is called before the first frame update
@@ -20,10 +20,6 @@ public class SkillPos_Ctrl : MonoBehaviour
     {
         Time.timeScale = 0.3f;
         //범위 증가값 = 스킬레벨 * 레벨당 범위증가 
-        m_UpRange = GlobalValue.g_SkLevelList[(int)m_SkType] *
-            GlobalValue.g_SkDataList[(int)m_SkType].m_UpRange;
-
-        m_SkillRange += m_UpRange;
 
         if (m_SkPointer != null)
         {
@@ -81,12 +77,13 @@ public class SkillPos_Ctrl : MonoBehaviour
         GameObject SkObj = Instantiate(SkillPrefab[(int)m_SkType]) as GameObject;
         SkObj.transform.position = pos;
         Skill_Ctrl SkCtrl = SkObj.GetComponent<Skill_Ctrl>();
-        SkCtrl.InitSkState(m_SkType, m_SkillRange);
+        SkCtrl.InitSkState(m_SkType, m_SkillRange, m_Damage);
     }
 
-    public void InitSkill(SkillType a_SkType, float a_Range)
+    public void InitSkill(SkillType a_SkType, float a_Range, float a_Damage)
     {
         m_SkType = a_SkType;
         m_SkillRange = a_Range;
+        m_Damage = a_Damage;
     }
 }
