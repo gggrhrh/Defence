@@ -12,8 +12,6 @@ public class Skill_Ctrl : MonoBehaviour
 
     float m_Range = 0.0f;       //스킬 범위
     float m_Attack = 0.0f;      //스킬 공격력
-    float delta = 0.0f;
-
 
     // Start is called before the first frame update
     void Start()
@@ -33,9 +31,6 @@ public class Skill_Ctrl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //delta += Time.deltaTime;
-        //if(delta > SkillClip.length)
-        //    this.gameObject.SetActive(false);
 
     }
 
@@ -48,7 +43,7 @@ public class Skill_Ctrl : MonoBehaviour
             Vector3 a_Dir = transform.position - m_FindMon[i].transform.position;
             if(Mathf.Abs(a_Dir.magnitude) < m_Range)
             {
-                FMonIndex.Add(i);
+                FMonIndex.Add(i);   //몬스터의 번호를 리스트에 추가
             }
         }
     }
@@ -58,6 +53,7 @@ public class Skill_Ctrl : MonoBehaviour
 
         for(int i = 0; i < FMonIndex.Count; i++)
         {
+            //데미지 주기
             m_FindMon[FMonIndex[i]].TakeDamage(m_Attack);
             //리스트 삭제
             if (m_FindMon[FMonIndex[i]].m_CurHp <= 0.0f)

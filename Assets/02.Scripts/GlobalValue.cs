@@ -49,7 +49,6 @@ public class Skill_Info  //각 Item 정보
         else if (a_SkType == SkillType.Skill_1)
         {
             m_Name = "아이스에이지";
-
             m_Price = 20; //기본가격
             m_UpPrice = 10; //Lv1->Lv2  (m_UpPrice + (m_UpPrice * (m_Level - 1)) 가격 필요
             m_UserLv = 3;
