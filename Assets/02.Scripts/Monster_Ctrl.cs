@@ -18,6 +18,7 @@ public enum MonsterType
 public class Monster_Ctrl : MonoBehaviour
 {
     public MonsterType m_MonType = MonsterType.Round1;
+    public Sprite[] MonsterSprite;
     public Image m_HpBar;
 
     int m_Round = 0;
@@ -82,18 +83,21 @@ public class Monster_Ctrl : MonoBehaviour
             m_MaxHp = 100.0f + 10.0f * (m_Round - 1);
             m_CurHp = m_MaxHp;
             m_Gold = 10;
+            m_MonRenderer.sprite = MonsterSprite[0];
         }
         else if (m_MonType == MonsterType.Round2)
         {
             m_MaxHp = 200.0f + 10.0f * (m_Round - 11);
             m_CurHp = m_MaxHp;
             m_Gold = 15;
+            m_MonRenderer.sprite = MonsterSprite[1];
         }
         else if (m_MonType == MonsterType.Round3)
         {
             m_MaxHp = 300.0f + 10.0f * (m_Round - 21);
             m_CurHp = m_MaxHp;
             m_Gold = 20;
+            m_MonRenderer.sprite = MonsterSprite[2];
         }
         else if (m_MonType == MonsterType.Boss1)
         {

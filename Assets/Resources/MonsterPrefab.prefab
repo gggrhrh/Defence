@@ -195,7 +195,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MonType: 0
+  MonsterSprite:
+  - {fileID: 21300000, guid: ca9dea99d082ec54e8d5fdf42264b142, type: 3}
+  - {fileID: 21300000, guid: 92c3af317fecc324eb74f955e9eb7a8c, type: 3}
+  - {fileID: 21300000, guid: 28fa9871c067475419c454515ad62710, type: 3}
+  - {fileID: 21300000, guid: abc64a2186e631048b513973243071b8, type: 3}
+  - {fileID: 21300000, guid: 9e162afe5870b274bbd27c194809fe95, type: 3}
   m_HpBar: {fileID: 6613700973161863101}
+  m_CurHp: 0
+  m_MoveSpeed: 2.2
 --- !u!1 &3280295531685692133
 GameObject:
   m_ObjectHideFlags: 0

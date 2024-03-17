@@ -27,7 +27,7 @@ public class MousePanelCtrl : MonoBehaviour
         if (MousePos.y > Screen.height)
             MousePos.y = Screen.height;
 
-        transform.position = MousePos;
+        transform.position = new Vector3(MousePos.x + 12.0f, MousePos.y - 12.0f, 0.0f);
     }
 
 }

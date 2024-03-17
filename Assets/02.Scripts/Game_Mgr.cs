@@ -178,7 +178,7 @@ public class Game_Mgr : MonoBehaviour
         //--- BackPanel
 
         if (GoldText != null)
-            GoldText.text = m_Gold.ToString();
+            GoldText.text = m_Gold.ToString() + " Gold";
     }
 
     // Update is called once per frame
@@ -373,7 +373,7 @@ public class Game_Mgr : MonoBehaviour
         m_Gold += a_Value;
 
         if (GoldText != null)
-            GoldText.text = m_Gold.ToString();
+            GoldText.text = m_Gold.ToString() + " Gold";
     }//public void AddGold(int a_Value)
 
     public void GameDie()
