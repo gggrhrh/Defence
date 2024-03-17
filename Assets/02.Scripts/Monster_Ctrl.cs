@@ -37,9 +37,10 @@ public class Monster_Ctrl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        MonsterState();
-        
         m_MonRenderer = GetComponentInChildren<SpriteRenderer>();
+
+        MonsterState();
+
     }
 
     // Update is called once per frame
