@@ -7,12 +7,13 @@ using UnityEngine.UI;
 public class SkillPos_Ctrl : MonoBehaviour
 {
     [HideInInspector] public SkillType m_SkType;
-    public Image m_SkPointer = null;
+    public Image m_Mouse = null;
     public GameObject[] SkillPrefab;    //스킬 프리팹
-
-    //스킬의 범위및 위치설정 변수
-    float m_SkillRange = 0.0f;
+    
+    //스킬의 위치설정 변수
     float m_Damage = 0.0f;
+    //작업관리자 스킬
+    public GameObject CADSel = null;
     Vector3 skillPos = Vector3.zero;
 
     // Start is called before the first frame update
@@ -20,28 +21,28 @@ public class SkillPos_Ctrl : MonoBehaviour
     {
         Time.timeScale = 0.3f;
         //범위 증가값 = 스킬레벨 * 레벨당 범위증가 
-
-        if (m_SkPointer != null)
-        {
-            m_SkPointer.rectTransform.localScale = new Vector3(m_SkillRange, m_SkillRange, 0.0f);
-        }
+        if (m_SkType == SkillType.Skill_1)   //CAD스킬이면
+            CADSel.SetActive(true);
+        else
+            CADSel.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 MousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f);
+        Vector3 MousePos = new Vector3(Input.mousePosition.x + 50.0f, Input.mousePosition.y + 50.0f, 0.0f);
 
-        if (MousePos.x < 0.0f)
-            MousePos.x = 0.0f;
-        if (MousePos.x > Screen.width)
-            MousePos.x = Screen.width;
-        if (MousePos.y < 0.0f)
-            MousePos.y = 0.0f;
-        if (MousePos.y > Screen.height)
-            MousePos.y = Screen.height;
+        if (MousePos.x < 0.0f + 50.0f)
+            MousePos.x = 0.0f + 50.0f;
+        if (MousePos.x > Screen.width + 50.0f)
+            MousePos.x = Screen.width + 50.0f;
+        if (MousePos.y < 0.0f + 50.0f)
+            MousePos.y = 0.0f + 50.0f;
+        if (MousePos.y > Screen.height + 50.0f)
+            MousePos.y = Screen.height + 50.0f;
 
-        m_SkPointer.transform.position = MousePos;
+
+        m_Mouse.transform.position = MousePos;
 
         if (Input.GetMouseButtonDown(0) == true)
         {
@@ -77,13 +78,12 @@ public class SkillPos_Ctrl : MonoBehaviour
         GameObject SkObj = Instantiate(SkillPrefab[(int)m_SkType]) as GameObject;
         SkObj.transform.position = pos;
         Skill_Ctrl SkCtrl = SkObj.GetComponent<Skill_Ctrl>();
-        SkCtrl.InitSkState(m_SkType, m_SkillRange, m_Damage);
+        SkCtrl.InitSkState(m_SkType, m_Damage);
     }
 
-    public void InitSkill(SkillType a_SkType, float a_Range, float a_Damage)
+    public void InitSkill(SkillType a_SkType, float a_Damage)
     {
         m_SkType = a_SkType;
-        m_SkillRange = a_Range;
         m_Damage = a_Damage;
     }
 }

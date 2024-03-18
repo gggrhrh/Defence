@@ -48,9 +48,7 @@ public class Number_Ctrl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GlobalValue.LoadGameData();
         GlobalUp();
-        m_CriRate = 0.5f;
 
         //--- 소환했을때 업그레이드 양만큼 공격력 증가
         if (m_NumType == NumType.Beginner)

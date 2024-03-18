@@ -4,9 +4,9 @@ using UnityEngine;
 
 public enum SkillType
 {
-    Skill_0 = 0,        // Boom
-    Skill_1,            // Iceage
-    //Skill_2,            // "보호막"
+    Skill_0 = 0,        // 본체때리기
+    Skill_1,            // 전원껐다켜기
+    Skill_2,            // 작업관리자
     //Skill_3,            // "유도탄"
     //Skill_4,            // "더블샷"
     //Skill_5,            // "소환수 공격"
@@ -23,9 +23,7 @@ public class Skill_Info  //각 Item 정보
     public float m_Damage = 0.0f;   //스킬의 데미지
     public float m_UpDamage = 0.0f; // 업그레이드 스킬 데미지
     public float m_CoolTime = 0.0f;
-    public float m_Range = 0.0f;    //스킬의 범위
-    public float m_UpRange = 0.0f;  //업그레이드 스킬 범위
-    //public string m_SkillExp = "";    //스킬 효과 설명
+    public string m_SkillExp = "";    //스킬 효과 설명
     //public Sprite m_IconImg = null;   //캐릭터 아이템에 사용될 이미지
 
     public void SetType(SkillType a_SkType)
@@ -34,32 +32,41 @@ public class Skill_Info  //각 Item 정보
 
         if (a_SkType == SkillType.Skill_0)
         {
-            m_Name = "화염폭발";
+            m_Name = "본체때리기";
             m_Price = 10; //기본가격
             m_UpPrice = 5; //Lv1->Lv2  (m_UpPrice + (m_UpPrice * (m_Level - 1)) 가격 필요
             m_UserLv = 0;
 
-            m_Damage = 100.0f;
-            m_UpDamage = 50.0f;
-            m_CoolTime = 5.0f;
-            m_Range = 1.0f;
-            m_UpRange = 0.1f;
-
+            m_Damage = 50.0f;
+            m_UpDamage = 10.0f;
+            m_CoolTime = 20.0f;
+            m_SkillExp = "모든 몬스터에게 데미지를 줍니다.";
         }
         else if (a_SkType == SkillType.Skill_1)
         {
-            m_Name = "아이스에이지";
+            m_Name = "작업관리자켜기";
             m_Price = 20; //기본가격
             m_UpPrice = 10; //Lv1->Lv2  (m_UpPrice + (m_UpPrice * (m_Level - 1)) 가격 필요
             m_UserLv = 3;
 
-            m_Damage = 150.0f;
-            m_UpDamage = 60.0f;
-            m_CoolTime = 5.0f;
-            m_Range = 1.2f;
-            m_UpRange = 0.15f;
+            m_Damage = 5000.0f;
+            m_UpDamage = 1000.0f;
+            m_CoolTime = 15.0f;
+            m_SkillExp = "하나의 몬스터를 삭제합니다.";
         }
-   
+        else if (a_SkType == SkillType.Skill_2)
+        {
+            m_Name = "전원껐다켜기";
+            m_Price = 50;
+            m_UpPrice = 25;
+            m_UserLv = 10;
+
+            m_Damage = 5000.0f;
+            m_UpDamage = 1000.0f;
+            m_CoolTime = 300.0f;
+            m_SkillExp = "모든 몬스터를 삭제합니다.";
+        }
+
     }//public void SetType(SkillType a_SkType)
 }
 public class GlobalValue

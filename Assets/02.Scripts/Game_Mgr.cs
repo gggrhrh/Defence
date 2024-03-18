@@ -320,7 +320,7 @@ public class Game_Mgr : MonoBehaviour
     void RefreshUIUpdate()
     {
         if (RoundText != null)
-            RoundText.text = "Round " + m_Round.ToString();
+            RoundText.text = "ROUND " + m_Round.ToString();
         if (TimeText != null)
             TimeText.text = m_RoundTime.ToString("F2");
         if (MonCountText != null)
@@ -335,12 +335,10 @@ public class Game_Mgr : MonoBehaviour
                 continue;
 
             float a_CoolTime = GlobalValue.g_SkDataList[ii].m_CoolTime;
-            float a_Range = GlobalValue.g_SkDataList[ii].m_Range +
-                GlobalValue.g_SkDataList[ii].m_UpRange * (GlobalValue.g_SkLevelList[ii] - 1);
             float a_Damage = GlobalValue.g_SkDataList[ii].m_Damage +
                 GlobalValue.g_SkDataList[ii].m_UpDamage * (GlobalValue.g_SkLevelList[ii] - 1);
             GameObject a_SkillClone = Instantiate(m_SkInvenNode);
-            a_SkillClone.GetComponent<SkillNode_Ctrl>().InitState((SkillType)ii, a_Range, a_Damage, a_CoolTime, a_CoolTime);
+            a_SkillClone.GetComponent<SkillNode_Ctrl>().InitState((SkillType)ii, a_Damage, a_CoolTime, a_CoolTime);
             a_SkillClone.transform.SetParent(m_IvnContent, false);
         }
     }// void RefreshSkillList()
