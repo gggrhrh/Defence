@@ -5297,6 +5297,8 @@ MonoBehaviour:
   m_GoldText: {fileID: 89665190}
   m_UserGold: 0
   MessageText: {fileID: 1628332736}
+  Sv_Content: {fileID: 1267165892}
+  SkProduct: {fileID: 6538490963633529578, guid: 6afcca0df8e85ee49acd971a294a9426, type: 3}
 --- !u!1 &1901868305
 GameObject:
   m_ObjectHideFlags: 0

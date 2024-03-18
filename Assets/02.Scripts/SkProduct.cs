@@ -18,6 +18,12 @@ public class SkProduct : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (m_LevelUpBtn != null)
+            m_LevelUpBtn.onClick.AddListener(() =>
+            {
+                StoreMgr.Inst.BuySkill(m_SkType);
+            });
+
         if (m_SkLabel != null)
             m_SkLabel.text = GlobalValue.g_SkDataList[(int)m_SkType].m_Name;
 
@@ -43,11 +49,14 @@ public class SkProduct : MonoBehaviour
         if (m_SkInfoText != null)
             m_SkInfoText.text = "레벨 : " + a_Level.ToString() + "\n공격력 : ";
 
-        if (m_SkUpInfoText != null)
-            m_SkUpInfoText.text = "레벨 : " + (a_Level + 1).ToString() + "\n공격력 : ";
     }
 
     void LevelUpBtnClick()
+    {
+
+    }
+
+    public void SkProductInit()
     {
 
     }

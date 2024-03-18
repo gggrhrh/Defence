@@ -39,7 +39,7 @@ public class Skill_Info  //각 Item 정보
 
             m_Damage = 50.0f;
             m_UpDamage = 10.0f;
-            m_CoolTime = 20.0f;
+            m_CoolTime = 5.0f;
             m_SkillExp = "모든 몬스터에게 데미지를 줍니다.";
         }
         else if (a_SkType == SkillType.Skill_1)
@@ -51,7 +51,7 @@ public class Skill_Info  //각 Item 정보
 
             m_Damage = 1000.0f;
             m_UpDamage = 500.0f;
-            m_CoolTime = 15.0f;
+            m_CoolTime = 5.0f;
             m_SkillExp = "하나의 몬스터를 삭제합니다.";
         }
         else if (a_SkType == SkillType.Skill_2)

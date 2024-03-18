@@ -29,6 +29,10 @@ public class StoreMgr : MonoBehaviour
     public Text MessageText;
     float ShowMsTimer = 0.0f;
 
+    [Header("------ Skill Product ------")]
+    public GameObject Sv_Content = null;
+    public GameObject SkProduct = null;
+
     public static StoreMgr Inst;
 
     void Awake()
@@ -149,6 +153,11 @@ public class StoreMgr : MonoBehaviour
         m_SkillRoot.SetActive(isSkill);
         m_CharRoot.SetActive(isChar);
         //--- 오브젝트 설정
+    }
+
+    public void BuySkill(SkillType a_SkType)
+    {
+
     }
 
     public void MessageOnOff(string Mess = "", bool isOn = true)

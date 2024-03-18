@@ -105,18 +105,21 @@ public class Monster_Ctrl : MonoBehaviour
             m_MaxHp = 1000.0f;
             m_CurHp = m_MaxHp;
             m_Gold = 300;
+            m_MonRenderer.sprite = MonsterSprite[3];
         }
         else if (m_MonType == MonsterType.Boss2)
         {
             m_MaxHp = 2000.0f;
             m_CurHp = m_MaxHp;
             m_Gold = 500;
+            m_MonRenderer.sprite = MonsterSprite[4];
         }
         else if (m_MonType == MonsterType.Boss3)
         {
             m_MaxHp = 3000.0f;
             m_CurHp = m_MaxHp;
             m_Gold = 700;
+            m_MonRenderer.sprite = MonsterSprite[5];
         }
     }//void MonsterState()
 
