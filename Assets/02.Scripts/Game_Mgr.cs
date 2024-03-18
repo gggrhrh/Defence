@@ -195,6 +195,11 @@ public class Game_Mgr : MonoBehaviour
         {
             UseSkill_Key(SkillType.Skill_1);
         }
+        else if(Input.GetKeyDown(KeyCode.Alpha3) ||
+            Input.GetKeyDown(KeyCode.Keypad3))
+        {
+            UseSkill_Key(SkillType.Skill_2);
+        }
         //--- 단축키 이용으로 스킬 사용하기
 
         m_RoundTime -= Time.deltaTime;

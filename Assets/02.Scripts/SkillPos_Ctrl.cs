@@ -1,15 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SkillPos_Ctrl : MonoBehaviour
 {
     [HideInInspector] public SkillType m_SkType;
-    public Image m_Mouse = null;
+    public Image m_MouseImg = null;
     public GameObject[] SkillPrefab;    //스킬 프리팹
-    
+
     //스킬의 위치설정 변수
     float m_Damage = 0.0f;
     //작업관리자 스킬
@@ -25,6 +24,7 @@ public class SkillPos_Ctrl : MonoBehaviour
             CADSel.SetActive(true);
         else
             CADSel.SetActive(false);
+
     }
 
     // Update is called once per frame
@@ -41,21 +41,24 @@ public class SkillPos_Ctrl : MonoBehaviour
         if (MousePos.y > Screen.height + 50.0f)
             MousePos.y = Screen.height + 50.0f;
 
+        m_MouseImg.transform.position = MousePos;
 
-        m_Mouse.transform.position = MousePos;
+        CADCtrl();
 
         if (Input.GetMouseButtonDown(0) == true)
         {
-            skillPos = MousePos;
+            skillPos = Input.mousePosition;
             UseSkill();
             Time.timeScale = 1.0f;
             Destroy(gameObject);
+
         }
         else if (Input.GetMouseButtonDown(1) == true)
         {
             Time.timeScale = 1.0f;
             Destroy(gameObject);
         }
+
     }
 
     void UseSkill()
@@ -81,9 +84,19 @@ public class SkillPos_Ctrl : MonoBehaviour
         SkCtrl.InitSkState(m_SkType, m_Damage);
     }
 
+    void CADCtrl()
+    {
+        if (m_SkType != SkillType.Skill_1)
+            return;
+
+        Vector3 a_MousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f);
+        CADSel.transform.position = a_MousePos;
+    }
+
     public void InitSkill(SkillType a_SkType, float a_Damage)
     {
         m_SkType = a_SkType;
         m_Damage = a_Damage;
     }
+
 }

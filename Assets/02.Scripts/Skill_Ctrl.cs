@@ -6,8 +6,8 @@ public class Skill_Ctrl : MonoBehaviour
 {
     [HideInInspector] public SkillType m_SkType;
 
-    Monster_Ctrl[] m_FindMon = null;
-    List<int> FMonIndex = new List<int>();
+    Monster_Ctrl[] m_FindMon = null;    //보스포함 몬스터
+    List<Monster_Ctrl> m_Monster = new List<Monster_Ctrl>();    //보스제외 몬스터 
 
     float m_Attack = 0.0f;      //스킬 공격력
     float SkAnimTime = 0.0f;
@@ -17,11 +17,17 @@ public class Skill_Ctrl : MonoBehaviour
     {
         FindMonster();
 
+        if (m_FindMon == null)
+            Destroy(gameObject);
+
         if (m_SkType == SkillType.Skill_0)
             AttackComUpdate();
         else if (m_SkType == SkillType.Skill_1)
+            CADUpdate();
+        else if (m_SkType == SkillType.Skill_2)
             ComOnOffUpdate();
 
+        Destroy(gameObject, 1.0f);
     }
 
     // Update is called once per frame
@@ -36,23 +42,42 @@ public class Skill_Ctrl : MonoBehaviour
 
         for (int i = 0; i < m_FindMon.Length; i++)
         {
-            FMonIndex.Add(i);   //몬스터의 번호를 리스트에 추가
+            if (m_FindMon[i].m_MonType == MonsterType.Round1 ||
+                m_FindMon[i].m_MonType == MonsterType.Round2 ||
+                 m_FindMon[i].m_MonType == MonsterType.Round3)
+            {
+                m_Monster.Add(m_FindMon[i]);
+            }
+        }
+    }
+
+    void AttackComUpdate() //본체때리기스킬
+    {
+        for (int i = 0; i < m_FindMon.Length; i++)
+        {
+            m_FindMon[i].TakeDamage(m_Attack);
         }
     }
 
     void CADUpdate()    //작업관리자 스킬
     {
-
-    }
-
-    void  AttackComUpdate() //본체때리기스킬
-    {
-
+        for(int i = 0; i < m_Monster.Count; i++)
+        {
+            Vector3 a_Dist = m_Monster[i].transform.position - transform.position;
+            if (a_Dist.magnitude < 1.0f)
+            {
+                m_Monster[i].TakeDamage(m_Attack);
+                break;
+            }
+        }
     }
 
     void ComOnOffUpdate()   //컴퓨터 OnOff 켜기스킬
     {
-
+        for (int i = 0; i < m_Monster.Count; i++)
+        {
+            m_Monster[i].TakeDamage(m_Attack);
+        }
     }
 
     public void InitSkState(SkillType a_SkType, float a_Attack)

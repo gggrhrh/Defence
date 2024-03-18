@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 3629636418755008424}
   - component: {fileID: 8020628056117814744}
   - component: {fileID: 1910282109904646234}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MonsterPrefab
   m_TagString: Monster
   m_Icon: {fileID: 0}
@@ -198,9 +198,10 @@ MonoBehaviour:
   MonsterSprite:
   - {fileID: 21300000, guid: ca9dea99d082ec54e8d5fdf42264b142, type: 3}
   - {fileID: 21300000, guid: 92c3af317fecc324eb74f955e9eb7a8c, type: 3}
-  - {fileID: 21300000, guid: 28fa9871c067475419c454515ad62710, type: 3}
   - {fileID: 21300000, guid: abc64a2186e631048b513973243071b8, type: 3}
-  - {fileID: 21300000, guid: 9e162afe5870b274bbd27c194809fe95, type: 3}
+  - {fileID: 21300000, guid: 2d6bec03e861f0844b8f684731d87f25, type: 3}
+  - {fileID: 21300000, guid: 8b4da455a78525e4c826abf0e8c469f0, type: 3}
+  - {fileID: 21300000, guid: b1228ca649830b849b564f01441f61f0, type: 3}
   m_HpBar: {fileID: 6613700973161863101}
   m_CurHp: 0
   m_MoveSpeed: 2.2

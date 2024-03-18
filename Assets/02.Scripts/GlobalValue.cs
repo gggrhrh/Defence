@@ -5,8 +5,8 @@ using UnityEngine;
 public enum SkillType
 {
     Skill_0 = 0,        // 본체때리기
-    Skill_1,            // 전원껐다켜기
-    Skill_2,            // 작업관리자
+    Skill_1,            // 작업관리자
+    Skill_2,            // 전원껐다켜기
     //Skill_3,            // "유도탄"
     //Skill_4,            // "더블샷"
     //Skill_5,            // "소환수 공격"
@@ -47,10 +47,10 @@ public class Skill_Info  //각 Item 정보
             m_Name = "작업관리자켜기";
             m_Price = 20; //기본가격
             m_UpPrice = 10; //Lv1->Lv2  (m_UpPrice + (m_UpPrice * (m_Level - 1)) 가격 필요
-            m_UserLv = 3;
+            m_UserLv = 0;
 
-            m_Damage = 5000.0f;
-            m_UpDamage = 1000.0f;
+            m_Damage = 1000.0f;
+            m_UpDamage = 500.0f;
             m_CoolTime = 15.0f;
             m_SkillExp = "하나의 몬스터를 삭제합니다.";
         }
@@ -61,9 +61,9 @@ public class Skill_Info  //각 Item 정보
             m_UpPrice = 25;
             m_UserLv = 10;
 
-            m_Damage = 5000.0f;
-            m_UpDamage = 1000.0f;
-            m_CoolTime = 300.0f;
+            m_Damage = 1000.0f;
+            m_UpDamage = 500.0f;
+            m_CoolTime = 10.0f;
             m_SkillExp = "모든 몬스터를 삭제합니다.";
         }
 
