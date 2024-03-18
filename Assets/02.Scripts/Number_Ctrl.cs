@@ -198,8 +198,8 @@ public class Number_Ctrl : MonoBehaviour
         a_Num.SetType(m_NumType, m_Level);
         m_StAttack = a_Num.m_Attack;    //초기 공격력 값
         m_AttackSpeed = a_Num.m_AttackSpeed;    //업글정렬후 공격력값
-        //m_SpriteIcon = m_IconImg.GetComponent<SpriteRenderer>();
-        //m_SpriteIcon.sprite = a_Num.m_IconImg;
+        m_SpriteIcon = m_IconImg.GetComponent<SpriteRenderer>();
+        m_SpriteIcon.sprite = a_Num.m_IconImg;
     }
 
     string NumberInfo(NumType a_NumType)

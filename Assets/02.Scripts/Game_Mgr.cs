@@ -178,7 +178,7 @@ public class Game_Mgr : MonoBehaviour
         //--- BackPanel
 
         if (GoldText != null)
-            GoldText.text = m_Gold.ToString() + " Gold";
+            GoldText.text = m_Gold.ToString("N0") + " Gold";
     }
 
     // Update is called once per frame
@@ -373,7 +373,7 @@ public class Game_Mgr : MonoBehaviour
         m_Gold += a_Value;
 
         if (GoldText != null)
-            GoldText.text = m_Gold.ToString() + " Gold";
+            GoldText.text = m_Gold.ToString("N0") + " Gold";
     }//public void AddGold(int a_Value)
 
     public void GameDie()
@@ -381,7 +381,7 @@ public class Game_Mgr : MonoBehaviour
         Time.timeScale = 0.0f;
         GameOverPanel.SetActive(true);
         if (CurGoldText != null)
-            CurGoldText.text = "³²Àº °ñµå : " + m_Gold;
+            CurGoldText.text = "³²Àº °ñµå : " + m_Gold.ToString("N0");
 
         int a_Coin = m_Gold / 100;
         if (CoinText != null)
