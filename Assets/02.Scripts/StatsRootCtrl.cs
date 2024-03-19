@@ -250,7 +250,7 @@ public class StatsRootCtrl : MonoBehaviour
         if(m_BuyGold > 0)
         {
             a_NeedDelegate = true;
-            a_Mess = m_BuyGold.ToString() + "골드를 사용하여 스탯을 올리시겠습니까?";
+            a_Mess = "소모 금액 " + m_BuyGold.ToString() + "\n정말 구입하시겠습니까?";
         }
 
         GameObject a_DlgRsc = Resources.Load("DialogBox") as GameObject;
