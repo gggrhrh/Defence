@@ -30,9 +30,9 @@ public class Monster_Ctrl : MonoBehaviour
     Vector3 m_Pos;
     Vector3 m_Dir = Vector3.down;
 
-    //피격시 빨갛게 변함
+    //피격시 투명하게 변함
     SpriteRenderer m_MonRenderer = null;
-    Color32 Takecolor = new Color32(255, 150, 150, 255);
+    Color32 Takecolor = new Color32(255, 255, 255, 230);
 
     // Start is called before the first frame update
     void Start()

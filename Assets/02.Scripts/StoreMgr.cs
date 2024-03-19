@@ -30,7 +30,7 @@ public class StoreMgr : MonoBehaviour
     float ShowMsTimer = 0.0f;
 
     [Header("------ Skill Product ------")]
-    public GameObject Sv_Content = null;
+    public GameObject SKill_Content = null;
     public GameObject SkProduct = null;
 
     public static StoreMgr Inst;
@@ -46,7 +46,9 @@ public class StoreMgr : MonoBehaviour
         GlobalValue.LoadGameData();
         m_UserGold = GlobalValue.g_UserGold;
 
-        if(m_GoldText !=null)
+        SkillListUpdate();
+
+        if (m_GoldText !=null)
             m_GoldText.text = m_UserGold.ToString();
 
         //--- 초기 설정
@@ -153,6 +155,19 @@ public class StoreMgr : MonoBehaviour
         m_SkillRoot.SetActive(isSkill);
         m_CharRoot.SetActive(isChar);
         //--- 오브젝트 설정
+    }
+
+    void SkillListUpdate()
+    {
+        GameObject a_SkillObj = null;
+        SkProduct a_SkNode = null;
+        for(int i = 0; i < GlobalValue.g_SkDataList.Count; i++)
+        {
+            a_SkillObj = (GameObject)Instantiate(SkProduct);
+            a_SkNode = a_SkillObj.GetComponent<SkProduct>();
+            a_SkNode.SkProductInit(GlobalValue.g_SkDataList[i].m_SkType);
+            a_SkNode.transform.SetParent(SKill_Content.transform, false);
+        }
     }
 
     public void BuySkill(SkillType a_SkType)

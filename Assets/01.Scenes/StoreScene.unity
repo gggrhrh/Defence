@@ -237,8 +237,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 465.9, y: -50}
-  m_SizeDelta: {x: 400, y: 500}
+  m_AnchoredPosition: {x: 465.9, y: -25}
+  m_SizeDelta: {x: 400, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &108072594
 MonoBehaviour:
@@ -5297,7 +5297,7 @@ MonoBehaviour:
   m_GoldText: {fileID: 89665190}
   m_UserGold: 0
   MessageText: {fileID: 1628332736}
-  Sv_Content: {fileID: 1267165892}
+  SKill_Content: {fileID: 1267165892}
   SkProduct: {fileID: 6538490963633529578, guid: 6afcca0df8e85ee49acd971a294a9426, type: 3}
 --- !u!1 &1901868305
 GameObject:
