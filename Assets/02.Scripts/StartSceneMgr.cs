@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class StartMgr : MonoBehaviour
+public class StartSceneMgr : MonoBehaviour
 {
     public Image SandWatch = null;
     public Image Loading = null;

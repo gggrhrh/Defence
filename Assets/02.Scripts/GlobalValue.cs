@@ -99,7 +99,7 @@ public class GlobalValue
         }
         //--- 설정 데이터 로딩
 
-        //PlayerPrefs.DeleteAll();
+        PlayerPrefs.DeleteAll();
         g_NickName = PlayerPrefs.GetString("NickName", "SBS전사");
         g_UserLevel = PlayerPrefs.GetInt("UserLevel", 0);
         g_UserGold = PlayerPrefs.GetInt("UserGold", 100);
@@ -116,7 +116,7 @@ public class GlobalValue
             for (int ii = 0; ii < (int)SkillType.SkCount; ii++)
             {
                 a_KeyBuff = string.Format("Skill_Item_{0}", ii); //"Skill_Item_0", "Skill_Item_1"
-                a_SkLevel = PlayerPrefs.GetInt(a_KeyBuff, 2);
+                a_SkLevel = PlayerPrefs.GetInt(a_KeyBuff, 0);
                 // 1이면 보유 0이면 미보유
 
                 g_SkLevelList.Add(a_SkLevel);

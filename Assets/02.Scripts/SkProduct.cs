@@ -31,10 +31,10 @@ public class SkProduct : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RefreshUI();
+
     }
 
-    void RefreshUI()
+    public void RefreshUI()
     {
         int a_Level = GlobalValue.g_SkLevelList[(int)m_SkType];
 

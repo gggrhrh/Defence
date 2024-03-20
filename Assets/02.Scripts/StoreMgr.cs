@@ -33,18 +33,19 @@ public class StoreMgr : MonoBehaviour
     public GameObject SKill_Content = null;
     public GameObject SkProduct = null;
 
+    SkProduct[] m_SkNodeList;
+
     //--- 지금 뭘 구입하려고 시도한 건지? 저장해 놓기 위한 변수
     SkillType m_BuySkType;  //어떤 스킬 아이템을 구입하려고 한 건지?
     int m_SvMyGold = 0;    //구입 프로세스에 진입 후 상태 저장용 : 차감된 내 골드가 얼마인지?
     int m_SvMyLevel = 0;    //스킬 레벨 증가 백업해 놓기...
                             //--- 지금 뭘 구입하려고 시도한 건지? 저장해 놓기 위한 변수
 
-    //--- 서버와의 통신을 위한 변수
-    int m_BackupMyGold = 0;     //Backup 용
-    int[] m_SvSkCount = new int[6];     //Backup 용
-    float m_BuyDelayTime = 0.0f;
-    bool isNetworkLock = false;
-    //--- 서버와의 통신을 위한 변수
+    ////--- 서버와의 통신을 위한 변수
+    //int m_BackupMyGold = 0;     //Backup 용
+    //int[] m_SvSkCount = new int[6];     //Backup 용
+    //float m_BuyDelayTime = 0.0f;
+    ////--- 서버와의 통신을 위한 변수
 
     public static StoreMgr Inst;
 
@@ -60,6 +61,7 @@ public class StoreMgr : MonoBehaviour
         m_UserGold = GlobalValue.g_UserGold;
 
         SkillListUpdate();
+        RefreshSkItemList();
 
         if (m_GoldText != null)
             m_GoldText.text = m_UserGold.ToString();
@@ -203,11 +205,11 @@ public class StoreMgr : MonoBehaviour
             a_NeedDelegate = true;  //<-- 이 조건일 때 구매
         }
 
-        //--- Backup 받아 놓기(실패시 돌려 놓기 위한 용도)
-        for (int ii = 0; ii < GlobalValue.g_SkLevelList.Count; ii++)
-            m_SvSkCount[ii] = GlobalValue.g_SkLevelList[ii];
-        m_BackupMyGold = GlobalValue.g_UserGold;
-        //--- Backup 받아 놓기(실패시 돌려 놓기 위한 용도)
+        ////--- Backup 받아 놓기(실패시 돌려 놓기 위한 용도)
+        //for (int ii = 0; ii < GlobalValue.g_SkLevelList.Count; ii++)
+        //    m_SvSkCount[ii] = GlobalValue.g_SkLevelList[ii];
+        //m_BackupMyGold = GlobalValue.g_UserGold;
+        ////--- Backup 받아 놓기(실패시 돌려 놓기 위한 용도)
 
         m_BuySkType = a_SkType;
         m_SvMyGold = GlobalValue.g_UserGold;
@@ -231,8 +233,37 @@ public class StoreMgr : MonoBehaviour
 
     void TryBuySkill()
     {
+        if (m_BuySkType < SkillType.Skill_0 || SkillType.SkCount <= m_BuySkType)
+            return;
 
+        GlobalValue.g_UserGold = m_SvMyGold;    //골드값 조정
+        GlobalValue.g_SkLevelList[(int)m_BuySkType] = m_SvMyLevel; //스킬 보유수 증가 조정
+
+        RefreshSkItemList();
+
+        m_GoldText.text = GlobalValue.g_UserGold.ToString();
+
+        //로컬에 저장
+        PlayerPrefs.SetInt("UserGold", GlobalValue.g_UserGold);
+        string a_KeyBuff = string.Format("Skill_Item_{0}", (int)m_BuySkType);
+        PlayerPrefs.SetInt(a_KeyBuff, GlobalValue.g_SkLevelList[(int)m_BuySkType]);
+        //로컬에 저장
     }
+
+    void RefreshSkItemList()
+    {
+        if (SKill_Content != null)
+        {
+            if (m_SkNodeList == null || m_SkNodeList.Length <= 0)
+                m_SkNodeList = SKill_Content.GetComponentsInChildren<SkProduct>();
+        }
+
+        for (int ii = 0; ii < m_SkNodeList.Length; ii++)
+        {
+            m_SkNodeList[ii].RefreshUI();
+        }
+
+    }//void RefreshSkItemList()
 
     public void MessageOnOff(string Mess = "", bool isOn = true)
     {

@@ -31,18 +31,17 @@ public class StatsRootCtrl : MonoBehaviour
     int AttSpeedLevel = 0;
     int CriRateLevel = 0;
     int CriDmgLevel = 0;
-    int m_BuyGold = 0;
+    int m_BuyGold = 0;  //총구매에 필요한 금액
     int m_UserGold = 0;
     //--- 저장용
 
     // Start is called before the first frame update
     void Start()
     {
-        GlobalValue.LoadGameData();
-        ResetBtnClick();
+        RefreshUI();
 
         if (m_ResetBtn != null)
-            m_ResetBtn.onClick.AddListener(ResetBtnClick);
+            m_ResetBtn.onClick.AddListener(RefreshUI);
 
         if (m_SaveBtn != null)
             m_SaveBtn.onClick.AddListener(SaveBtnClick);
@@ -226,16 +225,23 @@ public class StatsRootCtrl : MonoBehaviour
         StoreMgr.Inst.m_GoldText.text = m_UserGold.ToString();
     }
 
-    void ResetBtnClick()
+    void RefreshUI()
     {
-        AttackLevel = GlobalValue.g_Attack;
-        AttSpeedLevel = GlobalValue.g_AttSpeed;
-        CriRateLevel = GlobalValue.g_CriRate;
-        CriDmgLevel = GlobalValue.g_CriDmg;
-        m_UserGold = GlobalValue.g_UserGold;
-        m_BuyGold = 0;
+        if (AttackText != null)
+            AttackText.text = GlobalValue.g_Attack.ToString();
 
-        RefreshText();
+        if (AttSpeedText != null)
+            AttSpeedText.text = GlobalValue.g_AttSpeed.ToString();
+
+        if (CriRateText != null)
+            CriRateText.text = GlobalValue.g_CriRate.ToString();
+
+        if (CriDmgText != null)
+            CriDmgText.text = GlobalValue.g_CriDmg.ToString();
+
+        StoreMgr.Inst.m_GoldText.text = GlobalValue.g_UserGold.ToString();
+
+        m_BuyGold = 0;
     }
 
     void SaveBtnClick()
@@ -279,11 +285,8 @@ public class StatsRootCtrl : MonoBehaviour
         PlayerPrefs.SetInt("UserGold", m_UserGold);
         //서버에 저장
 
-        //저장 데이터 불러오기
-        GlobalValue.LoadGameData();
-
         //변수 저장및 텍스트 초기화
-        ResetBtnClick();
+        RefreshUI();
     }
 
 }
