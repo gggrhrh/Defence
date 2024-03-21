@@ -25,7 +25,7 @@ public class LobbyMgr : MonoBehaviour
     [Header("------ UGUI ------")]
     public Button m_StoreBtn = null;
     public Button m_MyInfoBtn = null;
-    public Button m_CollectionBtn = null;
+    public Button m_HelpBtn = null;
 
     // Start is called before the first frame update
     void Start()
@@ -49,8 +49,8 @@ public class LobbyMgr : MonoBehaviour
         if (m_MyInfoBtn != null)
             m_MyInfoBtn.onClick.AddListener(MyInfoBtnClick);
 
-        if (m_CollectionBtn != null)
-            m_CollectionBtn.onClick.AddListener(CollectBtnClick);
+        if (m_HelpBtn != null)
+            m_HelpBtn.onClick.AddListener(HelpBtnClick);
     }
 
     // Update is called once per frame
@@ -118,13 +118,15 @@ public class LobbyMgr : MonoBehaviour
         SceneManager.LoadScene("MyInfoScene");
     }
 
-    void CollectBtnClick()
+    void HelpBtnClick()
     {
         if (CfgBoxCheck() == true)
         {
             MessageOnOff("환경설정 박스를 닫고 다시 눌러주세요.");
             return;
         }
+
+        SceneManager.LoadScene("HelpScene");
     }    
 
     void MessageOnOff(string Mess = "", bool isOn = true, float a_Time = 3.0f)

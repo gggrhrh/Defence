@@ -26,7 +26,7 @@ public class StatsRootCtrl : MonoBehaviour
     public Text CriRateText;
     public Text CriDmgText;
 
-    //--- 저장용 
+    //--- 저장용 변수
     int AttackLevel = 0;
     int AttSpeedLevel = 0;
     int CriRateLevel = 0;
@@ -38,10 +38,11 @@ public class StatsRootCtrl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        RefreshUI();
+        LoadStats();
+        RefreshText();
 
         if (m_ResetBtn != null)
-            m_ResetBtn.onClick.AddListener(RefreshUI);
+            m_ResetBtn.onClick.AddListener(ResetBtnClick);
 
         if (m_SaveBtn != null)
             m_SaveBtn.onClick.AddListener(SaveBtnClick);
@@ -163,13 +164,21 @@ public class StatsRootCtrl : MonoBehaviour
 
         if (a_Value == 0)
         {
-            if (AttackLevel <= 0)
+            if(AttackLevel <= 0)
             {
                 StoreMgr.Inst.MessageOnOff("최소 레벨입니다.");
                 return;
             }
-            if (GlobalValue.g_Attack < AttackLevel) m_BuyGold -= a_Gold; 
-            //기본레벨에서 올렸다 내리면 골드를 다시 돌려줌
+
+            if (GlobalValue.g_Attack < AttackLevel) m_BuyGold -= a_Gold;
+            //기존 레벨에서 올렸다 내리면 골드를 다시 돌려줌
+            else
+            {
+                StoreMgr.Inst.MessageOnOff("기존 레벨입니다.");
+                return;
+            }
+            //기존 레벨보다 낮아지지 않음
+
             AttackLevel--;
         }
         else if (a_Value == 1)
@@ -179,7 +188,14 @@ public class StatsRootCtrl : MonoBehaviour
                 StoreMgr.Inst.MessageOnOff("최소 레벨입니다.");
                 return;
             }
+
             if (GlobalValue.g_AttSpeed < AttSpeedLevel) m_BuyGold -= a_Gold;
+            else
+            {
+                StoreMgr.Inst.MessageOnOff("기존 레벨입니다.");
+                return;
+            }
+            
             AttSpeedLevel--;
         }
         else if (a_Value == 2)
@@ -189,7 +205,14 @@ public class StatsRootCtrl : MonoBehaviour
                 StoreMgr.Inst.MessageOnOff("최소 레벨입니다.");
                 return;
             }
+
             if (GlobalValue.g_CriRate < CriRateLevel) m_BuyGold -= a_Gold;
+            else
+            {
+                StoreMgr.Inst.MessageOnOff("기존 레벨입니다.");
+                return;
+            }
+            
             CriRateLevel--;
         }
         else if (a_Value == 3)
@@ -199,7 +222,14 @@ public class StatsRootCtrl : MonoBehaviour
                 StoreMgr.Inst.MessageOnOff("최소 레벨입니다.");
                 return;
             }
+
             if (GlobalValue.g_CriDmg < CriDmgLevel) m_BuyGold -= a_Gold;
+            else
+            {
+                StoreMgr.Inst.MessageOnOff("기존 레벨입니다.");
+                return;
+            }
+            
             CriDmgLevel--;
         }
 
@@ -207,6 +237,16 @@ public class StatsRootCtrl : MonoBehaviour
 
         RefreshText();
     }
+
+    void LoadStats()
+    {
+        AttackLevel = GlobalValue.g_Attack;
+        AttSpeedLevel = GlobalValue.g_AttSpeed;
+        CriRateLevel = GlobalValue.g_CriRate;
+        CriDmgLevel = GlobalValue.g_CriDmg;
+
+        m_UserGold = GlobalValue.g_UserGold;
+    }//void SaveStats()
 
     void RefreshText()
     {
@@ -225,22 +265,13 @@ public class StatsRootCtrl : MonoBehaviour
         StoreMgr.Inst.m_GoldText.text = m_UserGold.ToString();
     }
 
-    void RefreshUI()
+    void ResetBtnClick()
     {
-        if (AttackText != null)
-            AttackText.text = GlobalValue.g_Attack.ToString();
+        LoadStats();
 
-        if (AttSpeedText != null)
-            AttSpeedText.text = GlobalValue.g_AttSpeed.ToString();
+        RefreshText();
 
-        if (CriRateText != null)
-            CriRateText.text = GlobalValue.g_CriRate.ToString();
-
-        if (CriDmgText != null)
-            CriDmgText.text = GlobalValue.g_CriDmg.ToString();
-
-        StoreMgr.Inst.m_GoldText.text = GlobalValue.g_UserGold.ToString();
-
+        //구매골드 0으로 초기화
         m_BuyGold = 0;
     }
 
@@ -250,9 +281,11 @@ public class StatsRootCtrl : MonoBehaviour
         bool a_NeedDelegate = false;
 
         if (m_BuyGold <= 0)
-            a_Mess = "올리고 싶은 스탯을 (+)버튼을 통해 올리세요.";
+            a_Mess = "스탯을 조정해주세요.";
+
         if (m_UserGold < 0)
             a_Mess = "보유 금액이 부족합니다.";
+
         if(m_BuyGold > 0)
         {
             a_NeedDelegate = true;
@@ -277,16 +310,23 @@ public class StatsRootCtrl : MonoBehaviour
     {
         m_BuyGold = 0;
 
+        GlobalValue.g_Attack = AttackLevel;
+        GlobalValue.g_AttSpeed = AttSpeedLevel;
+        GlobalValue.g_CriRate = CriRateLevel;
+        GlobalValue.g_CriDmg = CriDmgLevel;
+        GlobalValue.g_UserGold = m_UserGold;
+
         //서버에 저장
-        PlayerPrefs.SetInt("AttackLv", AttackLevel);
-        PlayerPrefs.SetInt("AttSpeedLv", AttSpeedLevel);
-        PlayerPrefs.SetInt("CriRateLv", CriRateLevel);
-        PlayerPrefs.SetInt("CriDmgLv", CriDmgLevel);
-        PlayerPrefs.SetInt("UserGold", m_UserGold);
+        PlayerPrefs.SetInt("AttackLv", GlobalValue.g_Attack);
+        PlayerPrefs.SetInt("AttSpeedLv", GlobalValue.g_AttSpeed);
+        PlayerPrefs.SetInt("CriRateLv", GlobalValue.g_CriRate);
+        PlayerPrefs.SetInt("CriDmgLv", GlobalValue.g_CriDmg);
+        PlayerPrefs.SetInt("UserGold", GlobalValue.g_UserGold);
         //서버에 저장
 
         //변수 저장및 텍스트 초기화
-        RefreshUI();
+        m_BuyGold = 0;
+        
     }
 
 }

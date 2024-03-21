@@ -98,8 +98,6 @@ public class GlobalValue
             }
         }
         //--- 설정 데이터 로딩
-
-        PlayerPrefs.DeleteAll();
         g_NickName = PlayerPrefs.GetString("NickName", "SBS전사");
         g_UserLevel = PlayerPrefs.GetInt("UserLevel", 0);
         g_UserGold = PlayerPrefs.GetInt("UserGold", 100);

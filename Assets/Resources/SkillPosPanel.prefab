@@ -326,7 +326,7 @@ MonoBehaviour:
   m_SkType: 0
   m_MouseImg: {fileID: 7064047230123372637}
   SkillPrefab:
-  - {fileID: 670895042290444740, guid: f4370e4f9893e1045bea808b61c33eae, type: 3}
+  - {fileID: 1660484669577754223, guid: d41efe4e35b7fe94da2af1c65e43be11, type: 3}
   - {fileID: 8572627489040962026, guid: 843ad60dd0e552947a6a39b6c43b738e, type: 3}
   - {fileID: 8046873111967865413, guid: 7b58e6df5c210f24483c479c2a3b5e8e, type: 3}
   CADSel: {fileID: 916587799503748581}

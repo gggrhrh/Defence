@@ -10,7 +10,8 @@ public enum GameRound
 {
     ReadyRound,     //준비라운드
     MonsterRound,   //기본 몬스터 라운드
-    BossRound       //보스라운드
+    BossRound,       //보스라운드
+    GameEnd         //게임엔드
 }
 
 public class Game_Mgr : MonoBehaviour
@@ -106,6 +107,14 @@ public class Game_Mgr : MonoBehaviour
     public GameObject m_SkInvenNode;
     //--- 인벤토리 관련 변수
 
+    //--- 게임 배속
+    [Header("--- Game Speed Up ---")]
+    public Button m_GameSpeedUpBtn = null;
+    bool GameSpeedUpOn = false;
+    Color32 Offcolor = Color.white;
+    Color32 Oncolor = Color.gray;
+    //--- 게임 배속
+
     public static Game_Mgr Inst = null;
 
     private void Awake()
@@ -116,15 +125,15 @@ public class Game_Mgr : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
+    {        
+        //게임 초기화
         Time.timeScale = 1.0f;
         GlobalValue.LoadGameData();
         RefreshSkillList();
 
-        //게임 초기화
         m_GameRound = GameRound.ReadyRound;
         m_RoundTime = 10.0f;
-        m_Gold = 5000;
+        m_Gold = 500;
         //게임 초기화
 
         if (m_SpawnBtn != null)
@@ -179,6 +188,9 @@ public class Game_Mgr : MonoBehaviour
 
         if (GoldText != null)
             GoldText.text = m_Gold.ToString("N0") + " Gold";
+
+        if (m_GameSpeedUpBtn != null)
+            m_GameSpeedUpBtn.onClick.AddListener(GameSpeedUpClick);
     }
 
     // Update is called once per frame
@@ -382,6 +394,7 @@ public class Game_Mgr : MonoBehaviour
     public void GameDie()
     {
         Time.timeScale = 0.0f;
+        m_GameRound = GameRound.GameEnd;
         GameOverPanel.SetActive(true);
         if (CurGoldText != null)
             CurGoldText.text = "남은 골드 : " + m_Gold.ToString("N0");
@@ -390,10 +403,12 @@ public class Game_Mgr : MonoBehaviour
         if (CoinText != null)
             CoinText.text = "얻은 코인 : " + a_Coin.ToString();
 
-        PlayerPrefs.SetInt("UserGold", GlobalValue.g_UserGold + a_Coin);
+        GlobalValue.g_UserLevel += a_Coin;
+
+        PlayerPrefs.SetInt("UserGold", GlobalValue.g_UserGold);
     }//public void GameDie()
 
-    void TimerUpdate() //라운드별 시간 체크 및 업데이트
+    void TimerUpdate() //게임 상태별 시간 체크 및 업데이트
     {
         if (m_GameRound == GameRound.ReadyRound)
             m_RoundTime = 10.0f;
@@ -404,7 +419,7 @@ public class Game_Mgr : MonoBehaviour
 
     }//void TimerUpdate()
 
-    void RoundUpdate()
+    void RoundUpdate()  //라운드별 게임 상태 업데이트
     {
         if (m_Round < 0)
             return;
@@ -420,7 +435,20 @@ public class Game_Mgr : MonoBehaviour
     IEnumerator MonsterSpawn()  //몬스터 소환 코루틴
     {
         if (m_GameRound == GameRound.MonsterRound)
-        {
+        {   //보스라운드가 아닐때 보스가 살아있으면 사망 처리
+            Monster_Ctrl[] a_FMons = FindObjectsOfType<Monster_Ctrl>();
+            for(int i = 0; i < a_FMons.Length; i++)
+            {
+                if (a_FMons[i].m_MonType == MonsterType.Boss1 ||
+                    a_FMons[i].m_MonType == MonsterType.Boss2 ||
+                    a_FMons[i].m_MonType == MonsterType.Boss3)
+                {
+                    GameDie();
+                    break;
+                }
+            }
+            //보스라운드가 아닐때 보스가 살아있으면 사망 처리
+
             for (int ii = 0; ii < m_MonMax; ii++)
             {
                 Vector3 a_Pos = new Vector3(1.75f, 4.0f, 0.0f);
@@ -441,6 +469,8 @@ public class Game_Mgr : MonoBehaviour
             Monster_Ctrl MonCtrl = Go.GetComponent<Monster_Ctrl>();
             MonCtrl.InitState(m_Round);
             Go.transform.position = a_Pos;
+
+            m_MonCount++;
         }
     }//IEnumerator MonsterSpawn()
 
@@ -521,6 +551,22 @@ public class Game_Mgr : MonoBehaviour
         }//else //if(m_Inven_ScOnOff == true)
 
     }//void ScrollViewOnOff_Update()
+
+    void GameSpeedUpClick()
+    {
+        GameSpeedUpOn = !GameSpeedUpOn;
+
+        if(GameSpeedUpOn == false)
+        {
+            Time.timeScale = 1.0f;
+            m_GameSpeedUpBtn.GetComponent<Image>().color = Offcolor;
+        }
+        else
+        {
+            Time.timeScale = 2.0f;
+            m_GameSpeedUpBtn.GetComponent<Image>().color = Oncolor;
+        }
+    }
 
     public static bool IsPointerOverUIObject() //UGUI의 UI들이 먼저 피킹되는지 확인하는 함수
     {

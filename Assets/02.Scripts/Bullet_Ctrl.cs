@@ -20,9 +20,9 @@ public class Bullet_Ctrl : MonoBehaviour
 
     void OnEnable() //Active가 활성화 될 때마다 호출되는 함수
     {
-        m_isColl = false;   
+        m_isColl = false;
         m_LifeTime = 1.0f;
-        
+
         FindEnemy();
     }
 
@@ -64,7 +64,18 @@ public class Bullet_Ctrl : MonoBehaviour
         if (a_EnemyList.Length <= 0) //등장해 있는 몬스터가 하나도 없으면...
             return;     //추적할 대상을 찾지 못한다.
 
-        Target_Obj = a_EnemyList[0];
+        Target_Obj = a_EnemyList[0];    //제일 먼저 소환된 몬스터부터 잡음
+
+        for (int i = 0; i < a_EnemyList.Length; i++)
+        {
+            Monster_Ctrl a_MonCtrl = a_EnemyList[i].GetComponent<Monster_Ctrl>();
+            if (a_MonCtrl.m_MonType == MonsterType.Boss1 ||
+                a_MonCtrl.m_MonType == MonsterType.Boss2 ||
+                a_MonCtrl.m_MonType == MonsterType.Boss3)
+            {
+                Target_Obj = a_EnemyList[i];
+            }
+        }
 
         if (Target_Obj != null) //추적한 대상을 찾음
             m_FindEnemy = true;

@@ -553,7 +553,7 @@ MonoBehaviour:
   m_SkInfoText: {fileID: 7651124742909112195}
   m_LevelUpBtn: {fileID: 6233054151149216485}
   IconSprites:
-  - {fileID: 21300000, guid: fdd759c8604f0cb4288ada9cb10fb0af, type: 3}
+  - {fileID: 21300000, guid: b55851e642452f14bbe4d0dae0b40bc5, type: 3}
   - {fileID: 21300000, guid: 605e7a50449e0f145ba80f28d20379f1, type: 3}
   - {fileID: 21300000, guid: b345807caa3e43e47a3c242e8beeca0d, type: 3}
   m_LockPanel: {fileID: 5962599582692978121}

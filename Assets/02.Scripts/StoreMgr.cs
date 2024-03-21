@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -271,7 +272,7 @@ public class StoreMgr : MonoBehaviour
         {
             MessageText.text = Mess;
             MessageText.gameObject.SetActive(true);
-            ShowMsTimer = 7.0f;
+            ShowMsTimer = 3.0f;
         }
         else
         {
