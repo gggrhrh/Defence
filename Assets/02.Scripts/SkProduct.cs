@@ -57,7 +57,7 @@ public class SkProduct : MonoBehaviour
 
         m_LevelUpBtn.GetComponentInChildren<Text>().text = m_Price.ToString();
 
-        if (a_Damage > 1000.0f)
+        if (a_Damage >= 1000.0f)
         {
             m_SkInfoText.text = "Level : " + a_Level + "\nCool Time : " + a_CoolTime.ToString("F1") + "s\nDamage : 보스제외 즉사스킬";
         }

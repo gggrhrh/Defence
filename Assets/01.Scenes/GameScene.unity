@@ -3274,6 +3274,7 @@ MonoBehaviour:
   m_IvnContent: {fileID: 2076292995}
   m_SkInvenNode: {fileID: 6754207881713138313, guid: ae10af9a623c1234c825d6a4afdbe2b6, type: 3}
   m_GameSpeedUpBtn: {fileID: 446807327}
+  GameSpeedUpOn: 0
 --- !u!1 &1236905246
 GameObject:
   m_ObjectHideFlags: 0
