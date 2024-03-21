@@ -14,6 +14,8 @@ public class SkillPos_Ctrl : MonoBehaviour
     //작업관리자 스킬
     public GameObject CADSel = null;
     Vector3 skillPos = Vector3.zero;
+    //게임 배속 중인지 판별
+    bool SpeedOn = false;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +26,8 @@ public class SkillPos_Ctrl : MonoBehaviour
             CADSel.SetActive(true);
         else
             CADSel.SetActive(false);
+
+        SpeedOn = Game_Mgr.Inst.GameSpeedUpOn; 
 
     }
 
@@ -49,13 +53,19 @@ public class SkillPos_Ctrl : MonoBehaviour
         {
             skillPos = Input.mousePosition;
             UseSkill();
-            Time.timeScale = 1.0f;
+            if(SpeedOn == true)
+                Time.timeScale = 2.0f;
+            else
+                Time.timeScale = 1.0f;
             Destroy(gameObject);
 
         }
         else if (Input.GetMouseButtonDown(1) == true)
         {
-            Time.timeScale = 1.0f;
+            if (SpeedOn == true)
+                Time.timeScale = 2.0f;
+            else
+                Time.timeScale = 1.0f;
             Destroy(gameObject);
         }
 

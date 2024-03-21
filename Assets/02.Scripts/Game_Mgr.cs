@@ -110,7 +110,7 @@ public class Game_Mgr : MonoBehaviour
     //--- 게임 배속
     [Header("--- Game Speed Up ---")]
     public Button m_GameSpeedUpBtn = null;
-    bool GameSpeedUpOn = false;
+    [HideInInspector] public bool GameSpeedUpOn = false;
     Color32 Offcolor = Color.white;
     Color32 Oncolor = Color.gray;
     //--- 게임 배속
@@ -125,7 +125,7 @@ public class Game_Mgr : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {        
+    {
         //게임 초기화
         Time.timeScale = 1.0f;
         GlobalValue.LoadGameData();
@@ -207,7 +207,7 @@ public class Game_Mgr : MonoBehaviour
         {
             UseSkill_Key(SkillType.Skill_1);
         }
-        else if(Input.GetKeyDown(KeyCode.Alpha3) ||
+        else if (Input.GetKeyDown(KeyCode.Alpha3) ||
             Input.GetKeyDown(KeyCode.Keypad3))
         {
             UseSkill_Key(SkillType.Skill_2);
@@ -437,7 +437,7 @@ public class Game_Mgr : MonoBehaviour
         if (m_GameRound == GameRound.MonsterRound)
         {   //보스라운드가 아닐때 보스가 살아있으면 사망 처리
             Monster_Ctrl[] a_FMons = FindObjectsOfType<Monster_Ctrl>();
-            for(int i = 0; i < a_FMons.Length; i++)
+            for (int i = 0; i < a_FMons.Length; i++)
             {
                 if (a_FMons[i].m_MonType == MonsterType.Boss1 ||
                     a_FMons[i].m_MonType == MonsterType.Boss2 ||
@@ -556,7 +556,7 @@ public class Game_Mgr : MonoBehaviour
     {
         GameSpeedUpOn = !GameSpeedUpOn;
 
-        if(GameSpeedUpOn == false)
+        if (GameSpeedUpOn == false)
         {
             Time.timeScale = 1.0f;
             m_GameSpeedUpBtn.GetComponent<Image>().color = Offcolor;
