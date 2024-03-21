@@ -180,7 +180,12 @@ public class Monster_Ctrl : MonoBehaviour
         //보상주기
         Game_Mgr.Inst.AddGold(m_Gold);
         Game_Mgr.Inst.m_MonCount--;
+
         Destroy(gameObject);
+
+        //만약 죽은 몬스터가 3라운드 보스면 즉시 게임 종료
+        if (m_MonType == MonsterType.Boss3)
+            Game_Mgr.Inst.GameDie();
     }
 
     public void InitState(int a_Round)
