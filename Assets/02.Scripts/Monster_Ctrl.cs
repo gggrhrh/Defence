@@ -199,12 +199,14 @@ public class Monster_Ctrl : MonoBehaviour
             Game_Mgr.Inst.GameDie();
     }
 
-    public void InitState(int a_Round)
+    public void InitState(int a_Round, float a_MonSpeed)
     {
         if (a_Round <= 0)
             return;
 
         m_Round = a_Round;
+
+        m_MoveSpeed = a_MonSpeed;
 
         if (m_Round < 10)
             m_MonType = MonsterType.Round1;

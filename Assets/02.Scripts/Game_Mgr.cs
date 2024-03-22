@@ -449,12 +449,14 @@ public class Game_Mgr : MonoBehaviour
             }
             //보스라운드가 아닐때 보스가 살아있으면 사망 처리
 
+            float a_MonSpeed = Random.Range(2.0f, 3.0f);
+
             for (int ii = 0; ii < m_MonMax; ii++)
             {
                 Vector3 a_Pos = new Vector3(1.75f, 4.0f, 0.0f);
                 GameObject Go = Instantiate(MonsterPrefab) as GameObject;
                 Monster_Ctrl MonCtrl = Go.GetComponent<Monster_Ctrl>();
-                MonCtrl.InitState(m_Round);
+                MonCtrl.InitState(m_Round, a_MonSpeed);
                 Go.transform.position = a_Pos;
 
                 m_MonCount++;
@@ -467,7 +469,7 @@ public class Game_Mgr : MonoBehaviour
             Vector3 a_Pos = new Vector3(1.75f, 4.0f, 0.0f);
             GameObject Go = Instantiate(MonsterPrefab) as GameObject;
             Monster_Ctrl MonCtrl = Go.GetComponent<Monster_Ctrl>();
-            MonCtrl.InitState(m_Round);
+            MonCtrl.InitState(m_Round, 1.5f);   //보스는 이동속도 느리게
             Go.transform.position = a_Pos;
 
             m_MonCount++;
@@ -504,7 +506,10 @@ public class Game_Mgr : MonoBehaviour
             return;
 
         m_BackPanel.SetActive(false);
-        Time.timeScale = 1.0f;
+
+        if (GameSpeedUpOn == false)
+            Time.timeScale = 1.0f;
+        else Time.timeScale = 2.0f;
     }
 
     void ScrollViewOnOff_Update()
