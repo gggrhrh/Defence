@@ -30,14 +30,18 @@ public class Monster_Ctrl : MonoBehaviour
     Vector3 m_Pos;
     Vector3 m_Dir = Vector3.down;
 
-    //피격시 투명하게 변함
+    //피격시 이펙트
     SpriteRenderer m_MonRenderer = null;
     Color32 Takecolor = new Color32(255, 255, 255, 230);
+    private GameObject m_HitEffPrefab = null;
+
 
     // Start is called before the first frame update
     void Start()
     {
         m_MonRenderer = GetComponentInChildren<SpriteRenderer>();
+
+        m_HitEffPrefab = Resources.Load<GameObject>("HitEffect");
 
         MonsterState();
 
@@ -130,6 +134,13 @@ public class Monster_Ctrl : MonoBehaviour
             Bullet_Ctrl a_BCtrl = coll.GetComponent<Bullet_Ctrl>();
             if (a_BCtrl.m_isColl == true)
                 return;
+
+            //이펙트 구현
+            GameObject effect = GameObject.Instantiate(m_HitEffPrefab,
+                transform.position, Quaternion.identity) as GameObject;
+            Destroy(effect, 0.3f);
+            //이펙트 구현
+
             float a_Attack = a_BCtrl.m_Attack;
             bool a_isCri = a_BCtrl.m_isCri;
             
