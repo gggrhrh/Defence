@@ -33,11 +33,17 @@ public class MyInfo_Mgr : MonoBehaviour
     int CriRateLv = 0;
     int CriDmgLv = 0;
 
+    [Header("------ SkillRoot ------")]
+    public Text[] SkillLabeltext = null;
+    public Text[] SkillInfoText = null;
+    public GameObject[] LockImg = null;
+
     // Start is called before the first frame update
     void Start()
     {
         GlobalValue.LoadGameData();
         StatsTextRefresh();
+        SkillTextRefresh();
 
         //--- 초기 설정
         m_StatsBtn.GetComponent<Image>().color = OnColor;
@@ -64,12 +70,21 @@ public class MyInfo_Mgr : MonoBehaviour
 
         if (m_CharBtn != null)
             m_CharBtn.onClick.AddListener(CharBtnClick);
+
+        for (int i = 0; i < GlobalValue.g_SkDataList.Count; i++)
+        {
+            if (GlobalValue.g_SkLevelList[i] == 0)
+                LockImg[i].SetActive(true);
+            else
+                LockImg[i].SetActive(false);
+        }
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void StatsBtnClick()
@@ -153,5 +168,19 @@ public class MyInfo_Mgr : MonoBehaviour
             CriRateText.text = "크리티컬 확률 : " + CriRateLv + "Lv ( + " + CriRateLv.ToString() + "% )";
         if (CriDmgText != null)
             CriDmgText.text = "크리티컬 데미지 : " + CriDmgLv + "Lv ( X " + (2.0f + CriDmgLv * 0.01f).ToString("F2") + " )";
+    }
+
+    void SkillTextRefresh()
+    {
+        for (int i = 0; i < GlobalValue.g_SkDataList.Count; i++)
+        {
+            float a_Level = GlobalValue.g_SkLevelList[i];
+            float a_Damage = GlobalValue.g_SkDataList[i].m_Damage +
+                GlobalValue.g_SkDataList[i].m_UpDamage * (a_Level - 1);
+
+            SkillLabeltext[i].text = GlobalValue.g_SkDataList[i].m_Name;
+            SkillInfoText[i].text = "레벨 : " + a_Level + "Lv" + "\n데미지 : " + a_Damage +
+                "\n쿨타임 : " + GlobalValue.g_SkDataList[i].m_CoolTime + "s";
+        }
     }
 }

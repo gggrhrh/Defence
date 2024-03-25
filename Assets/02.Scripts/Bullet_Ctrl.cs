@@ -6,6 +6,8 @@ public class Bullet_Ctrl : MonoBehaviour
 {
     float m_MoveSpeed = 10.0f;  //이동속도
     float m_LifeTime = 1.0f;
+    SpriteRenderer m_Renderer = null;
+    public Sprite[] sprites = null;
 
     //--- 적을 찾는 변수
     GameObject Target_Obj = null;   //타겟 참조 변수
@@ -17,24 +19,37 @@ public class Bullet_Ctrl : MonoBehaviour
     //--- 총알의 공격력
     [HideInInspector] public float m_Attack = 0.0f;
     [HideInInspector] public bool m_isCri = false;
+    [HideInInspector] public NumType m_NumType = NumType.Beginner;
+
+    //--- 숫자 타입이 이진수라면 숫자총알이 점점 커짐
+    
+    float CacSize = 1.0f;
+    //--- 숫자 타입이 이진수라면 숫자총알이 점점 커짐
 
     void OnEnable() //Active가 활성화 될 때마다 호출되는 함수
     {
         m_isColl = false;
         m_LifeTime = 1.0f;
-
+        
         FindEnemy();
+    }
+
+    void Awake()
+    {
+        m_Renderer = this.gameObject.GetComponent<SpriteRenderer>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        
         //Destroy(gameObject, 1.0f);
     }
 
     // Update is called once per frame
     void Update()
-    {
+    {   
+        //생존시간
         if (0.0f < m_LifeTime)
         {
             m_LifeTime -= Time.deltaTime;
@@ -45,6 +60,7 @@ public class Bullet_Ctrl : MonoBehaviour
                 m_isColl = false;
             }
         }
+        //생존시간
 
         if (Target_Obj != null)
             BulletMove();
@@ -91,8 +107,10 @@ public class Bullet_Ctrl : MonoBehaviour
         transform.Translate(m_DesiredDir * m_MoveSpeed * Time.deltaTime, Space.World);
     }
 
-    public void InitBullet(float a_Attack, bool isCri = false)
+    public void InitBullet(NumType a_NumType, int a_Level, float a_Attack, bool isCri = false)
     {
+        m_NumType = a_NumType;
+        m_Renderer.sprite = sprites[a_Level];
         m_Attack = a_Attack;
         m_isCri = isCri;
     }

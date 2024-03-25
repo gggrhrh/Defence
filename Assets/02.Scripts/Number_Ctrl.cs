@@ -24,7 +24,7 @@ public class Number_Ctrl : MonoBehaviour
     public GameObject m_ShootPos = null;
     float m_ShootCool = 0.0f;
     //--- 총알 발사
-    
+
     //--- 이진수AI 관련 변수
     public GameObject m_BinaryNum = null;
     float angle = 0.0f;
@@ -76,7 +76,7 @@ public class Number_Ctrl : MonoBehaviour
 
         m_ShootCool += Time.deltaTime;
 
-        if(m_AttackSpeed <= m_ShootCool)
+        if (m_AttackSpeed <= m_ShootCool)
         {
             m_ShootCool = 0.0f;
             float a_Cri = Random.Range(0.0f, 1.0f);
@@ -86,14 +86,14 @@ public class Number_Ctrl : MonoBehaviour
                 Bullet_Ctrl a_BulletObj = BulletPool_Mgr.Inst.GetBulletPool();
                 a_BulletObj.gameObject.SetActive(true);
                 a_BulletObj.transform.position = m_ShootPos.transform.position;
-                a_BulletObj.InitBullet(m_CurAttack * m_CriDmg, true);
+                a_BulletObj.InitBullet(m_NumType, m_Level, m_CurAttack * m_CriDmg, true);
             }
             else
             {
                 Bullet_Ctrl a_BulletObj = BulletPool_Mgr.Inst.GetBulletPool();
                 a_BulletObj.gameObject.SetActive(true);
                 a_BulletObj.transform.position = m_ShootPos.transform.position;
-                a_BulletObj.InitBullet(m_CurAttack);
+                a_BulletObj.InitBullet(m_NumType, m_Level, m_CurAttack);
             }
         }
     }//void FireUpdate()
@@ -108,9 +108,9 @@ public class Number_Ctrl : MonoBehaviour
             return;
 
         m_ShootCool += Time.deltaTime;
-        if(m_AttackSpeed <= m_ShootCool)
+        if (m_AttackSpeed <= m_ShootCool)
         {
-            StartCoroutine(BinarySystemFireCorutine());         
+            StartCoroutine(BinarySystemFireCorutine());
             m_ShootCool = 0.0f;
         }
 
@@ -127,7 +127,7 @@ public class Number_Ctrl : MonoBehaviour
                 Bullet_Ctrl a_BulletObj = BulletPool_Mgr.Inst.GetBulletPool();
                 a_BulletObj.gameObject.SetActive(true);
                 a_BulletObj.transform.position = m_ShootPos.transform.position;
-                a_BulletObj.InitBullet(m_CurAttack * m_CriDmg, true);
+                a_BulletObj.InitBullet(m_NumType, m_Level, m_CurAttack * m_CriDmg, true);
 
                 yield return new WaitForSeconds(0.05f);
             }
@@ -139,7 +139,7 @@ public class Number_Ctrl : MonoBehaviour
                 Bullet_Ctrl a_BulletObj = BulletPool_Mgr.Inst.GetBulletPool();
                 a_BulletObj.gameObject.SetActive(true);
                 a_BulletObj.transform.position = m_ShootPos.transform.position;
-                a_BulletObj.InitBullet(m_CurAttack);
+                a_BulletObj.InitBullet(m_NumType, m_Level, m_CurAttack);
 
                 yield return new WaitForSeconds(0.05f);
             }
@@ -165,7 +165,7 @@ public class Number_Ctrl : MonoBehaviour
 
         m_ShootCool += Time.deltaTime;
 
-        if(m_AttackSpeed <= m_ShootCool)
+        if (m_AttackSpeed <= m_ShootCool)
         {
             m_ShootCool = 0.0f;
             float a_Cri = Random.Range(0.0f, 1.0f);
@@ -174,17 +174,17 @@ public class Number_Ctrl : MonoBehaviour
                 Bullet_Ctrl a_BulletObj = BulletPool_Mgr.Inst.GetBulletPool();
                 a_BulletObj.gameObject.SetActive(true);
                 a_BulletObj.transform.position = m_ShootPos.transform.position;
-                a_BulletObj.InitBullet(m_CurAttack * m_CriDmg, true);
+                a_BulletObj.InitBullet(m_NumType, m_Level, m_CurAttack * m_CriDmg, true);
             }
             else
             {
                 Bullet_Ctrl a_BulletObj = BulletPool_Mgr.Inst.GetBulletPool();
                 a_BulletObj.gameObject.SetActive(true);
                 a_BulletObj.transform.position = m_ShootPos.transform.position;
-                a_BulletObj.InitBullet(m_CurAttack);
+                a_BulletObj.InitBullet(m_NumType, m_Level, m_CurAttack);
             }
         }
-        
+
     }
 
     public void InitState(NumType a_NumType, int a_Level, int a_NumPos)
@@ -213,7 +213,7 @@ public class Number_Ctrl : MonoBehaviour
         NumInfo = string.Format("숫자 타입 : {0}\n레벨 : {1}\n공격력 : {2}\n공격속도 : {3:0.00}" +
             "\n치명타 확률 : {4:0.00}\n치명타 데미지 : {5:0.00}"
             , NumTypestr, m_Level, m_CurAttack, m_AttackSpeed, m_CriRate, m_CriDmg);
-        
+
         return NumInfo;
     }
 
@@ -221,7 +221,7 @@ public class Number_Ctrl : MonoBehaviour
     {
         if (m_NumType != a_NumType)
             return;
-        
+
         else
         {
             if (a_NumType == NumType.Number)
@@ -238,7 +238,7 @@ public class Number_Ctrl : MonoBehaviour
         m_AttUp = GlobalValue.g_Attack;
         m_AttSpeedUp = GlobalValue.g_AttSpeed;
         m_CriRateUp = GlobalValue.g_CriRate;
-        m_CriDmgUp =GlobalValue.g_CriDmg;
+        m_CriDmgUp = GlobalValue.g_CriDmg;
 
         m_StAttack = m_StAttack * (1 + 0.01f * m_AttUp);
         m_AttackSpeed = m_AttackSpeed - (0.01f * m_AttSpeedUp);
