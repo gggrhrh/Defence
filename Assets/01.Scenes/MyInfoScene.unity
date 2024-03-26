@@ -1234,10 +1234,6 @@ MonoBehaviour:
   - {fileID: 217227897}
   - {fileID: 947007660}
   - {fileID: 697372405}
-  SkillIconImg:
-  - {fileID: 623649050}
-  - {fileID: 422921195}
-  - {fileID: 1046358966}
   SkillInfoText:
   - {fileID: 380961326}
   - {fileID: 1450819867}
@@ -2970,7 +2966,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.5990566, b: 0.5990566, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
