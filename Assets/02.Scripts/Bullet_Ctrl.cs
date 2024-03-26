@@ -30,10 +30,12 @@ public class Bullet_Ctrl : MonoBehaviour
     {
         m_isColl = false;
         m_LifeTime = 1.0f;
-            
+
         // 숫자 타입마다 총알의 Update
         if (m_NumType == NumType.Binary_Num)
             delta = 0.0f;
+        else if (m_NumType == NumType.Binary_System)
+            transform.localScale = new Vector3(0.5f, 0.5f, 1.0f);
         else
             transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         // 숫자 타입마다 총알의 Update
@@ -119,7 +121,7 @@ public class Bullet_Ctrl : MonoBehaviour
     }
 
     void B_N_Update()
-    {      
+    {
         delta += Time.deltaTime;
         this.transform.localScale = new Vector3(SizeUpSpeed * delta, SizeUpSpeed * delta, 1.0f);
     }
@@ -132,7 +134,7 @@ public class Bullet_Ctrl : MonoBehaviour
         m_isCri = isCri;
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D coll)
     {
         //이진수면 범위공격을 함
         if (m_NumType == NumType.Binary_Num)

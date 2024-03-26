@@ -225,10 +225,6 @@ public class Game_Mgr : MonoBehaviour
 
         RefreshUIUpdate();
 
-        //몬스터가 50마리를 넘으면 게임종료
-        if (m_MaxMonCount <= m_MonCount)
-            GameDie();
-
         //PanelTimer 작동
         if (PanelTimer > 0.0f)
         {
@@ -403,7 +399,7 @@ public class Game_Mgr : MonoBehaviour
         if (CoinText != null)
             CoinText.text = "얻은 코인 : " + a_Coin.ToString();
 
-        GlobalValue.g_UserLevel += a_Coin;
+        GlobalValue.g_UserGold += a_Coin;
 
         PlayerPrefs.SetInt("UserGold", GlobalValue.g_UserGold);
     }//public void GameDie()
@@ -434,6 +430,9 @@ public class Game_Mgr : MonoBehaviour
 
     IEnumerator MonsterSpawn()  //몬스터 소환 코루틴
     {
+        if (m_GameRound == GameRound.GameEnd)
+            StopAllCoroutines();
+
         if (m_GameRound == GameRound.MonsterRound)
         {   //보스라운드가 아닐때 보스가 살아있으면 사망 처리
             Monster_Ctrl[] a_FMons = FindObjectsOfType<Monster_Ctrl>();
@@ -453,6 +452,13 @@ public class Game_Mgr : MonoBehaviour
 
             for (int ii = 0; ii < m_MonMax; ii++)
             {
+                //몬스터가 50마리를 넘으면 게임종료
+                if (m_MaxMonCount <= m_MonCount)
+                {
+                    GameDie();
+                    break;
+                }
+
                 Vector3 a_Pos = new Vector3(1.75f, 4.0f, 0.0f);
                 GameObject Go = Instantiate(MonsterPrefab) as GameObject;
                 Monster_Ctrl MonCtrl = Go.GetComponent<Monster_Ctrl>();

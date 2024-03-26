@@ -19,7 +19,6 @@ public class Skill_Info  //각 Item 정보
     public SkillType m_SkType = SkillType.Skill_0; //캐릭터 타입
     public int m_Price = 100;   //아이템 구매 가격 
     public int m_UpPrice = 50; //업그레이드 가격, 타입에 따라서
-    public int m_UserLv = 0;    //스킬을 얻는데 필요한 유저의 레벨
     public float m_Damage = 0.0f;   //스킬의 데미지
     public float m_UpDamage = 0.0f; // 업그레이드 스킬 데미지
     public float m_CoolTime = 0.0f;
@@ -35,7 +34,6 @@ public class Skill_Info  //각 Item 정보
             m_Name = "본체때리기";
             m_Price = 10; //기본가격
             m_UpPrice = 5; //Lv1->Lv2  (m_UpPrice + (m_UpPrice * (m_Level - 1)) 가격 필요
-            m_UserLv = 0;
 
             m_Damage = 50.0f;
             m_UpDamage = 10.0f;
@@ -47,7 +45,6 @@ public class Skill_Info  //각 Item 정보
             m_Name = "작업관리자켜기";
             m_Price = 20; //기본가격
             m_UpPrice = 10; //Lv1->Lv2  (m_UpPrice + (m_UpPrice * (m_Level - 1)) 가격 필요
-            m_UserLv = 0;
 
             m_Damage = 1000.0f;
             m_UpDamage = 500.0f;
@@ -59,7 +56,6 @@ public class Skill_Info  //각 Item 정보
             m_Name = "전원껐다켜기";
             m_Price = 50;
             m_UpPrice = 25;
-            m_UserLv = 10;
 
             m_Damage = 1000.0f;
             m_UpDamage = 500.0f;
@@ -77,8 +73,6 @@ public class GlobalValue
     public static string g_UniqID = "";     //유저 아이디
     public static string g_NickName = "";   //유저 닉네임
     public static int g_UserGold = 0;       //유저의 골드
-    public static int g_UserLevel = 0;      //유저의 레벨
-    public static int g_Exp = 0;            //유저 경험치
     public static int g_Attack = 0;         //상점에서 업그레이드 하는 공격력 레벨 (100레벨 까지)
     public static int g_AttSpeed = 0;       //공격속도 레벨(20레벨 까지)
     public static int g_CriRate = 0;        //크리티컬 확률
@@ -99,7 +93,6 @@ public class GlobalValue
         }
         //--- 설정 데이터 로딩
         g_NickName = PlayerPrefs.GetString("NickName", "SBS전사");
-        g_UserLevel = PlayerPrefs.GetInt("UserLevel", 0);
         g_UserGold = PlayerPrefs.GetInt("UserGold", 100);
         g_Attack = PlayerPrefs.GetInt("AttackLv", 0);
         g_AttSpeed = PlayerPrefs.GetInt("AttSpeedLv", 0);

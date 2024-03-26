@@ -11,7 +11,7 @@ public class DmgTxt_Ctrl : MonoBehaviour
 
     //속도 = 거리 / 시간
     float m_EffDur = 1.05f;
-    float MvVelocity = 0.5f / 1.0f;    //1초에 0.5m 가는 속도
+    float MvVelocity = 0.6f / 1.0f;    //1초에 0.6m 가는 속도
     float ApVelocity = 1.0f / (1.0f - 0.4f);
     //alpha 0.4초부터 1.0초까지 (0.6초동안) : 0.0 -> 1.0 변화하는 속도
 
