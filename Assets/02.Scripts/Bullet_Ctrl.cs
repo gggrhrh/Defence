@@ -16,21 +16,28 @@ public class Bullet_Ctrl : MonoBehaviour
     [HideInInspector] public bool m_isColl = false;          //타겟에 처음 부딪히면
     //--- 적을 찾는 변수
 
-    //--- 총알의 공격력
+    //--- 총알의 공격력 및 크리티컬ON
     [HideInInspector] public float m_Attack = 0.0f;
     [HideInInspector] public bool m_isCri = false;
     [HideInInspector] public NumType m_NumType = NumType.Beginner;
 
     //--- 숫자 타입이 이진수라면 숫자총알이 점점 커짐
-    
-    float CacSize = 1.0f;
+    float delta = 1.0f;
+    float SizeUpSpeed = 5.0f;
     //--- 숫자 타입이 이진수라면 숫자총알이 점점 커짐
 
     void OnEnable() //Active가 활성화 될 때마다 호출되는 함수
     {
         m_isColl = false;
         m_LifeTime = 1.0f;
-        
+            
+        // 숫자 타입마다 총알의 Update
+        if (m_NumType == NumType.Binary_Num)
+            delta = 0.0f;
+        else
+            transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        // 숫자 타입마다 총알의 Update
+
         FindEnemy();
     }
 
@@ -42,13 +49,13 @@ public class Bullet_Ctrl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
         //Destroy(gameObject, 1.0f);
     }
 
     // Update is called once per frame
     void Update()
-    {   
+    {
         //생존시간
         if (0.0f < m_LifeTime)
         {
@@ -71,6 +78,10 @@ public class Bullet_Ctrl : MonoBehaviour
             gameObject.SetActive(false);
             m_isColl = false;
         }
+
+        //2진수는 범위공격을 하기 때문에 숫자가 점점 커짐
+        if (m_NumType == NumType.Binary_Num)
+            B_N_Update();
     }
 
     void FindEnemy()
@@ -107,6 +118,12 @@ public class Bullet_Ctrl : MonoBehaviour
         transform.Translate(m_DesiredDir * m_MoveSpeed * Time.deltaTime, Space.World);
     }
 
+    void B_N_Update()
+    {      
+        delta += Time.deltaTime;
+        this.transform.localScale = new Vector3(SizeUpSpeed * delta, SizeUpSpeed * delta, 1.0f);
+    }
+
     public void InitBullet(NumType a_NumType, int a_Level, float a_Attack, bool isCri = false)
     {
         m_NumType = a_NumType;
@@ -117,6 +134,10 @@ public class Bullet_Ctrl : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        //이진수면 범위공격을 함
+        if (m_NumType == NumType.Binary_Num)
+            return;
+
         //몬스터와 충돌하면 다른 몬스터와 겹쳐서 충돌하지 않게 함
         m_isColl = true;
     }

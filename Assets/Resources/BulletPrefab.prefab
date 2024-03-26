@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -134,12 +134,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprites:
+  - {fileID: 21300000, guid: 40c4de39308d4ab438ea4993151ee9b0, type: 3}
   - {fileID: 21300000, guid: 03f7dbe2b1fe5634893cc0e2b327ac26, type: 3}
   - {fileID: 21300000, guid: 40989451830708d4a8d9da4a7087970b, type: 3}
   - {fileID: 21300000, guid: 1532a589723fd7f49981616ff9d28104, type: 3}
   - {fileID: 21300000, guid: 78fd7e6780bf0dd45984617e25e1593e, type: 3}
   - {fileID: 21300000, guid: 81e3e4764605fef4382e1ec3204f73a2, type: 3}
-  - {fileID: 21300000, guid: d7289870d728dae468bbe3e6a4f47790, type: 3}
   m_isColl: 0
   m_Attack: 0
   m_isCri: 0
+  m_NumType: 0

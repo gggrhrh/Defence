@@ -10,7 +10,14 @@ public class Skill_Ctrl : MonoBehaviour
     List<Monster_Ctrl> m_Monster = new List<Monster_Ctrl>();    //보스제외 몬스터 
 
     float m_Attack = 0.0f;      //스킬 공격력
-    float SkAnimTime = 0.0f;
+
+    //--- 스킬 이펙트
+    private GameObject OnOffEffPrefab;
+
+    private void Awake()
+    {
+        OnOffEffPrefab = Resources.Load<GameObject>("OnOffEffect");
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -74,6 +81,9 @@ public class Skill_Ctrl : MonoBehaviour
 
     void ComOnOffUpdate()   //컴퓨터 OnOff 켜기스킬
     {
+        GameObject EffPrefab = Instantiate(OnOffEffPrefab) as GameObject;
+        Destroy(EffPrefab, 1.0f);
+
         for (int i = 0; i < m_Monster.Count; i++)
         {
             m_Monster[i].TakeDamage(m_Attack);

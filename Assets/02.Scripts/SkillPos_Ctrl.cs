@@ -53,19 +53,23 @@ public class SkillPos_Ctrl : MonoBehaviour
         {
             skillPos = Input.mousePosition;
             UseSkill();
+            //플레이속도
             if(SpeedOn == true)
                 Time.timeScale = 2.0f;
             else
                 Time.timeScale = 1.0f;
+            //플레이속도
             Destroy(gameObject);
 
         }
         else if (Input.GetMouseButtonDown(1) == true)
         {
+            //플레이속도
             if (SpeedOn == true)
                 Time.timeScale = 2.0f;
             else
                 Time.timeScale = 1.0f;
+            //플레이속도
             Destroy(gameObject);
         }
 
@@ -85,7 +89,7 @@ public class SkillPos_Ctrl : MonoBehaviour
         }//for(int i = 0; i < a_SkNode.Length; i++)
         //---쿨타임 갱신
 
-        //--스킬 프리팹 스폰 위치 밑 범위
+        //--스킬 프리팹 스폰 위치
         Vector3 pos = Camera.main.ScreenToWorldPoint(skillPos);
         pos.z = 0.0f;
         GameObject SkObj = Instantiate(SkillPrefab[(int)m_SkType]) as GameObject;

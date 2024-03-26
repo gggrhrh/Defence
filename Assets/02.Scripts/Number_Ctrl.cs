@@ -84,16 +84,16 @@ public class Number_Ctrl : MonoBehaviour
             if (a_Cri < m_CriRate)  //치명타 ON
             {
                 Bullet_Ctrl a_BulletObj = BulletPool_Mgr.Inst.GetBulletPool();
-                a_BulletObj.gameObject.SetActive(true);
                 a_BulletObj.transform.position = m_ShootPos.transform.position;
                 a_BulletObj.InitBullet(m_NumType, m_Level, m_CurAttack * m_CriDmg, true);
+                a_BulletObj.gameObject.SetActive(true);
             }
             else
             {
                 Bullet_Ctrl a_BulletObj = BulletPool_Mgr.Inst.GetBulletPool();
-                a_BulletObj.gameObject.SetActive(true);
                 a_BulletObj.transform.position = m_ShootPos.transform.position;
                 a_BulletObj.InitBullet(m_NumType, m_Level, m_CurAttack);
+                a_BulletObj.gameObject.SetActive(true);
             }
         }
     }//void FireUpdate()
@@ -125,9 +125,9 @@ public class Number_Ctrl : MonoBehaviour
             for (int ii = 0; ii < m_Level + 1; ii++)
             {
                 Bullet_Ctrl a_BulletObj = BulletPool_Mgr.Inst.GetBulletPool();
-                a_BulletObj.gameObject.SetActive(true);
                 a_BulletObj.transform.position = m_ShootPos.transform.position;
                 a_BulletObj.InitBullet(m_NumType, m_Level, m_CurAttack * m_CriDmg, true);
+                a_BulletObj.gameObject.SetActive(true);
 
                 yield return new WaitForSeconds(0.05f);
             }
@@ -137,9 +137,9 @@ public class Number_Ctrl : MonoBehaviour
             for (int ii = 0; ii < m_Level + 1; ii++)
             {
                 Bullet_Ctrl a_BulletObj = BulletPool_Mgr.Inst.GetBulletPool();
-                a_BulletObj.gameObject.SetActive(true);
                 a_BulletObj.transform.position = m_ShootPos.transform.position;
                 a_BulletObj.InitBullet(m_NumType, m_Level, m_CurAttack);
+                a_BulletObj.gameObject.SetActive(true);
 
                 yield return new WaitForSeconds(0.05f);
             }
@@ -172,16 +172,16 @@ public class Number_Ctrl : MonoBehaviour
             if (a_Cri < m_CriRate)  //크리티컬 발동
             {
                 Bullet_Ctrl a_BulletObj = BulletPool_Mgr.Inst.GetBulletPool();
-                a_BulletObj.gameObject.SetActive(true);
                 a_BulletObj.transform.position = m_ShootPos.transform.position;
                 a_BulletObj.InitBullet(m_NumType, m_Level, m_CurAttack * m_CriDmg, true);
+                a_BulletObj.gameObject.SetActive(true);
             }
             else
             {
                 Bullet_Ctrl a_BulletObj = BulletPool_Mgr.Inst.GetBulletPool();
-                a_BulletObj.gameObject.SetActive(true);
                 a_BulletObj.transform.position = m_ShootPos.transform.position;
                 a_BulletObj.InitBullet(m_NumType, m_Level, m_CurAttack);
+                a_BulletObj.gameObject.SetActive(true);
             }
         }
 

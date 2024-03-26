@@ -23,10 +23,10 @@ public class Monster_Ctrl : MonoBehaviour
 
     int m_Round = 0;
     int m_Gold = 0; //몬스터 타입마다 주는 골드 바뀜
-    [HideInInspector]public float m_CurHp = 0.0f;
+    [HideInInspector] public float m_CurHp = 0.0f;
     float m_MaxHp = 0.0f;
 
-    [HideInInspector]public float m_MoveSpeed = 2.2f;
+    [HideInInspector] public float m_MoveSpeed = 2.2f;
     Vector3 m_Pos;
     Vector3 m_Dir = Vector3.down;
 
@@ -34,6 +34,7 @@ public class Monster_Ctrl : MonoBehaviour
     SpriteRenderer m_MonRenderer = null;
     Color32 Takecolor = new Color32(255, 255, 255, 230);
     private GameObject m_HitEffPrefab = null;
+    private GameObject m_HitEffPrefab_BN = null;
 
 
     // Start is called before the first frame update
@@ -42,6 +43,7 @@ public class Monster_Ctrl : MonoBehaviour
         m_MonRenderer = GetComponentInChildren<SpriteRenderer>();
 
         m_HitEffPrefab = Resources.Load<GameObject>("HitEffect");
+        m_HitEffPrefab_BN = Resources.Load<GameObject>("HitEffect_BN");
 
         MonsterState();
 
@@ -135,15 +137,25 @@ public class Monster_Ctrl : MonoBehaviour
             if (a_BCtrl.m_isColl == true)
                 return;
 
-            //이펙트 구현
-            GameObject effect = GameObject.Instantiate(m_HitEffPrefab,
-                transform.position, Quaternion.identity) as GameObject;
-            Destroy(effect, 0.3f);
-            //이펙트 구현
-
             float a_Attack = a_BCtrl.m_Attack;
             bool a_isCri = a_BCtrl.m_isCri;
-            
+            NumType a_NumType = a_BCtrl.m_NumType;
+
+            //이펙트 구현
+            if (a_NumType == NumType.Binary_Num)
+            {
+                GameObject effect = GameObject.Instantiate(m_HitEffPrefab_BN,
+                transform.position, Quaternion.identity) as GameObject;
+                Destroy(effect, 0.3f);
+            }
+            else
+            {
+                GameObject effect = GameObject.Instantiate(m_HitEffPrefab,
+                transform.position, Quaternion.identity) as GameObject;
+                Destroy(effect, 0.3f);
+            }
+            //이펙트 구현
+
             TakeDamage(a_Attack, a_isCri);
             coll.gameObject.SetActive(false);
         }
