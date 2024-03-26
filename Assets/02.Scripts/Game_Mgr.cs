@@ -196,6 +196,9 @@ public class Game_Mgr : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (m_GameRound == GameRound.GameEnd)
+            return;
+
         //--- 단축키 이용으로 스킬 사용하기
         if (Input.GetKeyDown(KeyCode.Alpha1) ||
             Input.GetKeyDown(KeyCode.Keypad1))
@@ -430,9 +433,6 @@ public class Game_Mgr : MonoBehaviour
 
     IEnumerator MonsterSpawn()  //몬스터 소환 코루틴
     {
-        if (m_GameRound == GameRound.GameEnd)
-            StopAllCoroutines();
-
         if (m_GameRound == GameRound.MonsterRound)
         {   //보스라운드가 아닐때 보스가 살아있으면 사망 처리
             Monster_Ctrl[] a_FMons = FindObjectsOfType<Monster_Ctrl>();
