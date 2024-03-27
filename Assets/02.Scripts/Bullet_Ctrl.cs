@@ -35,7 +35,7 @@ public class Bullet_Ctrl : MonoBehaviour
         if (m_NumType == NumType.Binary_Num)
             delta = 0.0f;
         else if (m_NumType == NumType.Binary_System)
-            transform.localScale = new Vector3(0.5f, 0.5f, 1.0f);
+            transform.localScale = new Vector3(0.7f, 0.7f, 1.0f);
         else
             transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         // 숫자 타입마다 총알의 Update

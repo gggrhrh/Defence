@@ -30,11 +30,15 @@ public class LobbyMgr : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1.0f;
         GlobalValue.LoadGameData();
         RefreshText();
 
         if (m_PlayBtn != null)
-            m_PlayBtn.onClick.AddListener(PlayBtnClick);
+            m_PlayBtn.onClick.AddListener(() =>
+            {
+                MyLoadScene("GameScene");
+            });
 
         if (m_ConfigBtn != null)
             m_ConfigBtn.onClick.AddListener(CfgBtnClick);
@@ -44,15 +48,23 @@ public class LobbyMgr : MonoBehaviour
 
         //--- 상점 인벤 도감
         if (m_StoreBtn != null)
-            m_StoreBtn.onClick.AddListener(StoreBtnClick);
+            m_StoreBtn.onClick.AddListener(() =>
+            {
+                MyLoadScene("StoreScene");
+            });
 
         if (m_MyInfoBtn != null)
-            m_MyInfoBtn.onClick.AddListener(MyInfoBtnClick);
+            m_MyInfoBtn.onClick.AddListener(() =>
+            {
+                MyLoadScene("MyInfoScene");
+            });
 
         if (m_HelpBtn != null)
-            m_HelpBtn.onClick.AddListener(HelpBtnClick);
+            m_HelpBtn.onClick.AddListener(() =>
+            {
+                MyLoadScene("HelpScene");
+            });
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -66,17 +78,6 @@ public class LobbyMgr : MonoBehaviour
         }
     }
 
-    void PlayBtnClick()
-    {
-        if (CfgBoxCheck() == true)
-        {
-            MessageOnOff("환경설정 박스를 닫고 다시 눌러주세요.");
-            return;
-        }
-
-        SceneManager.LoadScene("GameScene");
-    }
-
     void CfgBtnClick()
     {
         GameObject CfgObj = Instantiate(m_ConfigBox) as GameObject;
@@ -87,7 +88,7 @@ public class LobbyMgr : MonoBehaviour
 
     void ExitBtnClick()
     {
-        if(CfgBoxCheck() == true)
+        if (CfgBoxCheck() == true)
         {
             MessageOnOff("환경설정 박스를 닫고 다시 눌러주세요.");
             return;
@@ -95,39 +96,6 @@ public class LobbyMgr : MonoBehaviour
 
         Application.Quit();
     }
-
-    void StoreBtnClick()
-    {
-        if (CfgBoxCheck() == true)
-        {
-            MessageOnOff("환경설정 박스를 닫고 다시 눌러주세요.");
-            return;
-        }
-
-        SceneManager.LoadScene("StoreScene");
-    }
-
-    void MyInfoBtnClick()
-    {
-        if (CfgBoxCheck() == true)
-        {
-            MessageOnOff("환경설정 박스를 닫고 다시 눌러주세요.");
-            return;
-        }
-
-        SceneManager.LoadScene("MyInfoScene");
-    }
-
-    void HelpBtnClick()
-    {
-        if (CfgBoxCheck() == true)
-        {
-            MessageOnOff("환경설정 박스를 닫고 다시 눌러주세요.");
-            return;
-        }
-
-        SceneManager.LoadScene("HelpScene");
-    }    
 
     void MessageOnOff(string Mess = "", bool isOn = true, float a_Time = 3.0f)
     {
@@ -146,11 +114,11 @@ public class LobbyMgr : MonoBehaviour
 
     void RefreshText()
     {
-        if(m_NickNameText != null)
+        if (m_NickNameText != null)
         {
             m_NickNameText.text = GlobalValue.g_NickName;
         }
-        if(m_GoldText != null)
+        if (m_GoldText != null)
         {
             m_GoldText.text = GlobalValue.g_UserGold.ToString();
         }
@@ -161,7 +129,25 @@ public class LobbyMgr : MonoBehaviour
         Config_Ctrl CfgObj = GameObject.FindObjectOfType<Config_Ctrl>();
         if (CfgObj != null)
             return true;
-        
-        else  return false; 
+
+        else return false;
     }
+
+    void MyLoadScene(string a_ScName)
+    {
+        if (CfgBoxCheck() == true)
+        {
+            MessageOnOff("환경설정 박스를 닫고 다시 눌러주세요.");
+            return;
+        }
+
+        bool IsFadeOk = false;
+        if (Fade_Mgr.Inst != null)
+            IsFadeOk = Fade_Mgr.Inst.SceneOutReserve(a_ScName);
+        if (IsFadeOk == false)
+            SceneManager.LoadScene(a_ScName);
+
+        //Sound_Mgr.Instance.PlayGUISound("Pop", 1.0f);
+    }//void MyLoadScene(string a_ScName)
 }
+

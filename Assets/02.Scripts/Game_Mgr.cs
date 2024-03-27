@@ -122,7 +122,6 @@ public class Game_Mgr : MonoBehaviour
         Inst = this;
     }
 
-
     // Start is called before the first frame update
     void Start()
     {
