@@ -23,7 +23,7 @@ public class Config_Ctrl : MonoBehaviour
         if (m_Sound_Slider != null)
             m_Sound_Slider.onValueChanged.AddListener(SoundChanged);
 
-        if(m_Music_Slider != null)
+        if (m_Music_Slider != null)
             m_Music_Slider.onValueChanged.AddListener(MusicChanged);
 
         if (m_Sound_Slider != null)
@@ -33,11 +33,11 @@ public class Config_Ctrl : MonoBehaviour
             m_Music_Slider.value = PlayerPrefs.GetFloat("MusicVolume", 1.0f);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    //// Update is called once per frame
+    //void Update()
+    //{
+
+    //}
 
     private void SoundChanged(float value)
     {
