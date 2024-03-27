@@ -195,12 +195,12 @@ public class Number_Ctrl : MonoBehaviour
         NumberClass a_Num = new NumberClass();
         a_Num.SetType(m_NumType, m_Level);
         m_StAttack = a_Num.m_Attack;    //초기 공격력 값
-        m_AttackSpeed = a_Num.m_AttackSpeed;    //업글정렬후 공격력값
+        m_AttackSpeed = a_Num.m_AttackSpeed;
         m_SpriteIcon = m_IconImg.GetComponent<SpriteRenderer>();
         m_SpriteIcon.sprite = a_Num.m_IconImg;
     }
 
-    string NumberInfo(NumType a_NumType)
+    protected string NumberInfo(NumType a_NumType)
     {
         if (a_NumType == NumType.Beginner)
             NumTypestr = "기초숫자";
@@ -246,7 +246,7 @@ public class Number_Ctrl : MonoBehaviour
         m_CriDmg = 2 + (0.01f * m_CriDmgUp);
     }
 
-    //------------------------------------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------------------------------------------
 
     //마우스 드래그 및 포인트
     void OnMouseDown()  //마우스누를때
@@ -402,4 +402,5 @@ public class Number_Ctrl : MonoBehaviour
         Game_Mgr.Inst.NumberSpawn(a_NumType, a_Level, a_PosIndex);  //새로운 프리팹 소환
     }
     //드래그 관련 변수
+
 }

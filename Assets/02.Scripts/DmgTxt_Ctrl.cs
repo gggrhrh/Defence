@@ -73,7 +73,7 @@ public class DmgTxt_Ctrl : MonoBehaviour
         if (isCri == true)  //크리티컬 ON
         {
             DamageText.fontStyle = FontStyle.BoldAndItalic;
-            DamageText.fontSize = 36;
+            DamageText.fontSize = 32;
             m_EffDur = 1.5f;
             DamageText.AddComponent<Outline>();
             DamageText.GetComponent<Outline>().effectColor = new Color32(255, 255, 0, 255);
