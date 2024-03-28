@@ -78,6 +78,7 @@ public class Number_Ctrl : MonoBehaviour
 
         if (m_AttackSpeed <= m_ShootCool)
         {
+            Sound_Mgr.Instance.PlayEffSound("Shooting", 1.0f);
             m_ShootCool = 0.0f;
             float a_Cri = Random.Range(0.0f, 1.0f);
 

@@ -200,6 +200,16 @@ public class Monster_Ctrl : MonoBehaviour
     {
         if (m_CurHp < 0)
             return;
+
+        //사망 사운드 효과
+        if (m_MonType == MonsterType.Round1 ||
+            m_MonType == MonsterType.Round2 ||
+            m_MonType == MonsterType.Round3)
+            Sound_Mgr.Instance.PlayEffSound("MonDeath", 1.0f);
+        else
+            Sound_Mgr.Instance.PlayEffSound("BossDeath", 1.0f);
+        //사망 사운드 효과
+
         //보상주기
         Game_Mgr.Inst.AddGold(m_Gold);
         Game_Mgr.Inst.m_MonCount--;

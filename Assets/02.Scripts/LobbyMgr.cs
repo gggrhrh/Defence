@@ -64,6 +64,8 @@ public class LobbyMgr : MonoBehaviour
             {
                 MyLoadScene("HelpScene");
             });
+
+        Sound_Mgr.Instance.PlayBGM("Lobby_Track");
     }
     // Update is called once per frame
     void Update()
@@ -147,7 +149,7 @@ public class LobbyMgr : MonoBehaviour
         if (IsFadeOk == false)
             SceneManager.LoadScene(a_ScName);
 
-        //Sound_Mgr.Instance.PlayGUISound("Pop", 1.0f);
+        Sound_Mgr.Instance.PlayGUISound("Tap", 1.0f);
     }//void MyLoadScene(string a_ScName)
 }
 

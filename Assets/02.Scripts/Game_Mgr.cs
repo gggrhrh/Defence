@@ -422,10 +422,16 @@ public class Game_Mgr : MonoBehaviour
         if (m_Round < 0)
             return;
 
+        if (m_Round % 10 == 1)
+            Sound_Mgr.Instance.PlayBGM("Round_Track");
+
         if (m_Round == 0)
             m_GameRound = GameRound.ReadyRound;
         else if (m_Round == 10 || m_Round == 20 || m_Round == 30)
+        {
+            Sound_Mgr.Instance.PlayBGM("BossRound_Track");
             m_GameRound = GameRound.BossRound;
+        }
         else
             m_GameRound = GameRound.MonsterRound;
     }//void RoundUpdate()

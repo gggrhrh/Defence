@@ -27,8 +27,12 @@ public class StartSceneMgr : MonoBehaviour
     {
         delta += Time.deltaTime;
 
-        if(delta > LoadTime)
-            StartBG.SetActive(true);
+        if (delta > LoadTime)
+        {
+            delta = LoadTime;
+            Sound_Mgr.Instance.PlayGUISound("WindowError", 1.0f);
+            StartBG.SetActive(true); 
+        }
 
         SandWatch.transform.Rotate(new Vector3(0.0f, 0.0f, -SandRotSpeed * Time.deltaTime));
 

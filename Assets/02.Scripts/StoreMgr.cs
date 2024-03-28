@@ -182,6 +182,8 @@ public class StoreMgr : MonoBehaviour
             {
                 DownBtnClickMethod(3, 1);
             });
+
+        Sound_Mgr.Instance.PlayBGM("Store_Track");
     }
 
     // Update is called once per frame

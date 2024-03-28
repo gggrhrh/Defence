@@ -16,6 +16,8 @@ public class Title_Mgr : MonoBehaviour
             {     
                 SceneManager.LoadScene("LobbyScene");
             });
+
+        Sound_Mgr.Instance.PlayBGM("Title_Track");
     }
 
     // Update is called once per frame
