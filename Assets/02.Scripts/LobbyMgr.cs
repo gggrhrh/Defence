@@ -84,8 +84,6 @@ public class LobbyMgr : MonoBehaviour
     {
         GameObject CfgObj = Instantiate(m_ConfigBox) as GameObject;
         CfgObj.transform.SetParent(m_Canvas, false);
-
-        Time.timeScale = 0.0f;
     }
 
     void ExitBtnClick()

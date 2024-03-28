@@ -25,21 +25,24 @@ public class StartSceneMgr : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        delta += Time.deltaTime;
+        if (delta < LoadTime)
+        {
+            SandWatch.transform.Rotate(new Vector3(0.0f, 0.0f, -SandRotSpeed * Time.deltaTime));
+
+            load += LoadFillSpeed * Time.deltaTime;
+            if (load > 1.0f)
+                load -= 1.0f;
+            Loading.fillAmount = load;
+            delta += Time.deltaTime;
+        }
 
         if (delta > LoadTime)
         {
             delta = LoadTime;
-            Sound_Mgr.Instance.PlayGUISound("WindowError", 1.0f);
+            Sound_Mgr.Instance.PlayEffSound("WindowError", 1.0f);
             StartBG.SetActive(true); 
         }
 
-        SandWatch.transform.Rotate(new Vector3(0.0f, 0.0f, -SandRotSpeed * Time.deltaTime));
-
-        load += LoadFillSpeed * Time.deltaTime;
-        if (load > 1.0f)
-            load -= 1.0f;
-        Loading.fillAmount = load;
 
         if (StartBG.activeSelf == true)
         {

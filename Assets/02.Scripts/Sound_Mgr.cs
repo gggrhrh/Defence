@@ -175,7 +175,9 @@ public class Sound_Mgr : G_Singleton<Sound_Mgr>
 
     public void MusicVolume(float fVolume)
     {
+        m_MusicVolume = fVolume;
+
         if (m_AudioSrc != null)
-            m_AudioSrc.volume = m_bgmVolume * fVolume;
+            m_AudioSrc.volume = m_bgmVolume * m_MusicVolume;
     }
 }

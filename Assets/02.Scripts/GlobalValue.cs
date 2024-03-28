@@ -93,7 +93,7 @@ public class GlobalValue
         }
         //--- 설정 데이터 로딩
         g_NickName = PlayerPrefs.GetString("NickName", "SBS전사");
-        g_UserGold = PlayerPrefs.GetInt("UserGold", 100);
+        g_UserGold = PlayerPrefs.GetInt("UserGold", 10);
         g_Attack = PlayerPrefs.GetInt("AttackLv", 0);
         g_AttSpeed = PlayerPrefs.GetInt("AttSpeedLv", 0);
         g_CriRate = PlayerPrefs.GetInt("CriRateLv", 0);
