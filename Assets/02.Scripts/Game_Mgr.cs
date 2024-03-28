@@ -190,6 +190,8 @@ public class Game_Mgr : MonoBehaviour
 
         if (m_GameSpeedUpBtn != null)
             m_GameSpeedUpBtn.onClick.AddListener(GameSpeedUpClick);
+
+        Sound_Mgr.Instance.PlayBGM("Round_Track");
     }
 
     // Update is called once per frame
@@ -422,7 +424,7 @@ public class Game_Mgr : MonoBehaviour
         if (m_Round < 0)
             return;
 
-        if (m_Round % 10 == 1)
+        if (m_Round % 10 == 1 && m_Round != 1)
             Sound_Mgr.Instance.PlayBGM("Round_Track");
 
         if (m_Round == 0)
