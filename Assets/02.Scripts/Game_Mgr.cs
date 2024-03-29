@@ -60,6 +60,7 @@ public class Game_Mgr : MonoBehaviour
     //--- Game Over Panel
     [Header("------ Game Over Panel ------")]
     public GameObject GameOverPanel = null;
+    public Text GameOverLabel = null;
     public Button Lobby_Btn = null;
     public Button Replay_Btn = null;
     public Text CurGoldText = null;
@@ -391,11 +392,15 @@ public class Game_Mgr : MonoBehaviour
             GoldText.text = m_Gold.ToString("N0") + " Gold";
     }//public void AddGold(int a_Value)
 
-    public void GameDie()
+    void GameDie()
     {
         Time.timeScale = 0.0f;
         m_GameRound = GameRound.GameEnd;
         GameOverPanel.SetActive(true);
+
+        if (GameOverLabel != null)
+            GameOverLabel.text = "Game Over";
+
         if (CurGoldText != null)
             CurGoldText.text = "남은 골드 : " + m_Gold.ToString("N0");
 
@@ -406,7 +411,28 @@ public class Game_Mgr : MonoBehaviour
         GlobalValue.g_UserGold += a_Coin;
 
         PlayerPrefs.SetInt("UserGold", GlobalValue.g_UserGold);
-    }//public void GameDie()
+    }//void GameDie()
+
+    void GameClear()
+    {
+        Time.timeScale = 0.0f;
+        m_GameRound = GameRound.GameEnd;
+        GameOverPanel.SetActive(true);
+
+        if (GameOverLabel != null)
+            GameOverLabel.text = "Game Clear";
+
+        if (CurGoldText != null)
+            CurGoldText.text = "남은 골드 : " + m_Gold.ToString("N0");
+
+        int a_Coin = m_Gold / 100;
+        if (CoinText != null)
+            CoinText.text = "얻은 코인 : " + a_Coin.ToString();
+
+        GlobalValue.g_UserGold += a_Coin;
+
+        PlayerPrefs.SetInt("UserGold", GlobalValue.g_UserGold);
+    }
 
     void TimerUpdate() //게임 상태별 시간 체크 및 업데이트
     {
@@ -423,7 +449,8 @@ public class Game_Mgr : MonoBehaviour
     {
         if (m_Round < 0)
             return;
-
+        
+        //라운드에 따른 bgm 변경
         if (m_Round % 10 == 1 && m_Round != 1)
             Sound_Mgr.Instance.PlayBGM("Round_Track");
 
@@ -436,6 +463,12 @@ public class Game_Mgr : MonoBehaviour
         }
         else
             m_GameRound = GameRound.MonsterRound;
+
+        if(m_Round == 30)   //마지막 라운드에서 모든 몬스터를 잡으면 게임승리
+        {
+            if (m_MonCount <= 0)
+                GameClear();
+        }
     }//void RoundUpdate()
 
     IEnumerator MonsterSpawn()  //몬스터 소환 코루틴

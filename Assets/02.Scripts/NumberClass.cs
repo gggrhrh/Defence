@@ -14,6 +14,7 @@ public class NumberClass
 {
     public NumType m_NumType = NumType.Beginner;
     public int m_Level = 0;
+    public int m_maxLevel = 5;
     public Sprite m_IconImg = null;
     public float m_Attack = 0.0f;
     public float m_AttackSpeed = 0.0f;

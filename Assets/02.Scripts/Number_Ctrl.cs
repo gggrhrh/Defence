@@ -379,7 +379,8 @@ public class Number_Ctrl : MonoBehaviour
             //옮기는 위치의 캐릭터 정보 가져오기
 
             if (NumObj.m_Level == this.m_Level &&   //옮기는 위치의 캐릭터와 마우스 클릭중인 캐릭터의
-                NumObj.m_NumType == this.m_NumType) //레벨과 타입이 같다면 조합
+                NumObj.m_NumType == this.m_NumType &&
+                m_Level < 5) //레벨과 타입이 같다면 조합
             {
                 CombiNumber(m_Level, CacPos);
 

@@ -87,42 +87,42 @@ public class Monster_Ctrl : MonoBehaviour
     {
         if (m_MonType == MonsterType.Round1)
         {
-            m_MaxHp = 100.0f + 10.0f * (m_Round - 1);
+            m_MaxHp = 50.0f + 10.0f * (m_Round - 1);
             m_CurHp = m_MaxHp;
             m_Gold = 10;
             m_MonRenderer.sprite = MonsterSprite[0];
         }
         else if (m_MonType == MonsterType.Round2)
         {
-            m_MaxHp = 200.0f + 10.0f * (m_Round - 11);
+            m_MaxHp = 200.0f + 15.0f * (m_Round - 11);
             m_CurHp = m_MaxHp;
             m_Gold = 15;
             m_MonRenderer.sprite = MonsterSprite[1];
         }
         else if (m_MonType == MonsterType.Round3)
         {
-            m_MaxHp = 300.0f + 10.0f * (m_Round - 21);
+            m_MaxHp = 500.0f + 30.0f * (m_Round - 21);
             m_CurHp = m_MaxHp;
             m_Gold = 20;
             m_MonRenderer.sprite = MonsterSprite[2];
         }
         else if (m_MonType == MonsterType.Boss1)
         {
-            m_MaxHp = 1000.0f;
+            m_MaxHp = 2000.0f;
             m_CurHp = m_MaxHp;
             m_Gold = 300;
             m_MonRenderer.sprite = MonsterSprite[3];
         }
         else if (m_MonType == MonsterType.Boss2)
         {
-            m_MaxHp = 2000.0f;
+            m_MaxHp = 5000.0f;
             m_CurHp = m_MaxHp;
             m_Gold = 500;
             m_MonRenderer.sprite = MonsterSprite[4];
         }
         else if (m_MonType == MonsterType.Boss3)
         {
-            m_MaxHp = 3000.0f;
+            m_MaxHp = 10000.0f;
             m_CurHp = m_MaxHp;
             m_Gold = 700;
             m_MonRenderer.sprite = MonsterSprite[5];
@@ -215,10 +215,6 @@ public class Monster_Ctrl : MonoBehaviour
         Game_Mgr.Inst.m_MonCount--;
 
         Destroy(gameObject);
-
-        //만약 죽은 몬스터가 3라운드 보스면 즉시 게임 종료
-        if (m_MonType == MonsterType.Boss3)
-            Game_Mgr.Inst.GameDie();
     }
 
     public void InitState(int a_Round, float a_MonSpeed)
