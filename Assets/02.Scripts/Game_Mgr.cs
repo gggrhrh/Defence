@@ -116,6 +116,10 @@ public class Game_Mgr : MonoBehaviour
     Color32 Oncolor = Color.gray;
     //--- 게임 배속
 
+    //--- 보스 라운드 스킵
+    public Button RoundSkip_Btn = null;
+    //--- 보스 라운드 스킵
+
     public static Game_Mgr Inst = null;
 
     private void Awake()
@@ -192,6 +196,9 @@ public class Game_Mgr : MonoBehaviour
         if (m_GameSpeedUpBtn != null)
             m_GameSpeedUpBtn.onClick.AddListener(GameSpeedUpClick);
 
+        if (RoundSkip_Btn != null)
+            RoundSkip_Btn.onClick.AddListener(RoundSkip);
+
         Sound_Mgr.Instance.PlayBGM("Round_Track");
     }
 
@@ -252,6 +259,11 @@ public class Game_Mgr : MonoBehaviour
         ScrollViewOnOff_Update();
 
     }//void Update()
+
+    void RoundSkip()
+    {
+        m_RoundTime = 0.1f;
+    }
 
     public void DamageText(float a_Value, Vector3 a_Pos, Color a_Color, bool isCri = false)
     {
@@ -464,11 +476,19 @@ public class Game_Mgr : MonoBehaviour
         else
             m_GameRound = GameRound.MonsterRound;
 
-        if(m_Round == 30)   //마지막 라운드에서 모든 몬스터를 잡으면 게임승리
+        if (m_Round == 10 || m_Round == 20) //라운드 스킵 버튼 활성화
         {
-            if (m_MonCount <= 0)
+            if (m_MonCount <= 0 && m_RoundTime < 40.0f)
+                RoundSkip_Btn.gameObject.SetActive(true);
+        }
+        else if (m_Round == 30)   //마지막 라운드에서 모든 몬스터를 잡으면 게임승리
+        {
+            if (m_MonCount <= 0 && m_RoundTime < 40.0f)
                 GameClear();
         }
+        else  // 비활성화
+            RoundSkip_Btn.gameObject.SetActive(false);
+
     }//void RoundUpdate()
 
     IEnumerator MonsterSpawn()  //몬스터 소환 코루틴

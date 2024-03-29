@@ -31,6 +31,8 @@ public class Bullet_Ctrl : MonoBehaviour
         m_isColl = false;
         m_LifeTime = 1.0f;
 
+        Sound_Mgr.Instance.PlayEffSound("Shooting", 1.0f);
+
         // 숫자 타입마다 총알의 Update
         if (m_NumType == NumType.Binary_Num)
             delta = 0.0f;

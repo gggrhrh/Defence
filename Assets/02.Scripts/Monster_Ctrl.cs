@@ -202,11 +202,9 @@ public class Monster_Ctrl : MonoBehaviour
             return;
 
         //사망 사운드 효과
-        if (m_MonType == MonsterType.Round1 ||
-            m_MonType == MonsterType.Round2 ||
-            m_MonType == MonsterType.Round3)
-            Sound_Mgr.Instance.PlayEffSound("MonDeath", 1.0f);
-        else
+        if (m_MonType == MonsterType.Boss1 ||
+            m_MonType == MonsterType.Boss2 ||
+            m_MonType == MonsterType.Boss3)
             Sound_Mgr.Instance.PlayEffSound("BossDeath", 1.0f);
         //사망 사운드 효과
 
