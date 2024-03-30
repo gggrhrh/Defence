@@ -274,7 +274,7 @@ public class Number_Ctrl : MonoBehaviour
         Game_Mgr.Inst.isClick = false;
 
         Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, distance);
-        Vector3 objPos = Camera.main.ScreenToWorldPoint(mousePos);
+        Vector3 objPos = Camera.main.ScreenToWorldPoint(mousePos);  //마우스를 때는 위치
 
         transform.position = MousePoint(objPos);
     }
@@ -337,7 +337,7 @@ public class Number_Ctrl : MonoBehaviour
             a_Pos.y = 2.5f;
             YPos = 0;
         }
-        else
+        else  //CPU 칸에 들어가지 않으면 처음 위치로 정함
             a_Pos = m_StartPos;
         //--- y축 좌표
 
@@ -361,7 +361,7 @@ public class Number_Ctrl : MonoBehaviour
         }
         else //옮기는 위치에 캐릭터가 있을경우
         {
-            if (a_Pos == m_StartPos)
+            if (FMIndex == CIndex)
                 return m_StartPos;
 
             //옮기는 위치의 캐릭터 정보 가져오기
@@ -398,6 +398,9 @@ public class Number_Ctrl : MonoBehaviour
 
     void CombiNumber(int a_Level, int a_PosIndex)  //숫자를 조합하는 함수
     {
+        if (Game_Mgr.Inst.isClick == true)
+            return;
+
         NumType a_NumType = (NumType)Random.Range(1, 4);
         a_Level++;
         Game_Mgr.Inst.NumberSpawn(a_NumType, a_Level, a_PosIndex);  //새로운 프리팹 소환
