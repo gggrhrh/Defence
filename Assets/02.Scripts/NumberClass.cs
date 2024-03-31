@@ -24,7 +24,7 @@ public class NumberClass
     {
         m_NumType = a_NumType;
         m_Level = a_Level;
-        if(a_NumType == NumType.Beginner)
+        if (a_NumType == NumType.Beginner)
         {
             m_Attack = 10.0f;
             m_AttackSpeed = 1.2f;
@@ -33,20 +33,20 @@ public class NumberClass
         }
         else if (a_NumType == NumType.Number)
         {
-            m_Attack = 15.0f * a_Level;
+            m_Attack = 15.0f + (15.0f * a_Level - 1) * (1 - 0.06f * a_Level);
             m_AttackSpeed = 1.2f - 0.1f * a_Level;
             string Spritestr = string.Format("Number/Number/{0}", a_Level);
             m_IconImg = Resources.Load(Spritestr, typeof(Sprite)) as Sprite;
         }
-        else if(a_NumType == NumType.Binary_Num)
+        else if (a_NumType == NumType.Binary_Num)
         {
-            m_Attack = 25.0f * a_Level;
+            m_Attack = 25.0f + (25.0f * a_Level - 1) * (1 - 0.06f * a_Level);
             m_AttackSpeed = 1.5f - 0.05f * a_Level;
             m_IconImg = Resources.Load("Number/Binary_Num/1", typeof(Sprite)) as Sprite;
         }
         else if (a_NumType == NumType.Binary_System)
         {
-            m_Attack = 5.0f * a_Level;
+            m_Attack = 5.0f + (5.0f * a_Level - 1) * (1 - 0.06f * a_Level);
             m_AttackSpeed = 1.0f - 0.1f * a_Level;
             string Spritestr = string.Format("Number/Binary_System/{0}", a_Level);
             m_IconImg = Resources.Load(Spritestr, typeof(Sprite)) as Sprite;
