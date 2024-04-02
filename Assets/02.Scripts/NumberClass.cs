@@ -33,15 +33,15 @@ public class NumberClass
         }
         else if (a_NumType == NumType.Number)
         {
-            m_Attack = 15.0f + (15.0f * a_Level - 1) * (1 - 0.06f * a_Level);
+            m_Attack = 15.0f + (15.0f * a_Level - 1) * (1 - 0.065f * a_Level);
             m_AttackSpeed = 1.2f - 0.1f * a_Level;
             string Spritestr = string.Format("Number/Number/{0}", a_Level);
             m_IconImg = Resources.Load(Spritestr, typeof(Sprite)) as Sprite;
         }
         else if (a_NumType == NumType.Binary_Num)
         {
-            m_Attack = 25.0f + (25.0f * a_Level - 1) * (1 - 0.08f * a_Level);
-            m_AttackSpeed = 1.5f - 0.05f * a_Level;
+            m_Attack = 25.0f + (15.0f * a_Level - 1) + (5.0f * a_Level - 2);
+            m_AttackSpeed = 1.5f;
             m_IconImg = Resources.Load("Number/Binary_Num/1", typeof(Sprite)) as Sprite;
         }
         else if (a_NumType == NumType.Binary_System)

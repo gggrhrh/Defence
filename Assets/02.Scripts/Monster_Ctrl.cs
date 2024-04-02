@@ -94,14 +94,14 @@ public class Monster_Ctrl : MonoBehaviour
         }
         else if (m_MonType == MonsterType.Round2)
         {
-            m_MaxHp = 200.0f + 15.0f * (m_Round - 11);
+            m_MaxHp = 300.0f + 20.0f * (m_Round - 11);
             m_CurHp = m_MaxHp;
             m_Gold = 15;
             m_MonRenderer.sprite = MonsterSprite[1];
         }
         else if (m_MonType == MonsterType.Round3)
         {
-            m_MaxHp = 500.0f + 30.0f * (m_Round - 21);
+            m_MaxHp = 700.0f + 30.0f * (m_Round - 21);
             m_CurHp = m_MaxHp;
             m_Gold = 20;
             m_MonRenderer.sprite = MonsterSprite[2];
@@ -115,14 +115,14 @@ public class Monster_Ctrl : MonoBehaviour
         }
         else if (m_MonType == MonsterType.Boss2)
         {
-            m_MaxHp = 5000.0f;
+            m_MaxHp = 7000.0f;
             m_CurHp = m_MaxHp;
             m_Gold = 500;
             m_MonRenderer.sprite = MonsterSprite[4];
         }
         else if (m_MonType == MonsterType.Boss3)
         {
-            m_MaxHp = 10000.0f;
+            m_MaxHp = 15000.0f;
             m_CurHp = m_MaxHp;
             m_Gold = 700;
             m_MonRenderer.sprite = MonsterSprite[5];
