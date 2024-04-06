@@ -196,7 +196,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MonType: 0
   MonsterSprite:
-  - {fileID: 21300000, guid: ca9dea99d082ec54e8d5fdf42264b142, type: 3}
+  - {fileID: 21300000, guid: 943e9bd459b99534a84eda49f8c232ae, type: 3}
   - {fileID: 21300000, guid: 92c3af317fecc324eb74f955e9eb7a8c, type: 3}
   - {fileID: 21300000, guid: abc64a2186e631048b513973243071b8, type: 3}
   - {fileID: 21300000, guid: 2d6bec03e861f0844b8f684731d87f25, type: 3}
@@ -279,7 +279,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ca9dea99d082ec54e8d5fdf42264b142, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 943e9bd459b99534a84eda49f8c232ae, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

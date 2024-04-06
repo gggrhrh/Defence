@@ -77,6 +77,7 @@ public class GlobalValue
     public static int g_AttSpeed = 0;       //공격속도 레벨(20레벨 까지)
     public static int g_CriRate = 0;        //크리티컬 확률
     public static int g_CriDmg = 0;         //크리티컬 데미지
+    public static int g_Tutorial = 0;  //튜토리얼 진행상황
 
     public static void LoadGameData()
     {
@@ -93,11 +94,12 @@ public class GlobalValue
         }
         //--- 설정 데이터 로딩
         g_NickName = PlayerPrefs.GetString("NickName", "SBS전사");
-        g_UserGold = PlayerPrefs.GetInt("UserGold", 10);
+        g_UserGold = PlayerPrefs.GetInt("UserGold", 0);
         g_Attack = PlayerPrefs.GetInt("AttackLv", 0);
         g_AttSpeed = PlayerPrefs.GetInt("AttSpeedLv", 0);
         g_CriRate = PlayerPrefs.GetInt("CriRateLv", 0);
         g_CriDmg = PlayerPrefs.GetInt("CriDmgLv", 0);
+        g_Tutorial = PlayerPrefs.GetInt("Tutorial", 0);
 
         //---서버나 로컬에 저장된 보유 상태 로딩
         if (g_SkLevelList.Count <= 0)

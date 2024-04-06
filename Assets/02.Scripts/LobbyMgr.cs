@@ -27,6 +27,9 @@ public class LobbyMgr : MonoBehaviour
     public Button m_MyInfoBtn = null;
     public Button m_HelpBtn = null;
 
+    [Header("------ Tutorial ------")]
+    public GameObject m_TutorialPanel = null;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,7 +40,10 @@ public class LobbyMgr : MonoBehaviour
         if (m_PlayBtn != null)
             m_PlayBtn.onClick.AddListener(() =>
             {
-                MyLoadScene("GameScene");
+                if (GlobalValue.g_Tutorial == 0)
+                    MyLoadScene("TutorialScene");
+                else
+                    MyLoadScene("GameScene");
             });
 
         if (m_ConfigBtn != null)
@@ -78,6 +84,8 @@ public class LobbyMgr : MonoBehaviour
                 MessageOnOff("", false);
             }
         }
+
+        TutorialUpdate();
     }
 
     void CfgBtnClick()
@@ -149,5 +157,14 @@ public class LobbyMgr : MonoBehaviour
 
         Sound_Mgr.Instance.PlayGUISound("Tap", 1.0f);
     }//void MyLoadScene(string a_ScName)
+
+    void TutorialUpdate()
+    {
+        if (GlobalValue.g_Tutorial != 0)
+            return;
+
+        if (m_TutorialPanel != null)
+            m_TutorialPanel.SetActive(true);
+    }
 }
 
