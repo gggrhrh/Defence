@@ -130,10 +130,16 @@ public class Game_Mgr : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (GlobalValue.g_Tutorial == 0)
+            Time.timeScale = 0.0f;
+
         //게임 초기화
-        Time.timeScale = 1.0f;
-        GlobalValue.LoadGameData();
-        RefreshSkillList();
+        else
+        {
+            Time.timeScale = 1.0f;
+            GlobalValue.LoadGameData();
+            RefreshSkillList();
+        }
 
         m_GameRound = GameRound.ReadyRound;
         m_RoundTime = 10.0f;
@@ -333,7 +339,6 @@ public class Game_Mgr : MonoBehaviour
 
     public void NumberSpawn(NumType a_NumType, int a_Level, int a_PosIndex)
     {
-
         //위치 설정
         m_SpawnPos.x = -5.0f + (float)(a_PosIndex % 5) * 1.25f;
         m_SpawnPos.y = 2.5f - (a_PosIndex / 5) * 1.25f;
@@ -392,6 +397,9 @@ public class Game_Mgr : MonoBehaviour
 
     void UseSkill_Key(SkillType a_SkType)   //키보드로 스킬 입력시
     {
+        if (GlobalValue.g_Tutorial == 0)
+            return;
+
         if (GlobalValue.g_SkLevelList[(int)a_SkType] <= 0)
             return;     //레벨이 0이면 사용할수 없음
 
@@ -478,7 +486,7 @@ public class Game_Mgr : MonoBehaviour
     {
         if (m_Round < 0)
             return;
-        
+
         //라운드에 따른 bgm 변경
         if (m_Round % 10 == 1 && m_Round != 1)
             Sound_Mgr.Instance.PlayBGM("Round_Track");
@@ -548,6 +556,9 @@ public class Game_Mgr : MonoBehaviour
 
     public void HelpPanelSpawn(string errorstr)
     {
+        if (GlobalValue.g_Tutorial == 0)
+            return;
+
         if (IsPanel == true)
             return;
 

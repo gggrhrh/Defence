@@ -2598,7 +2598,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &898418201
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4875,7 +4875,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1500689029
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5756,6 +5756,7 @@ MonoBehaviour:
   TutorialPanel: {fileID: 1500689028}
   m_PanelText: {fileID: 3020024}
   textManager: {fileID: 1159262805}
+  textNextBtn: {fileID: 1687163769}
   SpawnPanel: {fileID: 898418200}
 --- !u!1 &1843681092
 GameObject:
