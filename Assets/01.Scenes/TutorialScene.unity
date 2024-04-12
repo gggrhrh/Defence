@@ -3202,7 +3202,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &844988930
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4894,7 +4894,7 @@ MonoBehaviour:
   MonsterPrefab: {fileID: 3109876955121552938, guid: d00c50d09b56b9c498c0aa9dcd7aef2b, type: 3}
   HelpPanelPrefab: {fileID: 764617777594148587, guid: 23979a641a21bc34b9a7e8527c4ee274, type: 3}
   m_Canvas: {fileID: 1473081257}
-  m_BackBtn: {fileID: 1945472032}
+  m_BackBtn: {fileID: 0}
   m_BackPanel: {fileID: 1748681452}
   m_ReplayBtn: {fileID: 1686242302}
   m_GoLobbyBtn: {fileID: 1432490432}
@@ -4932,7 +4932,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1236905246}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ce7df6eaaec62f48953ce1404905039, type: 3}
   m_Name: 
@@ -7001,8 +7001,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\uC2A4\uD0AC \uAC2F\uC218 \uBC0F \uCFE8\uD0C0\uC784 \uD45C\uC2DC \uD310
-    (R)"
+  m_Text: "\uC2A4\uD0AC \uC0AC\uC6A9 \uBC0F \uCFE8\uD0C0\uC784 (R)"
 --- !u!222 &1518539810
 CanvasRenderer:
   m_ObjectHideFlags: 0
