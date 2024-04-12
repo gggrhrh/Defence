@@ -130,16 +130,9 @@ public class Game_Mgr : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (GlobalValue.g_Tutorial == 0)
-            Time.timeScale = 0.0f;
-
-        //게임 초기화
-        else
-        {
-            Time.timeScale = 1.0f;
-            GlobalValue.LoadGameData();
-            RefreshSkillList();
-        }
+        Time.timeScale = 1.0f;
+        GlobalValue.LoadGameData();
+        RefreshSkillList();
 
         m_GameRound = GameRound.ReadyRound;
         m_RoundTime = 10.0f;
@@ -215,6 +208,9 @@ public class Game_Mgr : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GlobalValue.g_Tutorial == 0)
+            return;
+
         if (m_GameRound == GameRound.GameEnd)
             return;
 
@@ -473,6 +469,7 @@ public class Game_Mgr : MonoBehaviour
 
     void TimerUpdate() //게임 상태별 시간 체크 및 업데이트
     {
+
         if (m_GameRound == GameRound.ReadyRound)
             m_RoundTime = 10.0f;
         else if (m_GameRound == GameRound.BossRound)
@@ -640,6 +637,9 @@ public class Game_Mgr : MonoBehaviour
 
     void GameSpeedUpClick()
     {
+        if (GlobalValue.g_Tutorial == 0)
+            return;
+
         GameSpeedUpOn = !GameSpeedUpOn;
 
         if (GameSpeedUpOn == false)
