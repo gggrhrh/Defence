@@ -21,7 +21,8 @@ public class Skill_Info  //각 Item 정보
     public int m_UpPrice = 50; //업그레이드 가격, 타입에 따라서
     public float m_Damage = 0.0f;   //스킬의 데미지
     public float m_UpDamage = 0.0f; // 업그레이드 스킬 데미지
-    public float m_CoolTime = 0.0f;
+    public float m_CoolTime = 0.0f; //쿨타임
+    public float m_CoolDown = 0.0f; //쿨타임 다운
     public string m_SkillExp = "";    //스킬 효과 설명
     //public Sprite m_IconImg = null;   //캐릭터 아이템에 사용될 이미지
 
@@ -38,6 +39,7 @@ public class Skill_Info  //각 Item 정보
             m_Damage = 50.0f;
             m_UpDamage = 10.0f;
             m_CoolTime = 30.0f;
+            m_CoolDown = 1.0f;
             m_SkillExp = "모든 몬스터에게 데미지를 줍니다.";
         }
         else if (a_SkType == SkillType.Skill_1)
@@ -49,6 +51,7 @@ public class Skill_Info  //각 Item 정보
             m_Damage = 1000.0f;
             m_UpDamage = 500.0f;
             m_CoolTime = 30.0f;
+            m_CoolDown = 1.0f;
             m_SkillExp = "하나의 몬스터를 삭제합니다.";
         }
         else if (a_SkType == SkillType.Skill_2)
@@ -60,6 +63,7 @@ public class Skill_Info  //각 Item 정보
             m_Damage = 1000.0f;
             m_UpDamage = 500.0f;
             m_CoolTime = 300.0f;
+            m_CoolDown = 10.0f;
             m_SkillExp = "모든 몬스터를 삭제합니다.";
         }
 

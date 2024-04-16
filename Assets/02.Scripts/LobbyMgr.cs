@@ -8,6 +8,7 @@ public class LobbyMgr : MonoBehaviour
 {
     public Button m_PlayBtn = null;
     public Button m_ExitBtn = null;
+    public Button m_SaveClearBtn = null;
 
     [Header("------ CfgBox ------")]
     public Button m_ConfigBtn = null;
@@ -51,6 +52,13 @@ public class LobbyMgr : MonoBehaviour
 
         if (m_ExitBtn != null)
             m_ExitBtn.onClick.AddListener(ExitBtnClick);
+
+        if (m_SaveClearBtn != null)
+            m_SaveClearBtn.onClick.AddListener(() =>
+            {
+                PlayerPrefs.DeleteAll();
+                MyLoadScene("TitleScene");
+            });
 
         //--- 상점 인벤 도감
         if (m_StoreBtn != null)

@@ -52,12 +52,13 @@ public class SkProduct : MonoBehaviour
         GlobalValue.g_SkDataList[(int)m_SkType].m_UpDamage * (GlobalValue.g_SkLevelList[(int)m_SkType] - 1);
 
         float a_CoolTime = 0.0f;
-        a_CoolTime = GlobalValue.g_SkDataList[(int)m_SkType].m_CoolTime;
+        a_CoolTime = GlobalValue.g_SkDataList[(int)m_SkType].m_CoolTime -
+            GlobalValue.g_SkDataList[(int)m_SkType].m_CoolDown * (GlobalValue.g_SkLevelList[(int)m_SkType] - 1);
         //스킬의 레벨에 따른 변화값
 
         m_LevelUpBtn.GetComponentInChildren<Text>().text = m_Price.ToString();
 
-        if (a_Damage >= 1000.0f)
+        if (m_SkType == SkillType.Skill_1 || m_SkType == SkillType.Skill_2)
         {
             m_SkInfoText.text = "Level : " + a_Level + "\nCool Time : " + a_CoolTime.ToString("F1") + "s\nDamage : 보스제외 즉사스킬";
         }

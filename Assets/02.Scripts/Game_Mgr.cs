@@ -382,7 +382,8 @@ public class Game_Mgr : MonoBehaviour
             if (GlobalValue.g_SkLevelList[ii] <= 0)
                 continue;
 
-            float a_CoolTime = GlobalValue.g_SkDataList[ii].m_CoolTime;
+            float a_CoolTime = GlobalValue.g_SkDataList[ii].m_CoolTime -
+                GlobalValue.g_SkDataList[ii].m_CoolDown * (GlobalValue.g_SkLevelList[ii] - 1);
             float a_Damage = GlobalValue.g_SkDataList[ii].m_Damage +
                 GlobalValue.g_SkDataList[ii].m_UpDamage * (GlobalValue.g_SkLevelList[ii] - 1);
             GameObject a_SkillClone = Instantiate(m_SkInvenNode);
