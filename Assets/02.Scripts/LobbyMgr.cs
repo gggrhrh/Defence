@@ -57,7 +57,7 @@ public class LobbyMgr : MonoBehaviour
             m_SaveClearBtn.onClick.AddListener(() =>
             {
                 PlayerPrefs.DeleteAll();
-                MyLoadScene("TitleScene");
+                Application.Quit();
             });
 
         //--- 상점 인벤 도감
